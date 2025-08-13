@@ -2,6 +2,15 @@ critic_model:
   # experiment/model/critic_model.yaml
   _target_: trainers.models.gnn_policy_model.MyModelConfig
 
+  # ─── GNN settings ────────────────────────────────────────────────────────────
+  topology: from_pos
+  edge_radius: ${..model_shared.comms_radius}   # ← relative path, one level up
+  self_loops: false
+  gnn_class: torch_geometric.nn.conv.GATv2Conv
+  gnn_kwargs:
+    add_self_loops: true
+    residual: true
+
   # ─── Feature keys ────────────────────────────────────────────────────────────
   position_key: pos         # 2-D agent positions
   pos_features: 2
@@ -9,6 +18,7 @@ critic_model:
   vel_features: 2
   sentence_key: sentence_embedding
   exclude_pos_from_node_features: false
+  event_dim: ${hit_the_switch.task.params.event_dim}
 
   # ─── MLP head ────────────────────────────────────────────────────────────────
   num_cells: [512, 256]        # bigger first layer than actor
@@ -17,6 +27,7 @@ critic_model:
 
   # ─── Toggles ─────────────────────────────────────────────────────────────────
   use_gnn: false
+  use_event_gnn: ${..model_shared.use_event_gnn}
   use_encoder: ${..model_shared.use_encoder}
 
   gnn_emb_dim: ${..model_shared.gnn_emb_dim}

@@ -1,0 +1,19 @@
+critic_model:
+  # experiment/model/critic_model.yaml
+  _target_: trainers.models.team_event_gnn.MyModelConfig
+
+  # ─── Feature keys ────────────────────────────────────────────────────────────
+  position_key: pos         # 2-D agent positions
+  pos_features: 2
+  velocity_key: vel
+  vel_features: 2
+  exclude_pos_from_node_features: false
+  event_dim: ${hit_the_switch.task.params.event_dim}
+
+  # ─── MLP head ────────────────────────────────────────────────────────────────
+  num_cells: [256, 256]        # bigger first layer than actor
+  layer_class: torch.nn.Linear
+  activation_class: torch.nn.ReLU
+
+  # ─── Toggles ─────────────────────────────────────────────────────────────────
+  use_gnn: false

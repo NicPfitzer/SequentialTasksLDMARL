@@ -7,14 +7,11 @@ import torch
 from vmas import render_interactively
 from vmas.simulator.core import Agent, Box, Landmark, Line, Sphere, World
 from vmas.simulator.scenario import BaseScenario
-from vmas.simulator.utils import Color, ScenarioUtils
+from vmas.simulator.utils import Color, ScenarioUtils, TorchUtils
 from vmas.simulator.controllers.velocity_controller import VelocityController
 
 from scenarios.hit_the_switch.load_config import load_scenario_config
-from scenarios.hit_the_switch.language import LanguageUnit, load_decoder, load_sequence_model, load_task_data
-
-FIND_SWITCH = 0
-FIND_GOAL = 1
+from scenarios.hit_the_switch.language import LanguageUnit, load_decoder, load_sequence_model, load_task_data, FIND_GOAL, FIND_SWITCH
 
 class HitSwitchScenario(BaseScenario):
     def make_world(self, batch_dim: int, device: torch.device, **kwargs):
@@ -52,7 +49,7 @@ class HitSwitchScenario(BaseScenario):
             name="switch",
             collide=False,
             movable=False,
-            shape=Box(length=self.switch_length, width=self.switch_width),
+            shape=Sphere(radius=self.switch_radius),
             color=Color.YELLOW,
             collision_filter=lambda e: not isinstance(e.shape, Box),
         )
@@ -60,8 +57,8 @@ class HitSwitchScenario(BaseScenario):
 
     def _init_language_unit(self, world: World):
         if self.use_rnn:
-            load_decoder(model_path=self.decoder_model_path, embedding_size=self.embedding_size, device=world.device)
-            load_sequence_model(model_path=self.sequence_model_path, embedding_size=self.embedding_size, event_size=self.event_size, state_size=self.state_size, device=world.device)
+            #load_decoder(model_path=self.decoder_model_path, embedding_size=self.embedding_size, device=world.device)
+            load_sequence_model(model_path=self.sequence_model_path, embedding_size=self.embedding_size, event_size=self.event_dim, state_size=self.state_dim, device=world.device)
             load_task_data(json_path=self.data_json_path, device=world.device)
 
         self.language_unit = LanguageUnit(
@@ -83,11 +80,30 @@ class HitSwitchScenario(BaseScenario):
                 v_range=self.agent_v_range,
                 f_range=self.agent_f_range,
                 u_range=self.agent_u_range,
+                action_size=2 + self.event_dim if (self.use_rnn and self.use_team_event_gnn) else 2,
             )
             if self.use_velocity_controller:
                 agent.controller = VelocityController(
                     agent, world, ctrl_params=(2.0, 6.0, 0.002), pid_form="standard"
                 )
+            
+            agent.h = torch.zeros(
+                (world.batch_dim, self.embedding_size),
+                dtype=torch.float32,
+                device=world.device,
+            )
+            
+            agent.y = torch.zeros( 
+                (world.batch_dim, self.embedding_size),
+                dtype=torch.float32,
+                device=world.device,
+            )
+            
+            agent.e = torch.zeros(
+                (world.batch_dim, self.event_dim),
+                dtype=torch.float32,
+                device=world.device,
+            )
 
             goal = Landmark(
                 name=f"goal {i}",
@@ -115,28 +131,84 @@ class HitSwitchScenario(BaseScenario):
         agent.goal_coords[find_goal_indices] = agent.goal.state.pos[find_goal_indices]
 
     def reset_world_at(self, env_index: int = None):
-        central_agent_pos = torch.cat(
-            [
-                torch.zeros(
-                    (1, 1) if env_index is not None else (self.world.batch_dim, 1),
-                    device=self.world.device,
-                    dtype=torch.float32,
-                ).uniform_(
-                    -1 + (3 * self.agent_radius + self.agent_spacing),
-                    1 - (3 * self.agent_radius + self.agent_spacing),
-                ),
-                torch.zeros(
-                    (1, 1) if env_index is not None else (self.world.batch_dim, 1),
-                    device=self.world.device,
-                    dtype=torch.float32,
-                ).uniform_(
-                    -1 + (3 * self.agent_radius + self.agent_spacing),
-                    -(3 * self.agent_radius + self.agent_spacing)
-                    - self.passage_width / 2,
-                ),
-            ],
-            dim=1,
+        
+        # Add switch at random position in lower half of the world
+        # Ensure switch is not on the passage
+        # Randomly generate x and y coordinates for the switch
+        
+        rx = torch.rand(
+            (self.world.batch_dim, 1),
+            device=self.world.device,
+            dtype=torch.float32,
         )
+        ry = torch.rand(
+            (self.world.batch_dim, 1),
+            device=self.world.device,
+            dtype=torch.float32,
+        )
+        
+        rand_x = rx * (1 - self.switch_radius) * 2 - (1 - self.switch_radius)
+        rand_y = torch.max(-ry * (1 - self.switch_radius + self.agent_radius) - self.passage_length / 2, -1 * torch.ones_like(ry) + self.switch_radius - self.agent_radius)
+
+        if env_index is None:
+            pos = torch.cat((rand_x, rand_y), dim=1)
+        else:
+            pos = torch.cat(
+                [rand_x[env_index], rand_y[env_index]],
+                dim=0
+            )
+
+        self.switch.set_pos(
+            pos,
+            batch_index=env_index,
+        )
+        
+        self.team_hit_switch[env_index].zero_() if env_index is not None else self.team_hit_switch.zero_()
+        
+        if self.use_rnn:
+            
+            if env_index is None:
+                self.language_unit.reset_all()
+            else:
+                self.language_unit.reset_env(env_index) 
+                
+            self.language_unit.sample_dataset(env_index)
+            
+            if self.multitask_learning:
+                if env_index is None:
+                    hit_switch_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
+                    self.team_hit_switch[hit_switch_indices] = True
+
+                else:
+                    self.team_hit_switch[env_index] = self.language_unit.states[env_index] == FIND_GOAL
+
+            if env_index is None:
+                hit_switch_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
+                find_switch_indices = torch.where(self.language_unit.states == FIND_SWITCH)[0]
+                
+                for agent in self.world.agents:
+                    agent.goal_coords[find_switch_indices] = self.switch.state.pos[find_switch_indices]
+                    agent.goal_coords[hit_switch_indices] = agent.goal.state.pos[hit_switch_indices]
+            else:
+                for agent in self.world.agents:
+                    agent.goal_coords[env_index] = self.switch.state.pos[env_index]
+                    agent.goal_coords[env_index] = agent.goal.state.pos[env_index]
+        
+        # Initialize the RNN Automaton for the agent
+        for agent in self.world.agents:
+            if env_index is None:
+                agent.y = self.language_unit.task_embeddings.clone()
+                agent.h.zero_()
+                if self.multitask_learning:
+                    agent.h = self.language_unit.subtask_embeddings.clone()
+                agent.e.zero_()
+            else:
+                agent.y[env_index] = self.language_unit.task_embeddings[env_index]
+                agent.h[env_index].zero_() 
+                if self.multitask_learning:
+                    agent.h[env_index] = self.language_unit.subtask_embeddings[env_index]
+                agent.e[env_index].zero_()
+
         central_goal_pos = torch.cat(
             [
                 torch.zeros(
@@ -204,41 +276,29 @@ class HitSwitchScenario(BaseScenario):
             # Goal coordinates are set to zero
             agent.hit_switch[env_index].zero_() if env_index is not None else agent.hit_switch.zero_()
 
-            if i == self.n_agents - 1:
-                agent.set_pos(
-                    central_agent_pos,
-                    batch_index=env_index,
-                )
-            else:
-                agent.set_pos(
-                    central_agent_pos
-                    + torch.tensor(
-                        [
-                            [
-                                (
-                                    0.0
-                                    if i % 2
-                                    else (
-                                        self.agent_spacing
-                                        if i == 0
-                                        else -self.agent_spacing
-                                    )
-                                ),
-                                (
-                                    0.0
-                                    if not i % 2
-                                    else (
-                                        self.agent_spacing
-                                        if i == 1
-                                        else -self.agent_spacing
-                                    )
-                                ),
-                            ],
-                        ],
+            pos = torch.cat(
+                [
+                    torch.zeros(
+                        (1, 1) if env_index is not None else (self.world.batch_dim, 1),
                         device=self.world.device,
+                        dtype=torch.float32,
+                    ).uniform_(
+                        -1 + self.agent_radius,
+                        1 - self.agent_radius,
                     ),
-                    batch_index=env_index,
-                )
+                    torch.zeros(
+                        (1, 1) if env_index is not None else (self.world.batch_dim, 1),
+                        device=self.world.device,
+                        dtype=torch.float32,
+                    ).uniform_(
+                        -1 + self.agent_radius,
+                         - self.passage_width / 2 - self.agent_radius,
+                    ),
+                ],
+                dim=1,
+            )
+
+            agent.set_pos(pos, batch_index=env_index)
             if env_index is None:
                 agent.global_shaping = (
                     torch.linalg.vector_norm(
@@ -274,42 +334,7 @@ class HitSwitchScenario(BaseScenario):
                 batch_index=env_index,
             )
         self.landmark_poses = [landmark.state.pos.clone() for landmark in self.landmarks]
-
-        # Add switch at random position in lower half of the world
-        # Ensure switch is not on the passage
-        # Randomly generate x and y coordinates for the switch
-        rx = torch.rand(
-            (self.world.batch_dim, 1),
-            device=self.world.device,
-            dtype=torch.float32,
-        )
-        ry = torch.rand(
-            (self.world.batch_dim, 1),
-            device=self.world.device,
-            dtype=torch.float32,
-        )
-        rand_x = rx * (1 - self.switch_length/2) * 2 - (1 - self.switch_length/2)
-        rand_y = torch.max(-ry * (1 - self.switch_width / 2 + self.agent_radius) - self.passage_length / 2, -1 * torch.ones_like(ry) + self.switch_width / 2 - self.agent_radius)
-
-        if env_index is None:
-            pos = torch.cat((rand_x, rand_y), dim=1)
-        else:
-            pos = torch.tensor(
-                [rand_x[env_index], rand_y[env_index]],
-                dtype=torch.float32,
-                device=self.world.device,
-            )
-
-        self.switch.set_pos(
-            pos,
-            batch_index=env_index,
-        )
-        
-        self.team_hit_switch[env_index].zero_() if env_index is not None else self.team_hit_switch.zero_()
-        
-        if self.use_rnn:
-            self.language_unit.reset_env(env_index)
-            self.language_unit.sample_dataset(env_index)
+            
 
     def reward(self, agent: Agent):
         is_first = agent == self.world.agents[0]
@@ -344,14 +369,18 @@ class HitSwitchScenario(BaseScenario):
         if agent.collide:
             for a in self.world.agents:
                 if a != agent:
-                    self.rew[self.world.is_overlapping(a, agent)] -= 10
+                    self.rew[self.world.is_overlapping(a, agent)] -= 0
             for landmark in self.landmarks:
                 if landmark.collide:
-                    self.rew[self.world.is_overlapping(agent, landmark)] -= 10
+                    self.rew[self.world.is_overlapping(agent, landmark)] -= 0
             hit_switch_mask = self.world.is_overlapping(agent, self.switch).bool()
             # only the *first-time* hits (overlap & never hit before)
-            new_hits = hit_switch_mask & (~self.team_hit_switch)
-            self.rew[new_hits] += 10
+            if not self.multitask_learning: # All agents should learn to hit the switch
+                new_hits = hit_switch_mask & (~agent.hit_switch)
+                #self.rew[new_hits] += 10
+            else:
+                new_hits = hit_switch_mask & (~self.team_hit_switch)
+                #self.rew[new_hits] += 10
             
             # Update hit switch status
             agent.hit_switch |= hit_switch_mask
@@ -360,7 +389,8 @@ class HitSwitchScenario(BaseScenario):
         # Despawn passage if switch is hit
         if self.team_hit_switch.any():
             indices = torch.where(self.team_hit_switch)[0]
-            self.language_unit.states[indices] = FIND_GOAL
+            if not self.multitask_learning: # In multitask learning, we do not handle state transitions
+                self.language_unit.states[indices] = FIND_GOAL
             passages = self.landmarks[: self.n_passages]
             for passage in passages:
                 passage.state.pos[indices] = self._get_outside_pos(None)[indices]
@@ -381,11 +411,14 @@ class HitSwitchScenario(BaseScenario):
  
         obs_dict["pos"] = agent.state.pos
         obs_dict["vel"] = agent.state.vel
-        #obs_dict["sentence_embedding"] = self.language_unit.observe_subtask_embeddings()
-        obs_dict["sentence_embedding"] = torch.empty((self.world.batch_dim,0), device=self.world.device)  # Placeholder for LLM embeddings
+        obs_dict["event"] = agent.e
         obs_components.append(agent.goal.state.pos - agent.state.pos)
         obs_components.append(self.switch.state.pos - agent.state.pos)
-        obs_components.append((self.language_unit.states == FIND_GOAL).float().unsqueeze(1))  # Convert bool to float for observation
+        if not self.use_rnn:
+            obs_dict["sentence_embedding"] = torch.empty((self.world.batch_dim, 0), device=self.world.device)
+            obs_components.append(agent.e)  # Convert bool to float for observation
+        else:
+            obs_dict["sentence_embedding"] = agent.h
         obs_dict["obs"] = torch.cat(obs_components, dim=-1)
 
         return obs_dict
@@ -401,9 +434,60 @@ class HitSwitchScenario(BaseScenario):
             device=self.world.device,
         ).uniform_(-1000 * self.world.x_semidim, -10 * self.world.x_semidim)   
     
+    def process_action(self, agent):
+        
+        # if self.comm_dim > 0:
+        #     agent.e = agent.action._c.clone()
+            
+        # Clamp square to circle
+        agent.action.u = TorchUtils.clamp_with_norm(agent.action.u, agent.u_range)
+
+        # Zero small input
+        action_norm = torch.linalg.vector_norm(agent.action.u, dim=1)
+        agent.action.u[action_norm < 0.005] = 0
+
+        if self.use_velocity_controller and not self.use_kinematic_model:
+            agent.controller.process_force()
+    
     def pre_step(self):
         # Here we will implement the rnn logic to switch the sequence state
-        
+        if self.use_rnn and not self.multitask_learning:
+            for agent in self.world.agents:
+                
+                if self.use_team_event_gnn and agent.action.u is not None:
+                    event = agent.action.u[:, 2:]
+                elif self.simulate_team_event:
+                    event = self.team_hit_switch.float().unsqueeze(1)
+                else:
+                    event = agent.hit_switch.float().unsqueeze(1)
+                # Convert event to binary
+                event = torch.where(event > 0.5, torch.ones_like(event), torch.zeros_like(event))
+                # Get the current state of the RNN
+                h = agent.h.clone()
+                e = event
+                y = agent.y.clone()
+
+                # Compute the next state of the RNN
+                next_h, _ = self.language_unit.compute_forward_rnn(
+                    event=e,
+                    y=y,
+                    h=h,
+                )
+
+                # Update the agent's state
+                agent.h = next_h
+                agent.e = agent.hit_switch.float().unsqueeze(1)
+                
+        elif self.multitask_learning:
+            # In multitask learning, we do not update the RNN state, but we still need to set the subtask embeddings
+            for agent in self.world.agents:
+                agent.e = agent.hit_switch.float().unsqueeze(1)
+                agent.h = self.language_unit.subtask_embeddings.clone()
+        else:
+            # In non-multitask learning, we do not update the RNN state, but we still need to set the event embeddings
+            for agent in self.world.agents:
+                agent.e = agent.hit_switch.float().unsqueeze(1)
+
         find_switch_indices = torch.where(self.language_unit.states == FIND_SWITCH)[0]
         hit_switch_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
         
@@ -413,6 +497,45 @@ class HitSwitchScenario(BaseScenario):
             agent.goal_coords[hit_switch_indices] = agent.goal.state.pos[hit_switch_indices]
 
     def done(self):
+        
+        if self.multitask_learning:
+            
+            find_switch_indices = torch.where(self.language_unit.states == FIND_SWITCH)[0]
+            hit_switch_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
+            
+            dones = torch.zeros(
+                self.world.batch_dim,
+                dtype=torch.bool,
+                device=self.world.device,
+            )
+            
+            # Check if all agents have reached their goals
+            # dones[find_switch_indices] = torch.all(
+            #     torch.stack(
+            #         [
+            #             torch.linalg.vector_norm(agent.state.pos[find_switch_indices] - self.switch.state.pos[find_switch_indices],dim=1)
+            #             <= self.switch.shape.radius
+            #             for agent in self.world.agents
+            #         ],
+            #         dim=1,  # across agents
+            #     ),
+            #     dim=1
+            # )
+            dones[find_switch_indices] = self.team_hit_switch[find_switch_indices]
+            dones[hit_switch_indices] = torch.all(
+                torch.stack(
+                    [
+                        torch.linalg.vector_norm(agent.state.pos[hit_switch_indices] - agent.goal.state.pos[hit_switch_indices],dim=1)
+                        <= agent.shape.radius / 2
+                        for agent in self.world.agents
+                    ],
+                    dim=1  # across agents
+                ),
+                dim=1
+            )
+            
+            return dones
+
         return torch.all(
             torch.stack(
                 [
@@ -471,6 +594,22 @@ class HitSwitchScenario(BaseScenario):
                     )
                     line.set_color(*Color.GREEN.value)
                     geoms.append(line)
+        
+        if self.use_rnn:
+            try:
+                sentence = self.language_unit.response[env_index]
+                geom = rendering.TextLine(
+                    text=sentence,
+                    font_size=6
+                )
+                geom.label.color = (0, 0, 0, 255)
+                xform = rendering.Transform()
+                geom.add_attr(xform)
+                geoms.append(geom)
+            except:
+                print("No sentence found for this environment index, or syntax is wrong.")
+                pass
+            
         return geoms
 
 

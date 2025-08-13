@@ -11,9 +11,12 @@ def main(cfg: DictConfig):
     # Get the experiment name as first key in the config
     experiment_name = list(cfg.keys())[0]
     seed = cfg.seed
+    if "restore_path" in cfg:
+        restore_path = cfg.restore_path
+        cfg[experiment_name].experiment.restore_file = restore_path
     cfg = cfg[experiment_name]  # Get the config for the specific experiment
 
-    experiment = benchmarl_setup_experiment(cfg, seed=seed)
+    experiment = benchmarl_setup_experiment(cfg, seed=seed, main_experiment=True)
     experiment.run()
 
 if __name__ == "__main__":

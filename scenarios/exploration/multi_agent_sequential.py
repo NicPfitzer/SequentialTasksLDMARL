@@ -200,8 +200,7 @@ class MyLanguageScenario(BaseScenario):
         world.add_landmark(self.base)
     
     def _initialize_scenario_vars(self, batch_dim):
-        
-        
+         
         self.target_class = torch.zeros(batch_dim, dtype=torch.int, device=self.device)
         self.targets_pos = torch.zeros((batch_dim,self.n_target_classes,self.n_targets_per_class,2), device=self.device)
         self.flock_target = torch.zeros((batch_dim,2), device=self.device) 
@@ -373,7 +372,6 @@ class MyLanguageScenario(BaseScenario):
                 self.occupancy_grid.states[env_index] == DEFEND_WIDE
             )
             agent.holding_flag[env_index] &= (agent_index[env_index] == i)
-        
             
     def _handle_target_respawn(self):
         """Handle target respawn and removal for covered targets."""
@@ -493,9 +491,7 @@ class MyLanguageScenario(BaseScenario):
             dim=-1
         ).to(self.world.device).float()
         
-    
     def post_step(self):
-        
         
         # If we are using sequence model, compute the next subtask embedding
         if self.llm_activate and self.use_sequence_model:
@@ -521,7 +517,6 @@ class MyLanguageScenario(BaseScenario):
         
         self.team_spread[:,(self.step_count-1) % self.max_steps] = rms                     
 
-        
     def extra_render(self, env_index: int = 0) -> "List[Geom]":
         """Render additional visual elements."""
         from vmas.simulator import rendering

@@ -1,6 +1,6 @@
 model_shared:
   use_encoder: false
-  use_gnn: false
+  use_event_gnn: false
   gnn_emb_dim: 64
   encoder_dim: 128
   encoder_num_cells: [128]

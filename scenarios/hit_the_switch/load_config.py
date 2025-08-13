@@ -1,7 +1,6 @@
 # config_loader_condensed.py
 from collections.abc import Mapping
 from vmas.simulator.utils import ScenarioUtils
-from scenarios.exploration.grids.language_grid import DEFEND_TIGHT, DEFEND_WIDE
 
 # --------------------------------------------------------------------------- #
 # 1. PARAMS table
@@ -12,9 +11,9 @@ PARAMS = [
     ("n_passages", 1), ("shared_reward", False),
     ("n_agents", 5), ("agent_radius", 0.03333),
     ("agent_spacing", 0.1),("passage_width", 0.2),
-    ("passage_length", 0.103),("switch_length", 0.2),
-    ("switch_width", 0.2), ("break_all_wall", False),
-    
+    ("passage_length", 0.10),("switch_radius", 0.05),
+    ("break_all_wall", True),
+
     # --- Rewards ------------------------------------------------------------
     ("shaping_factor", 100),
     
@@ -29,10 +28,15 @@ PARAMS = [
     
     # --- Language -----------------------------------------------------------
     ("embedding_size", 1024), ("use_embedding_ratio", 1.0),
-    ("event_dim", 3), ("state_dim", 4), ("use_rnn", False),
+    ("event_dim", 1), ("state_dim", 3),
+    ("use_rnn", True), ("multitask_learning", False),
+    ("use_team_event_gnn", False), ("simulate_team_event", True),
     
     # --- Paths -----------------------------------------------------------
-    ("data_json_path", ""), ("decoder_model_path", ""), ("sequence_model_path", ""),
+    ("data_json_path", "data/dataset_hit_the_switch.json"), ("decoder_model_path", ""),
+    ("sequence_model_path", "sequence_models/hit_the_switch/event_rnn_best_gru-in64-bs128.pth"),
+    ("policy_config_path", "../../conf"), ("policy_config_name", "config_stage_two"),
+    ("policy_restore_path", "../../checkpoints/hit_the_switch/policy.pt")
 ]
 
 # Expand every entry to canonical (dest, key, default) form

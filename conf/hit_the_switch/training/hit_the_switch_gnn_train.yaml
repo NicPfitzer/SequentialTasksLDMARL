@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - /hit_the_switch/experiment/experiment_team_gnn
+  - /hit_the_switch/model/team_gnn_actor   # actor-network params
+  - /hit_the_switch/model/team_gnn_critic  # critic-network params
+  - /hit_the_switch/task/hit_the_switch_gnn_train
+  - /hit_the_switch/algorithm/mappo
+
+seed: 1

@@ -1,0 +1,4 @@
+defaults:
+  - _self_
+  - /hit_the_switch/training/hit_the_switch_multitask.yaml
+
