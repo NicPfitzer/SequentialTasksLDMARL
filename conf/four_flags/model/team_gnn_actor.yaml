@@ -16,7 +16,7 @@ actor_model:
   velocity_key: vel
   vel_features: 2
   exclude_pos_from_node_features: false
-  event_dim: ${hit_the_switch.task.params.event_dim}
+  event_dim: ${four_flags.task.params.event_dim}
 
   # ─── MLP head ────────────────────────────────────────────────────────────────
   num_cells: [256, 256]        # bigger first layer than actor

@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - /four_flags/experiment/experiment_team_gnn
+  - /four_flags/model/team_gnn_actor   # actor-network params
+  - /four_flags/model/team_gnn_critic  # critic-network params
+  - /four_flags/task/four_flags_gnn_train
+  - /four_flags/algorithm/mappo
+
+seed: 1

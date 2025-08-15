@@ -1,9 +1,9 @@
 defaults:
   - _self_
-  - /hit_the_switch/training/hit_the_switch_gnn_train.yaml
-  # - /hit_the_switch/training/hit_the_switch_fine_tune.yaml
-  # - /hit_the_switch/training/hit_the_switch_rl.yaml
-  # - /hit_the_switch/training/hit_the_switch_rollout.yaml
+  # - /hit_the_switch/training/hit_the_switch_gnn_train.yaml
   # - /hit_the_switch/training/hit_the_switch_multitask.yaml
-#  - /hit_the_switch/deployment/hit_the_switch_deploy_sequence.yaml
+ 
+  #- /four_flags/training/four_flags_gnn_train.yaml
+  - /four_flags/training/four_flags_multitask.yaml
+
 

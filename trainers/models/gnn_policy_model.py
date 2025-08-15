@@ -72,12 +72,7 @@ class MyModel(Model):
         pos_features: Optional[int],
         rot_features: Optional[int],
         vel_features: Optional[int],
-        encoder_dim: Optional[int],
-        encoder_num_cells: Optional[Sequence[int]],
-        event_dim: int,
-        use_encoder: bool,
         gnn_emb_dim: Optional[int],
-        use_event_gnn: bool,
         use_gnn: bool,
         **kwargs,
     ):
@@ -91,14 +86,9 @@ class MyModel(Model):
         self.pos_features = pos_features
         self.vel_features = vel_features
         self.rot_features = rot_features
-        self.use_encoder = use_encoder
-        self.use_event_gnn = use_event_gnn
         self.use_gnn = use_gnn
-        self.encoder_dim = encoder_dim
-        self.encoder_num_cells = encoder_num_cells
         self.gnn_emb_dim =  gnn_emb_dim
         self.exclude_pos_from_node_features = exclude_pos_from_node_features
-        self.event_dim = event_dim
 
         super().__init__(
             input_spec=kwargs.pop("input_spec"),
@@ -134,40 +124,10 @@ class MyModel(Model):
             )
                 
             self.gnn = gnn_class(**gnn_kwargs).to(self.device)
-              
-        if self.is_critic:
-            self.team_event = MultiAgentMLP(
-                n_agent_inputs=self.event_dim,
-                n_agent_outputs=self.event_dim,
-                n_agents=self.n_agents,
-                centralised=self.centralised,
-                share_params=self.share_params,
-                device=self.device,
-                **kwargs,
-            )
-        else:
-            gnn_kwargs.update({"in_channels": self.event_dim, "out_channels": self.event_dim * 2})
-            self.team_event = gnn_class(**gnn_kwargs).to(self.device)
-            filler = self.event_dim * 2 if not self.use_event_gnn else 0
-            self.merger = nn.Linear(self.output_leaf_spec.shape[-1] + filler, self.output_leaf_spec.shape[-1] + filler)
-
-        if self.use_encoder:
-            if encoder_dim is None:
-                raise ValueError("encoder_dim must be specified when use_encoder is True")
-            self.encoder = MLP(
-                in_features=self.input_spec[('agents', 'observation', self.sentence_key)].shape[-1],
-                out_features=encoder_dim,
-                device=self.device,
-                num_cells=encoder_num_cells,
-            )
             
         self.mlp_in = self._environment_obs_dim() 
         self.mlp_in += self.gnn_emb_dim if self.use_gnn else self._n_node_in()
-        base_output = self.output_leaf_spec.shape[-1]
-        if self.is_critic:
-            self.output_features = base_output
-        else:
-            self.output_features = base_output - (self.event_dim * 2 if self.use_event_gnn else 0)
+        self.output_features = self.output_leaf_spec.shape[-1]
 
         if self.input_has_agent_dim:
             self.mlp = MultiAgentMLP(
@@ -192,16 +152,6 @@ class MyModel(Model):
                 ]
             )
     
-    def freeze_layers(self):
-        if not self.is_critic:
-            if self.use_event_gnn:
-                for name, param in self.named_parameters():
-                    # Only keep team_event trainable
-                    if 'team_event' in name or 'merger' in name:
-                        param.requires_grad = True
-                    else:
-                        param.requires_grad = False
-    
     def _forward(self, tensordict: TensorDictBase) -> TensorDictBase:
 
         self.freeze_layers()
@@ -216,7 +166,6 @@ class MyModel(Model):
             vel = tensordict.get(('agents','observation',self.velocity_key))
             
         sentence =      tensordict.get(('agents','observation',self.sentence_key))
-        event =         tensordict.get(('agents','observation','event'))
         obs =           tensordict.get(('agents','observation','obs'))
         batch_size =    obs.shape[:-2]
         
@@ -269,49 +218,6 @@ class MyModel(Model):
                 )
             else:
                 out = self.mlp[0](x)
-        
-        
-        if self.use_event_gnn:    
-            if self.use_gnn:
-
-                graph_event = _batch_from_dense_to_ptg(
-                    x=event,
-                    edge_index=self.edge_index,
-                    pos=pos,
-                    vel=vel,
-                    self_loops=self.self_loops,
-                    edge_radius=self.edge_radius,
-                )
-                forward_gnn_params_event = {
-                    "x": graph_event.x,
-                    "edge_index": graph_event.edge_index,
-                }
-                if (
-                    self.position_key is not None or self.velocity_key is not None
-                ) and self.gnn_supports_edge_attrs:
-                    forward_gnn_params_event.update({"edge_attr": graph_event.edge_attr})
-                    
-                event_logits = self.team_event(**forward_gnn_params_event).view(
-                    *batch_size, self.n_agents, self.event_dim * 2
-                )
-                action_loc_logits, action_scale_logits = torch.chunk(out, 2, dim=-1)
-                event_loc_logits, event_scale_logits = torch.chunk(event_logits, 2, dim=-1)
-                out = torch.cat(
-                    [action_loc_logits, event_loc_logits, action_scale_logits, event_scale_logits], dim=-1
-                )
-            else: # Maybe the critic stays frozen
-                if self.input_has_agent_dim:
-                    out = self.team_event.forward(event)
-                    if not self.output_has_agent_dim:
-                        out = out[..., 0, :]
-                else:
-                    if not self.share_params:
-                        out = torch.stack(
-                            [net(x) for net in self.team_event],
-                            dim=-2,
-                        )
-                    else:
-                        out = self.team_event[0](event)
 
         tensordict.set(self.out_key, out)
 
@@ -344,10 +250,7 @@ class MyModel(Model):
         n = 0
 
         # Sentence embedding
-        if self.use_encoder:
-            n += self.encoder_dim
-        else:   
-            n += self.input_spec[('agents', 'observation', self.sentence_key)].shape[-1]
+        n += self.input_spec[('agents', 'observation', self.sentence_key)].shape[-1]
         
         return n
 
@@ -437,11 +340,6 @@ class MyModelConfig(ModelConfig):
     """Dataclass config for a :class:`~benchmarl.models.Mlp`."""
 
     use_gnn: bool = MISSING
-    use_encoder: bool = MISSING
-    use_event_gnn: bool = MISSING
-    
-    event_dim : Optional[int] = None
-
     gnn_kwargs: Optional[dict] = None
 
     topology: Optional[str] = None
@@ -449,9 +347,6 @@ class MyModelConfig(ModelConfig):
     num_cells: Optional[Sequence[int]] = None
     layer_class: Optional[Type[nn.Module]] = None
     activation_class: Optional[Type[nn.Module]] = None
-    
-    encoder_dim: Optional[int] = None
-    encoder_num_cells: Optional[Sequence[int]] = None
     
     gnn_emb_dim: Optional[int] = None
     gnn_class: Optional[Type[torch_geometric.nn.MessagePassing]] = None

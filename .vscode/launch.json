@@ -1,14 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
-
-    
-
-    
-
-    
-
 
     {
       "name": "Run eval_rnn_model.py",
@@ -75,6 +67,18 @@
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/scenarios/hit_the_switch/hit_the_switch_scenario_gnn_train.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_flags_scenario.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_flags/four_flags_scenario.py",
       "justMyCode": false,
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",

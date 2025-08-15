@@ -48,7 +48,7 @@ from sequence_models.hit_the_switch.model_training.mlp_decoder import Decoder
 # Constants – unchanged
 ###############################################################################
 
-MAX_SEQ_LEN = 4
+MAX_SEQ_LEN = 15
 
 ###############################################################################
 # Dataset + DataLoader helpers – identical to v1 (see comments there)
@@ -380,7 +380,7 @@ class EventRNN(pl.LightningModule):
 
 def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "decoders/llm0_decoder_model_grid_scale.pth"):
     train_loader, val_loader = make_loaders(
-        "sequence_models/data/dataset_hit_the_switch.json", batch_size=batch_size
+        "sequence_models/data/dataset_four_flags.json", batch_size=batch_size
     )
     
     # decoder = Decoder(
@@ -395,10 +395,10 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
 
     model = EventRNN(
         lr=3e-5,
-        event_dim=1,
+        event_dim=6,
         y_dim=1024,
         latent_dim=1024,
-        state_dim=3,
+        state_dim=7,
         input_dim=input_dim,
         num_layers=1,
         cls_loss_weight=8.0,
@@ -421,7 +421,7 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
     )
 
     trainer = pl.Trainer(
-        max_epochs=800,
+        max_epochs=1000,
         accelerator="auto",
         log_every_n_steps=10,
         callbacks=[checkpoint_cb],
@@ -439,7 +439,7 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
 
     best_ckpt = checkpoint_cb.best_model_path
     best_model = EventRNN.load_from_checkpoint(best_ckpt)
-    save_path = f"sequence_models/hit_the_switch/event_rnn_best_{run_name}.pth"
+    save_path = f"sequence_models/four_flags/event_rnn_best_{run_name}.pth"
 
     torch.save(best_model.state_dict(), save_path)
     print(f"[{run_name}] Best model saved to {save_path} (ckpt: {best_ckpt})")

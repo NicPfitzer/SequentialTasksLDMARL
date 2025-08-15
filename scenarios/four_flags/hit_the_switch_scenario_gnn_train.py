@@ -3,23 +3,28 @@
 #  All rights reserved.
 
 import torch
-
+from tensordict import TensorDict
 from vmas import render_interactively
 from vmas.simulator.core import Agent, Box, Landmark, Line, Sphere, World
 from vmas.simulator.scenario import BaseScenario
-from vmas.simulator.utils import Color, ScenarioUtils
+from vmas.simulator.utils import Color, TorchUtils
 from vmas.simulator.controllers.velocity_controller import VelocityController
 
-from sequence_models.hit_the_switch.model_training.rnn_model import EventRNN
 from scenarios.hit_the_switch.load_config import load_scenario_config
 from scenarios.hit_the_switch.language import LanguageUnit, load_decoder, load_sequence_model, load_task_data, FIND_GOAL, FIND_SWITCH
+
+from hydra import initialize, compose
+from hydra.core.global_hydra import GlobalHydra
+from omegaconf import DictConfig, OmegaConf
+from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
+
 
 class HitSwitchScenario(BaseScenario):
     def make_world(self, batch_dim: int, device: torch.device, **kwargs):
         load_scenario_config(kwargs, self)
         assert 1 <= self.n_passages <= 20
 
-        world = World(batch_dim, device, x_semidim=self.x_semidim, y_semidim=self.y_semidim, dim_c=self.event_dim)
+        world = World(batch_dim, device, x_semidim=self.x_semidim, y_semidim=self.y_semidim)
         
         self._add_passages(world)
         self._add_switch(world)
@@ -50,7 +55,7 @@ class HitSwitchScenario(BaseScenario):
             name="switch",
             collide=False,
             movable=False,
-            shape=Box(length=self.switch_length, width=self.switch_width),
+            shape=Sphere(radius=self.switch_radius),
             color=Color.YELLOW,
             collision_filter=lambda e: not isinstance(e.shape, Box),
         )
@@ -60,6 +65,10 @@ class HitSwitchScenario(BaseScenario):
         #load_decoder(model_path=self.decoder_model_path, embedding_size=self.embedding_size, device=world.device)
         load_sequence_model(model_path=self.sequence_model_path, embedding_size=self.embedding_size, event_size=self.event_dim, state_size=self.state_dim, device=world.device)
         load_task_data(json_path=self.data_json_path, device=world.device)
+        
+        # Load Action Policy
+        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path)
+        self.policy = get_policy_from_cfg(cfg, seed)
 
         self.language_unit = LanguageUnit(
             batch_size=world.batch_dim,
@@ -77,9 +86,7 @@ class HitSwitchScenario(BaseScenario):
             agent = Agent(
                 name=f"agent_{i}",
                 shape=Sphere(self.agent_radius),
-                v_range=self.agent_v_range,
-                f_range=self.agent_f_range,
-                u_range=self.agent_u_range,
+                discrete_action_nvec=[2]
             )
             if self.use_velocity_controller:
                 agent.controller = VelocityController(
@@ -122,18 +129,11 @@ class HitSwitchScenario(BaseScenario):
     def _set_initial_goal_coords(self, agent: Agent, world: World):
         
         agent.goal_coords = torch.zeros((world.batch_dim, 2), dtype=torch.float32, device=world.device)
-        
-        find_switch_indices = torch.where(self.language_unit.states == FIND_SWITCH)[0]
-        find_goal_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
-        
-        agent.goal_coords[find_switch_indices] = self.switch.state.pos[find_switch_indices]
-        agent.goal_coords[find_goal_indices] = agent.goal.state.pos[find_goal_indices]
+        agent.goal_coords = self.switch.state.pos.clone()
+        #agent.goal_coords = agent.goal.state.pos
 
     def reset_world_at(self, env_index: int = None):
         
-        # Add switch at random position in lower half of the world
-        # Ensure switch is not on the passage
-        # Randomly generate x and y coordinates for the switch
         rx = torch.rand(
             (self.world.batch_dim, 1),
             device=self.world.device,
@@ -144,16 +144,16 @@ class HitSwitchScenario(BaseScenario):
             device=self.world.device,
             dtype=torch.float32,
         )
-        rand_x = rx * (1 - self.switch_length/2) * 2 - (1 - self.switch_length/2)
-        rand_y = torch.max(-ry * (1 - self.switch_width / 2 + self.agent_radius) - self.passage_length / 2, -1 * torch.ones_like(ry) + self.switch_radius - self.agent_radius)
+        
+        rand_x = rx * (1 - self.switch_radius) * 2 - (1 - self.switch_radius)
+        rand_y = torch.max(-ry * (1 - self.switch_radius + self.agent_radius) - self.passage_length / 2, -1 * torch.ones_like(ry) + self.switch_radius - self.agent_radius)
 
         if env_index is None:
             pos = torch.cat((rand_x, rand_y), dim=1)
         else:
-            pos = torch.tensor(
+            pos = torch.cat(
                 [rand_x[env_index], rand_y[env_index]],
-                dtype=torch.float32,
-                device=self.world.device,
+                dim=0
             )
 
         self.switch.set_pos(
@@ -163,29 +163,36 @@ class HitSwitchScenario(BaseScenario):
         
         self.team_hit_switch[env_index].zero_() if env_index is not None else self.team_hit_switch.zero_()
         
-        if env_index is not None:
-            self.language_unit.reset_env(env_index) 
+        if env_index is None:
+                self.language_unit.reset_all()
         else:
-            self.language_unit.reset_all()
+            self.language_unit.reset_env(env_index) 
             
         self.language_unit.sample_dataset(env_index)
-        
-        hit_switch_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
-        self.team_hit_switch[hit_switch_indices] = True
-        
+
+        if env_index is None:
+            
+            self.language_unit.states.fill_(FIND_SWITCH)
+            for agent in self.world.agents:
+                agent.goal_coords = self.switch.state.pos.clone()
+                #agent.goal_coords = agent.goal.state.pos
+        else:
+            self.language_unit.states[env_index] = FIND_SWITCH
+            for agent in self.world.agents:
+                agent.goal_coords[env_index] = self.switch.state.pos[env_index]
+                #agent.goal_coords[env_index] = agent.goal.state.pos[env_index]
+
+
         # Initialize the RNN Automaton for the agent
         for agent in self.world.agents:
-            if env_index is not None:
-                agent.y[env_index] = self.language_unit.task_embeddings[env_index]
-                agent.h[env_index].zero_()
-                agent.e[env_index].zero_()
-            else:
+            if env_index is None:
                 agent.y = self.language_unit.task_embeddings.clone()
                 agent.h.zero_()
                 agent.e.zero_()
-
-        # Set agent goals
-        self.pre_step()
+            else:
+                agent.y[env_index] = self.language_unit.task_embeddings[env_index]
+                agent.h[env_index].zero_() 
+                agent.e[env_index].zero_()
 
         central_goal_pos = torch.cat(
             [
@@ -313,7 +320,6 @@ class HitSwitchScenario(BaseScenario):
             )
         self.landmark_poses = [landmark.state.pos.clone() for landmark in self.landmarks]
             
-
     def reward(self, agent: Agent):
         is_first = agent == self.world.agents[0]
 
@@ -352,16 +358,17 @@ class HitSwitchScenario(BaseScenario):
                 if landmark.collide:
                     self.rew[self.world.is_overlapping(agent, landmark)] -= 0
             hit_switch_mask = self.world.is_overlapping(agent, self.switch).bool()
-            # only the *first-time* hits (overlap & never hit before)
-            new_hits = hit_switch_mask & (~self.team_hit_switch)
-            self.rew[new_hits] += 10
+            new_team_hit_switch = hit_switch_mask & ~self.team_hit_switch
+            #self.rew[new_team_hit_switch] += 0
+            
+            hit_goal_mask = self.world.is_overlapping(agent, agent.goal).bool()
+            #self.rew[hit_goal_mask] += 10
             
             # Update hit switch status
             agent.hit_switch |= hit_switch_mask
             self.team_hit_switch |= hit_switch_mask
-
-        agent.e = agent.hit_switch.float().unsqueeze(1)
-
+            
+        
         # Despawn passage if switch is hit
         if self.team_hit_switch.any():
             indices = torch.where(self.team_hit_switch)[0]
@@ -386,10 +393,11 @@ class HitSwitchScenario(BaseScenario):
  
         obs_dict["pos"] = agent.state.pos
         obs_dict["vel"] = agent.state.vel
+        obs_dict["event"] = agent.hit_switch.float()
+        obs_dict["state"] = self.language_unit.states.float()
+        obs_dict["sentence_embedding"] = agent.h.clone()
         obs_components.append(agent.goal.state.pos - agent.state.pos)
         obs_components.append(self.switch.state.pos - agent.state.pos)
-        obs_dict["sentence_embedding"] = agent.h
-        obs_dict["event"] = agent.e
         obs_dict["obs"] = torch.cat(obs_components, dim=-1)
 
         return obs_dict
@@ -405,21 +413,67 @@ class HitSwitchScenario(BaseScenario):
             device=self.world.device,
         ).uniform_(-1000 * self.world.x_semidim, -10 * self.world.x_semidim)   
     
+    def process_action(self, agent):
+        
+        is_first = agent == self.world.agents[0]
+        if is_first:
+            # Replace agent action with the multitask policy action
+            obs_all_agents = self._collect_observations()
+            actions = self.policy(obs_all_agents)
+            for i, a in enumerate(self.world.agents):
+                # Clip e to 0, 1 integers
+                raw_event = a.action.u[:,0].unsqueeze(1)
+                a.e = torch.where(
+                    raw_event > 0.,
+                    torch.ones_like(raw_event, dtype=torch.float32),
+                    torch.zeros_like(raw_event, dtype=torch.float32),
+                )
+                a.action.u = actions.get(("agents", "action"))[:,i,:]
+
+        # Clamp square to circle
+        agent.action.u = TorchUtils.clamp_with_norm(agent.action.u, agent.u_range)
+
+        # Zero small input
+        action_norm = torch.linalg.vector_norm(agent.action.u, dim=1)
+        agent.action.u[action_norm < 0.005] = 0
+
+        if self.use_velocity_controller and not self.use_kinematic_model:
+            agent.controller.process_force()
+            
+    def _collect_observations(self):
+        data_dict = {} 
+
+        for agent in self.world.agents:
+            
+            obs = self.observation(agent)
+            obs["sentence_embedding"] = agent.h.clone()
+            for key, value in obs.items():
+                data_dict.setdefault(key, []).append(value.unsqueeze(1).float())
+
+        obs_dict = {
+            ("agents", "observation", key): torch.cat(tensor_list, dim=1)
+            for key, tensor_list in data_dict.items()
+        }
+
+        return TensorDict(obs_dict)
+    
     def pre_step(self):
         # Here we will implement the rnn logic to switch the sequence state
         for agent in self.world.agents:
+            
+            
             # Get the current state of the RNN
             h = agent.h.clone()
             e = agent.e.clone()
+            #e = (self.language_unit.states.unsqueeze(1).clone().float()). <- what we want to see
             y = agent.y.clone()
 
             # Compute the next state of the RNN
-            next_h, state_decoder_out = self.language_unit.compute_forward_rnn(
+            next_h, _ = self.language_unit.compute_forward_rnn(
                 event=e,
                 y=y,
                 h=h,
             )
-
             # Update the agent's state
             agent.h = next_h
 
@@ -505,9 +559,29 @@ class HitSwitchScenario(BaseScenario):
         except:
             print("No sentence found for this environment index, or syntax is wrong.")
             pass
-            
+        
         return geoms
-
+import copy
+def get_policy_from_cfg(cfg: DictConfig, seed: int):
+    experiment = benchmarl_setup_experiment(cfg, seed=seed, main_experiment=False)
+    policy_copy = copy.deepcopy(experiment.policy)  # full independent copy
+    del experiment  # drop the rest
+    return policy_copy
+import os
+def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None) -> DictConfig:
+    overrides = overrides or []  # e.g., ["restore_path=some_path"]
+    # current working directory
+    print(f"Current working directory: {os.getcwd()}")
+    # Add directory to restore_path if it is not None
+    restore_path = os.path.join(os.getcwd(), restore_path) if restore_path else None
+    GlobalHydra.instance().clear()
+    with initialize(version_base=None, config_path=config_path):
+        cfg = compose(config_name=config_name, overrides=overrides)
+    experiment_name = list(cfg.keys())[0]
+    seed = cfg.seed
+    cfg[experiment_name].experiment.restore_file = restore_path
+    cfg = cfg[experiment_name]  # Get the config for the specific experiment
+    return cfg, seed
 
 if __name__ == "__main__":
     scenario = HitSwitchScenario()

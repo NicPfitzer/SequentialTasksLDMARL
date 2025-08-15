@@ -109,7 +109,8 @@ class MyModel(Model):
                 
             # gnn_kwargs.update({"in_channels": self.event_dim, "out_channels": self.event_dim})
             sentence_dim = self.input_spec[('agents', 'observation', 'sentence_embedding')].shape[-1]
-            gnn_kwargs.update({"in_channels": self.event_dim * 2, "out_channels": 8})
+            # gnn_kwargs.update({"in_channels": self.event_dim * 2, "out_channels": 8})
+            gnn_kwargs.update({"in_channels": self.event_dim, "out_channels": 8})
             # if self._edge_attr_dim() and "edge_dim" in inspect.signature(gnn_class).parameters:
             #     gnn_kwargs["edge_dim"] = self._edge_attr_dim()
             # self.gnn_supports_edge_attrs = (
@@ -176,9 +177,14 @@ class MyModel(Model):
         sentence_embedding = tensordict.get(('agents','observation','sentence_embedding'))
         batch_size =    obs.shape[:-2]
         
+        # x_in = torch.cat(
+        #     [event, state], dim=-1
+        # ) 
         x_in = torch.cat(
-            [event, state], dim=-1
+            [event], dim=-1
         )
+        
+        
         
         if self.use_gnn:
 

@@ -9,10 +9,10 @@ PARAMS = [
     
     ("x_semidim", 1.0), ("y_semidim", 1.0),
     ("n_passages", 1), ("shared_reward", False),
-    ("n_agents", 5), ("agent_radius", 0.03333),
-    ("agent_spacing", 0.1),("passage_width", 0.2),
-    ("passage_length", 0.10),("switch_radius", 0.05),
-    ("break_all_wall", True),
+    ("n_agents", 5), ("agent_radius", 0.03),
+    ("agent_spacing", 0.1), ("passage_length", 0.2),
+    ("switch_radius", 0.05), ("break_all_wall", True),
+    ("chamber_width", 1.0),
 
     # --- Rewards ------------------------------------------------------------
     ("shaping_factor", 100),
@@ -28,15 +28,13 @@ PARAMS = [
     
     # --- Language -----------------------------------------------------------
     ("embedding_size", 1024), ("use_embedding_ratio", 1.0),
-    ("event_dim", 1), ("state_dim", 3),
-    ("use_rnn", True), ("multitask_learning", False),
-    ("use_team_event_gnn", False), ("simulate_team_event", True),
-    
+    ("event_dim", 6), ("state_dim", 7),
+
     # --- Paths -----------------------------------------------------------
-    ("data_json_path", "data/dataset_hit_the_switch.json"), ("decoder_model_path", ""),
-    ("sequence_model_path", "sequence_models/hit_the_switch/event_rnn_best_gru-in64-bs128.pth"),
+    ("data_json_path", "data/dataset_four_flags.json"), ("decoder_model_path", ""),
+    ("sequence_model_path", "sequence_models/four_flags/event_rnn_best_gru-in64-bs128.pth"),
     ("policy_config_path", "../../conf"), ("policy_config_name", "config_stage_two"),
-    ("policy_restore_path", "../../checkpoints/hit_the_switch/policy.pt")
+    ("policy_restore_path", "../../checkpoints/four_flags/policy.pt")
 ]
 
 # Expand every entry to canonical (dest, key, default) form
@@ -74,6 +72,7 @@ def load_scenario_config(source, env):
         setattr(env, dest_attr, value)
 
     # --- derived attributes -------------------------------------------------
+    env.passage_width = (env.y_semidim + env.agent_radius) / 10
     env.agent_f_range = env.agent_a_range + env.linear_friction
     env.agent_u_range = (
         env.agent_v_range if env.use_velocity_controller else env.agent_f_range

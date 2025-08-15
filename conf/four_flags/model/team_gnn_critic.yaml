@@ -1,27 +1,19 @@
-actor_model:
-  # experiment/model/actor_model.yaml
+critic_model:
+  # experiment/model/critic_model.yaml
   _target_: trainers.models.team_event_gnn.MyModelConfig
-  # ─── GNN settings ────────────────────────────────────────────────────────────
-  topology: from_pos
-  edge_radius: 0.35
-  self_loops: false
-  gnn_class: torch_geometric.nn.conv.GATv2Conv
-  gnn_kwargs:
-    add_self_loops: true
-    residual: true
 
-  # ─── Feature keys & sizes ────────────────────────────────────────────────────
+  # ─── Feature keys ────────────────────────────────────────────────────────────
   position_key: pos         # 2-D agent positions
   pos_features: 2
   velocity_key: vel
   vel_features: 2
   exclude_pos_from_node_features: false
-  event_dim: ${hit_the_switch.task.params.event_dim}
+  event_dim: ${four_flags.task.params.event_dim}
 
   # ─── MLP head ────────────────────────────────────────────────────────────────
   num_cells: [256, 256]        # bigger first layer than actor
   layer_class: torch.nn.Linear
   activation_class: torch.nn.ReLU
-  
+
   # ─── Toggles ─────────────────────────────────────────────────────────────────
-  use_gnn: true
+  use_gnn: false
