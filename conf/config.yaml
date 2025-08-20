@@ -3,7 +3,7 @@ defaults:
   # - /hit_the_switch/training/hit_the_switch_gnn_train.yaml
   # - /hit_the_switch/training/hit_the_switch_multitask.yaml
  
-  #- /four_flags/training/four_flags_gnn_train.yaml
-  - /four_flags/training/four_flags_multitask.yaml
+  - /four_flags/training/four_flags_gnn_train.yaml
+  # - /four_flags/training/four_flags_multitask.yaml
 
 

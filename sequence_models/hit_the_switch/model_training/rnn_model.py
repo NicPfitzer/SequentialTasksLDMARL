@@ -359,22 +359,6 @@ class EventRNN(pl.LightningModule):
 
         return loss
 
-    def validation_step(self, batch: Dict[str, Tensor], batch_idx: int):
-        loss = self._step(batch)
-        self.log_dict({
-            "val_loss": loss
-        }, prog_bar=True)
-
-        return loss
-
-    def validation_step(self, batch: Dict[str, Tensor], batch_idx: int):
-        loss = self._step(batch)
-        self.log_dict({
-            "val_loss": loss
-        }, prog_bar=True)
-
-        return loss
-
     def configure_optimizers(self):
         return torch.optim.AdamW(self.parameters(), lr=self.lr)
 

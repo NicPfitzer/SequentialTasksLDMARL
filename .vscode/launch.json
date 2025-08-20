@@ -15,10 +15,34 @@
       }
     },
     {
+      "name": "Run four_flags/eval_rnn_model.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/sequence_models/four_flags/model_eval/eval_rnn_model.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
       "name": "Run hit_the_switch/rnn_model.py",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/sequence_models/hit_the_switch/model_training/rnn_model.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_flags/rnn_model.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/sequence_models/four_flags/model_training/rnn_model.py",
       "justMyCode": false,
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",

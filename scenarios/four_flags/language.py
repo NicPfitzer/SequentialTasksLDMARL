@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import json
 
-from sequence_models.hit_the_switch.model_training.rnn_model import EventRNN
+from sequence_models.four_flags.model_training.rnn_model import EventRNN
 
 import torch.nn as nn
 import torch.nn.functional as F
@@ -11,15 +11,15 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 DECODER_OUTPUT_SIZE = 100
-MAX_SEQ_LEN = 4
-EVENT_DIM = 1
+MAX_SEQ_LEN = 15
+EVENT_DIM = 5
 
-FIND_GOAL = 0
-FIND_SWITCH = 1
-FIND_RED = 2
-FIND_GREEN = 3
-FIND_BLUE = 4
-FIND_PURPLE = 5
+FIND_RED = 0
+FIND_GREEN = 1
+FIND_BLUE = 2
+FIND_PURPLE = 3
+FIND_SWITCH = 4
+FIND_GOAL = 5
 
 STATES = {
     "FIND_GOAL": FIND_GOAL,
@@ -35,11 +35,6 @@ STATES = {
     "FIND_PURPLE": FIND_PURPLE,
     "purple": FIND_PURPLE,
 }
-
-train_dict = None
-total_dict_size = None
-data_grid_size = None
-decoder_model = None
 
 TextKeys = ("response", "text", "sentence", "prompt")
 EmbedKeys = ("embedding", "vector")
@@ -59,131 +54,21 @@ class Decoder(nn.Module):
 def load_decoder(model_path, embedding_size, device):
     
     global decoder_model
-    decoder_model = Decoder(emb_size= embedding_size, out_size=DECODER_OUTPUT_SIZE+4)
+    decoder_model = Decoder(emb_size= embedding_size, out_size=EVENT_DIM+1)
     decoder_model.load_state_dict(torch.load(model_path, map_location=device))
     decoder_model.eval()
     
 def load_sequence_model(model_path, embedding_size, event_size, state_size, device):
     
     global sequence_model
-    sequence_model = EventRNN(event_dim=event_size, y_dim=embedding_size, latent_dim=embedding_size, input_dim=64, state_dim=state_size).to(device)
+    sequence_model = EventRNN(event_dim=event_size, y_dim=embedding_size, latent_dim=embedding_size, input_dim=64, state_dim=state_size, decoder=None)
     sequence_model.load_state_dict(torch.load(model_path, map_location=device))
     sequence_model.eval()
 
-def load_multitask_data(
-    json_path,
-    device='cpu'):
-    global train_dict
-    global total_dict_size
-    global multitask 
-    
-    multitask = True
-
-    # Resolve path to ensure it's absolute and correct regardless of cwd
-    project_root = Path(__file__).resolve().parents[2]  # Adjust depending on depth of current file
-    full_path = project_root / json_path
-
-    with full_path.open('r') as f:
-        data = json.load(f)
-
-    def _get_first(d: Dict[str, Any], keys: tuple[str, ...]) -> Optional[Any]:
-        for k in keys:
-            if k in d:
-                return d[k]
-        return None
-
-    def process_dataset(data) -> List[Dict[str, Any]]:
-        """Load a merged file and return a flat list of {state, response, embedding} dicts."""
-
-        flat: List[Dict[str, Any]] = []
-        for state, records in data.items():
-            if not isinstance(records, list):
-                raise ValueError(f"State '{state}' must map to a list, got {type(records)}")
-
-            for rec in records:
-                if not isinstance(rec, dict):
-                    # If your source files were simple lists of strings, wrap them
-                    rec = {"response": rec}
-
-                response = _get_first(rec, TextKeys)
-                embedding = _get_first(rec, EmbedKeys)
-
-                # Basic validation
-                if not isinstance(response, str) or not response.strip():
-                    # Skip or raise; here we skip quietly. Change to raise if you prefer strictness.
-                    continue
-
-                if embedding is not None and not isinstance(embedding, list):
-                    # Coerce bad embeddings to None rather than crashing
-                    embedding = None
-
-                flat.append(
-                    {
-                        "states": state,
-                        "response": response.strip(),
-                        "embedding": torch.tensor(embedding, dtype=torch.float32) if embedding is not None else None,
-                    }
-                )
-        return flat
-
-    train_dict = process_dataset(data)
-    total_dict_size = len(next(iter(train_dict.values())))
-    
-def load_sequence_data(
-    json_path,
-    device='cpu'):
-    global train_dict
-    global total_dict_size
-
-    # Resolve path to ensure it's absolute and correct regardless of cwd
-    project_root = Path(__file__).resolve().parents[2]  # Adjust depending on depth of current file
-    full_path = project_root / json_path
-
-    with full_path.open('r') as f:
-        data = json.load(f)
-
-    if isinstance(data, list) and len(data) > 1 and all(isinstance(d, dict) for d in data):
-        np.random.shuffle(data)
-    else:
-        data = [data]  # Ensure data is a list of dicts
-
-    def process_dataset(dataset):
-        output = {}
-
-        if all("states" in entry for entry in dataset):
-            states = [entry["states"] for entry in dataset]
-            output["states"] = states
-        
-        if all("y" in entry for entry in dataset):
-            task = [entry["y"] for entry in dataset]
-            output["task"] = torch.tensor(task, dtype=torch.float32, device=device)
-        
-        if all("h" in entry for entry in dataset):
-            embeddings = [torch.tensor(entry["h"],dtype=torch.float32, device=device) for entry in dataset]
-            output["subtasks"] = embeddings
-        
-        if all("events" in entry for entry in dataset):
-            events = []
-            for entry in dataset:
-                e_all = torch.zeros((MAX_SEQ_LEN, EVENT_DIM), dtype=torch.float32, device=device)
-                e = torch.tensor(entry["events"], dtype=torch.float32, device=device)
-                e_all[:e.shape[0], :] = e
-                events.append(e_all)
-            output["event"] = torch.stack(events)
-        
-        if all("summary" in entry for entry in dataset):
-            sentences = [entry["summary"] for entry in dataset]
-            output["summary"] = sentences
-        
-        if all("responses" in entry for entry in dataset):
-            responses = [entry["responses"] for entry in dataset]
-            output["responses"] = responses
-        
-        return output
-
-    train_dict = process_dataset(data)
-    total_dict_size = len(next(iter(train_dict.values())))
-    
+from pathlib import Path
+import json
+import torch
+from typing import Dict, Any, Optional, List
 
 class LanguageUnit:
 
@@ -203,8 +88,111 @@ class LanguageUnit:
         self.states = torch.zeros((self.batch_size,), dtype=torch.int64, device=self.device)
         self.summary = [ "" for _ in range(self.batch_size)]
         self.response = [ "" for _ in range(self.batch_size)]
-    
-    
+        
+    def load_multitask_data(self, json_path, device='cpu'):
+
+        project_root = Path(__file__).resolve().parents[2]  # adjust if needed
+        full_path = project_root / json_path
+
+        with full_path.open('r') as f:
+            data = json.load(f)
+
+        def _get_first(d: Dict[str, Any], keys: tuple[str, ...]) -> Optional[Any]:
+            for k in keys:
+                if k in d:
+                    return d[k]
+            return None
+
+        def process_dataset(data) -> Dict[str, Any]:
+            """Return dict-of-lists with one big embedding tensor [N, D]."""
+
+            states: List[str] = []
+            responses: List[str] = []
+            embs: List[List[float]] = []
+
+            for state, records in data.items():
+                if not isinstance(records, list):
+                    raise ValueError(f"State '{state}' must map to a list, got {type(records)}")
+
+                for rec in records:
+                    if not isinstance(rec, dict):
+                        rec = {"response": rec}
+
+                    response = _get_first(rec, TextKeys)
+                    embedding = _get_first(rec, EmbedKeys)
+
+                    if not isinstance(response, str) or not response.strip():
+                        continue
+
+                    states.append(state)
+                    responses.append(response.strip())
+                    embs.append(embedding)
+
+            embed_tensor = torch.tensor(embs, dtype=torch.float32, device=device)
+
+            return {
+                "state": states,
+                "response": responses,
+                "embedding": embed_tensor,   # shape [N, D]
+            }
+
+        self.train_dict = process_dataset(data)
+        self.total_dict_size = len(self.train_dict["response"])
+        
+    def load_sequence_data(
+        self,
+        json_path,
+        device='cpu'):
+
+        # Resolve path to ensure it's absolute and correct regardless of cwd
+        project_root = Path(__file__).resolve().parents[2]  # Adjust depending on depth of current file
+        full_path = project_root / json_path
+
+        with full_path.open('r') as f:
+            data = json.load(f)
+
+        if isinstance(data, list) and len(data) > 1 and all(isinstance(d, dict) for d in data):
+            np.random.shuffle(data)
+        else:
+            data = [data]  # Ensure data is a list of dicts
+
+        def process_dataset(dataset):
+            output = {}
+
+            if all("states" in entry for entry in dataset):
+                states = [entry["states"] for entry in dataset]
+                output["states"] = states
+            
+            if all("y" in entry for entry in dataset):
+                task = [entry["y"] for entry in dataset]
+                output["task"] = torch.tensor(task, dtype=torch.float32, device=device)
+            
+            if all("h" in entry for entry in dataset):
+                embeddings = [torch.tensor(entry["h"],dtype=torch.float32, device=device) for entry in dataset]
+                output["subtasks"] = embeddings
+            
+            if all("events" in entry for entry in dataset):
+                events = []
+                for entry in dataset:
+                    e_all = torch.zeros((MAX_SEQ_LEN, EVENT_DIM), dtype=torch.float32, device=device)
+                    e = torch.tensor(entry["events"], dtype=torch.float32, device=device)
+                    e_all[:e.shape[0], :] = e
+                    events.append(e_all)
+                output["event"] = torch.stack(events)
+            
+            if all("summary" in entry for entry in dataset):
+                sentences = [entry["summary"] for entry in dataset]
+                output["summary"] = sentences
+            
+            if all("responses" in entry for entry in dataset):
+                responses = [entry["responses"] for entry in dataset]
+                output["responses"] = responses
+            
+            return output
+
+        self.train_dict = process_dataset(data)
+        self.total_dict_size = len(next(iter(self.train_dict.values())))
+
     def sample_multitask_dataset(self, env_index: torch.Tensor, forced_state=None):
         
         if env_index is None:
@@ -215,111 +203,228 @@ class LanguageUnit:
         packet_size = env_index.shape[0]
         
         # --- pick indices ------------------------------------------------------------     # or any key with same length
-        if packet_size <= total_dict_size:
+        if packet_size <= self.total_dict_size:
             # Normal case: sample *without* replacement
-            sample_indices = torch.randperm(total_dict_size, device=self.device)[:packet_size]
+            sample_indices = torch.randperm(self.total_dict_size, device=self.device)[:packet_size]
         else:
             # Need repeats → build “base” + “extra” indices
-            repeats, remainder = divmod(packet_size, total_dict_size)
+            repeats, remainder = divmod(packet_size, self.total_dict_size)
 
             # 1) repeat every index the same number of times
-            base = torch.arange(total_dict_size, device=self.device).repeat(repeats)
+            base = torch.arange(self.total_dict_size, device=self.device).repeat(repeats)
 
             # 2) top-up with a random subset for the leftover slots
-            extra = torch.randperm(total_dict_size, device=self.device)[:remainder] \
+            extra = torch.randperm(self.total_dict_size, device=self.device)[:remainder] \
                     if remainder > 0 else torch.empty(0, dtype=torch.long, device=self.device)
 
             sample_indices = torch.cat([base, extra])
         
         # Sample tensor
-        task_dict = {key: value[sample_indices] for key, value in train_dict.items() if key in train_dict and key not in ["responses", "states"]}
+        task_dict = {key: value[sample_indices] for key, value in self.train_dict.items() if key in self.train_dict and key not in ["response", "state"]}
+        task_dict["response"] = [self.train_dict["response"][i] for i in sample_indices]
+        task_dict["state"] = [self.train_dict["state"][i] for i in sample_indices]
         # Sample sentences
         indices_list = sample_indices.tolist()
-        if "responses" in train_dict:
+        if "response" in self.train_dict:
             for i , idx in enumerate(env_index):
-                self.response[idx] = train_dict["responses"][i]
-        
-        if "embeddings" in task_dict:
-            self.task_embeddings[env_index] = task_dict["embeddings"]
-            
-        if "states" in task_dict:
+                self.response[idx] = task_dict["response"][i]
+
+        if "embedding" in task_dict:
+            self.subtask_embeddings[env_index] = task_dict["embedding"]
+
+        if "state" in task_dict:
             for i , idx in enumerate(env_index):
-                state = task_dict["states"][i]
+                state = task_dict["state"][i]
                 self.states[idx] = STATES[state] if state in STATES else 0
-        
+                
     def sample_sequence_dataset(self, env_index: torch.Tensor, forced_state=None):
-        
+
         if env_index is None:
             env_index = torch.arange(self.batch_size, device=self.device)
         else:
             env_index = torch.atleast_1d(torch.tensor(env_index, device=self.device))
-        
+
         packet_size = env_index.shape[0]
-        
-        # --- pick indices ------------------------------------------------------------     # or any key with same length
-        if packet_size <= total_dict_size:
-            # Normal case: sample *without* replacement
-            sample_indices = torch.randperm(total_dict_size, device=self.device)[:packet_size]
-        else:
-            # Need repeats → build “base” + “extra” indices
-            repeats, remainder = divmod(packet_size, total_dict_size)
 
-            # 1) repeat every index the same number of times
-            base = torch.arange(total_dict_size, device=self.device).repeat(repeats)
+        # ---------- Build an inverted index: state_value -> [(sample_j, [matching_positions...]), ...]
+        if "states" not in self.train_dict:
+            raise ValueError("train_dict must contain 'states' sequences.")
 
-            # 2) top-up with a random subset for the leftover slots
-            extra = torch.randperm(total_dict_size, device=self.device)[:remainder] \
-                    if remainder > 0 else torch.empty(0, dtype=torch.long, device=self.device)
+        # values we can target
+        all_state_values = list(STATES.values())
+        # map: state_value -> list of (j, match_positions)
+        candidates_by_state = {sv: [] for sv in all_state_values}
 
-            sample_indices = torch.cat([base, extra])
-        
-        # Sample tensors
-        task_dict = {key: value[sample_indices] for key, value in train_dict.items() if key in train_dict and key not in ["states", "subtasks", "responses", "summary"]}
-        # Sample sentences
-        indices_list = sample_indices.tolist()
-        if "summary" in train_dict:
-            task_dict["summary"] = [train_dict["summary"][i] for i in indices_list]
-            
-        if "responses" in train_dict:
-            task_dict["responses"] = [train_dict["responses"][i] for i in indices_list]
-            
-        if "states" in train_dict:
-            task_dict["states"] = [train_dict["states"][i] for i in indices_list]
-            
-        if "subtasks" in train_dict:
-            task_dict["subtasks"] = [train_dict["subtasks"][i] for i in indices_list]
-        
+        for j in range(self.total_dict_size):
+            seq_states = self.train_dict["states"][j]
+            # collect match positions per state value
+            buckets = {sv: [] for sv in all_state_values}
+            for k in range(len(seq_states)):
+                sv = STATES[seq_states[k]]  # map token/label -> canonical value
+                if sv in buckets:
+                    buckets[sv].append(k)
+            for sv, pos in buckets.items():
+                if pos:
+                    candidates_by_state[sv].append((j, pos))
+
+        # Fast lookup: which states actually exist
+        available_states = [sv for sv, lst in candidates_by_state.items() if len(lst) > 0]
+
+        # ---------- Choose per-slot target state, sample, and subtask index
+        chosen_indices = []          # per-slot chosen sample j
+        chosen_subtask_idxs = []     # per-slot chosen subtask position
+
+        for _ in range(packet_size):
+            # 1) pick target state (forced or random), but ensure it's available if possible
+            target_sv = forced_state if forced_state is not None else random.choice(all_state_values)
+            if target_sv not in available_states:
+                if available_states:
+                    target_sv = random.choice(available_states)
+                else:
+                    # no samples contain any known state; hard fallback
+                    target_sv = None
+
+            # 2) pick random sample with that state
+            if target_sv is not None and candidates_by_state[target_sv]:
+                j, positions = random.choice(candidates_by_state[target_sv])
+                sub_idx = random.choice(positions)
+            else:
+                # global fallback: arbitrary sample/subtask 0
+                j = random.randrange(self.total_dict_size)
+                sub_idx = 0
+
+            chosen_indices.append(j)
+            chosen_subtask_idxs.append(sub_idx)
+
+        chosen_indices_t = torch.tensor(chosen_indices, device=self.device, dtype=torch.long)
+
+        # ---------- Assemble task_dict consistently for the chosen samples
+        task_dict = {}
+
+        # tensor-like entries: gather by index
+        tensor_keys = [k for k, v in self.train_dict.items()
+                    if k not in ["states", "subtasks", "responses", "summary"] and torch.is_tensor(v)]
+        for key in tensor_keys:
+            task_dict[key] = self.train_dict[key][chosen_indices_t]
+
+        # ragged/list-like entries: pick one-by-one
+        for key in ["summary", "responses", "states", "subtasks"]:
+            if key in self.train_dict:
+                task_dict[key] = [self.train_dict[key][j] for j in chosen_indices]
+
+        # ---------- Write fixed fields that don't depend on subtask position
         if "task" in task_dict:
             self.task_embeddings[env_index] = task_dict["task"]
-        
+
         if "summary" in task_dict:
-            for i , idx in enumerate(env_index):
+            for i, idx in enumerate(env_index):
                 self.summary[idx] = task_dict["summary"][i]
-        
+
         if "event" in task_dict:
-            event = task_dict["event"]
-            self.event_sequence[env_index] = event
-        
+            self.event_sequence[env_index] = task_dict["event"]
+
+        # ---------- Per-slot: commit chosen subtask position, response, and sequence_length
         if "subtasks" in task_dict and "responses" in task_dict and "states" in task_dict:
-            for i , idx in enumerate(env_index):
-                num_subtasks = task_dict["subtasks"][i].shape[0]
-                states = task_dict["states"][i]
-                # Chose random subtask index with equal probability to land on each subtask
-                state_pick = random.choice(list(STATES.values()))
-                subtask_idx =  random.randint(0, num_subtasks - 1) if num_subtasks > 0 else 0
-                attempt = 0
-                while STATES[states[subtask_idx]] != state_pick and attempt < 10:
-                    subtask_idx = random.randint(0, num_subtasks - 1) if num_subtasks > 0 else 0
-                    attempt += 1
-                self.sequence_length[idx] = subtask_idx
-                self.response[idx] = task_dict["responses"][i][subtask_idx]
-                
+            for i, idx in enumerate(env_index):
+                num_subtasks = task_dict["subtasks"][i].shape[0] if hasattr(task_dict["subtasks"][i], "shape") \
+                            else len(task_dict["subtasks"][i])
+                sub_idx = chosen_subtask_idxs[i] if num_subtasks > 0 else 0
+                sub_idx = min(max(sub_idx, 0), max(num_subtasks - 1, 0))
+
+                self.sequence_length[idx] = sub_idx
+                self.response[idx] = task_dict["responses"][i][sub_idx]
+
+                # normalization from your original code
                 if self.sequence_length[idx] == 0:
                     self.event_sequence[idx].zero_()
                     self.sequence_length[idx] = 1
-                
+        else:
+            # minimal fallback if ragged keys are missing
+            for i, idx in enumerate(env_index):
+                self.sequence_length[idx] = 1
+                if "responses" in task_dict and len(task_dict["responses"][i]) > 0:
+                    self.response[idx] = task_dict["responses"][i][0]
+                if "event" in task_dict:
+                    self.event_sequence[idx] = task_dict["event"][i]
+
+        # ---------- Rollout embeddings after everything is aligned
         if "subtasks" in task_dict:
             self.compute_subtask_embedding_rollout_from_rnn(env_index)
+
+        
+    # def sample_sequence_dataset(self, env_index: torch.Tensor, forced_state=None):
+        
+    #     if env_index is None:
+    #         env_index = torch.arange(self.batch_size, device=self.device)
+    #     else:
+    #         env_index = torch.atleast_1d(torch.tensor(env_index, device=self.device))
+        
+    #     packet_size = env_index.shape[0]
+        
+    #     # --- pick indices ------------------------------------------------------------     # or any key with same length
+    #     if packet_size <= self.total_dict_size:
+    #         # Normal case: sample *without* replacement
+    #         sample_indices = torch.randperm(self.total_dict_size, device=self.device)[:packet_size]
+    #     else:
+    #         # Need repeats → build “base” + “extra” indices
+    #         repeats, remainder = divmod(packet_size, self.total_dict_size)
+
+    #         # 1) repeat every index the same number of times
+    #         base = torch.arange(self.total_dict_size, device=self.device).repeat(repeats)
+
+    #         # 2) top-up with a random subset for the leftover slots
+    #         extra = torch.randperm(self.total_dict_size, device=self.device)[:remainder] \
+    #                 if remainder > 0 else torch.empty(0, dtype=torch.long, device=self.device)
+
+    #         sample_indices = torch.cat([base, extra])
+        
+    #     # Sample tensors
+    #     task_dict = {key: value[sample_indices] for key, value in self.train_dict.items() if key in self.train_dict and key not in ["states", "subtasks", "responses", "summary"]}
+    #     # Sample sentences
+    #     indices_list = sample_indices.tolist()
+    #     if "summary" in self.train_dict:
+    #         task_dict["summary"] = [self.train_dict["summary"][i] for i in indices_list]
+
+    #     if "responses" in self.train_dict:
+    #         task_dict["responses"] = [self.train_dict["responses"][i] for i in indices_list]
+
+    #     if "states" in self.train_dict:
+    #         task_dict["states"] = [self.train_dict["states"][i] for i in indices_list]
+
+    #     if "subtasks" in self.train_dict:
+    #         task_dict["subtasks"] = [self.train_dict["subtasks"][i] for i in indices_list]
+
+    #     if "task" in task_dict:
+    #         self.task_embeddings[env_index] = task_dict["task"]
+        
+    #     if "summary" in task_dict:
+    #         for i , idx in enumerate(env_index):
+    #             self.summary[idx] = task_dict["summary"][i]
+        
+    #     if "event" in task_dict:
+    #         event = task_dict["event"]
+    #         self.event_sequence[env_index] = event
+        
+    #     if "subtasks" in task_dict and "responses" in task_dict and "states" in task_dict:
+    #         for i , idx in enumerate(env_index):
+    #             num_subtasks = task_dict["subtasks"][i].shape[0]
+    #             states = task_dict["states"][i]
+    #             # Chose random subtask index with equal probability to land on each subtask
+    #             state_pick = random.choice(list(STATES.values()))
+    #             subtask_idx =  random.randint(0, num_subtasks - 1) if num_subtasks > 0 else 0
+    #             attempt = 0
+    #             while STATES[states[subtask_idx]] != state_pick and attempt < 10:
+    #                 subtask_idx = random.randint(0, num_subtasks - 1) if num_subtasks > 0 else 0
+    #                 attempt += 1
+    #             self.sequence_length[idx] = subtask_idx
+    #             self.response[idx] = task_dict["responses"][i][subtask_idx]
+                
+    #             if self.sequence_length[idx] == 0:
+    #                 self.event_sequence[idx].zero_()
+    #                 self.sequence_length[idx] = 1
+                
+    #     if "subtasks" in task_dict:
+    #         self.compute_subtask_embedding_rollout_from_rnn(env_index)   
     
     def get_subtask_embedding_from_rnn(self, env_index: torch.Tensor) -> torch.Tensor:
         """ Get the subtask embedding from the RNN model for the given enironments. """

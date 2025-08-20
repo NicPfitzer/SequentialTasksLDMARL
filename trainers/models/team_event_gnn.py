@@ -108,9 +108,10 @@ class MyModel(Model):
                 gnn_kwargs = {}
                 
             # gnn_kwargs.update({"in_channels": self.event_dim, "out_channels": self.event_dim})
-            sentence_dim = self.input_spec[('agents', 'observation', 'sentence_embedding')].shape[-1]
+            # sentence_dim = self.input_spec[('agents', 'observation', 'sentence_embedding')].shape[-1]
             # gnn_kwargs.update({"in_channels": self.event_dim * 2, "out_channels": 8})
             gnn_kwargs.update({"in_channels": self.event_dim, "out_channels": 8})
+            # gnn_kwargs.update({"in_channels": self.event_dim + 1, "out_channels": 8})
             # if self._edge_attr_dim() and "edge_dim" in inspect.signature(gnn_class).parameters:
             #     gnn_kwargs["edge_dim"] = self._edge_attr_dim()
             # self.gnn_supports_edge_attrs = (
@@ -173,7 +174,8 @@ class MyModel(Model):
             
         event =         tensordict.get(('agents','observation','event'))
         obs =           tensordict.get(('agents','observation','obs'))
-        state =         tensordict.get(('agents','observation','state'))
+        task_state =    tensordict.get(('agents','observation','task_state'))
+        agent_state =   tensordict.get(('agents','observation','agent_state'))
         sentence_embedding = tensordict.get(('agents','observation','sentence_embedding'))
         batch_size =    obs.shape[:-2]
         
@@ -183,8 +185,6 @@ class MyModel(Model):
         x_in = torch.cat(
             [event], dim=-1
         )
-        
-        
         
         if self.use_gnn:
 
@@ -211,14 +211,15 @@ class MyModel(Model):
             out = self.merger(event_logits)
             #out = event_logits
         else:
-            node_feat = [obs, state]
-            if pos is not None and not self.exclude_pos_from_node_features:
-                node_feat.append(pos)
-            if rot is not None:
-                node_feat.append(rot)
-            if vel is not None:
-                node_feat.append(vel)
-                
+            #node_feat = [obs, state]
+            # if pos is not None and not self.exclude_pos_from_node_features:
+            #     node_feat.append(pos)
+            # if rot is not None:
+            #     node_feat.append(rot)
+            # if vel is not None:
+            #     node_feat.append(vel)
+
+            node_feat = [task_state, agent_state]
             x = torch.cat(node_feat, dim=-1)
             
             if self.input_has_agent_dim:
@@ -243,21 +244,23 @@ class MyModel(Model):
         n = 0        
 
         # 2. plain observation vector ("obs")
-        n += self.input_spec[('agents', 'observation', 'obs')].shape[-1]
+        #n += self.input_spec[('agents', 'observation', 'obs')].shape[-1]
 
-        n += self.input_spec[('agents', 'observation', 'state')].shape[-1]
+        n += self.input_spec[('agents', 'observation', 'task_state')].shape[-1]
 
-        # 3. optional positional features
-        if self.position_key is not None and not self.exclude_pos_from_node_features:
-            n += self.pos_features          
+        n += self.input_spec[('agents', 'observation', 'agent_state')].shape[-1]
 
-        # 4. optional rotation features
-        if self.rotation_key is not None:
-            n += self.rot_features
+        # # 3. optional positional features
+        # if self.position_key is not None and not self.exclude_pos_from_node_features:
+        #     n += self.pos_features          
 
-        # 5. optional velocity features
-        if self.velocity_key is not None:
-            n += self.vel_features
+        # # 4. optional rotation features
+        # if self.rotation_key is not None:
+        #     n += self.rot_features
+
+        # # 5. optional velocity features
+        # if self.velocity_key is not None:
+        #     n += self.vel_features
 
         return n
 

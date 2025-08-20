@@ -164,7 +164,7 @@ def collect_merged_train_test_data_from_embeddings(json_path, train_ratio, test_
         for subtask in subtask_data:
             merged_data.append({
                 "embedding": subtask["embedding"],
-                "grid": subtask["grid"]
+                "goal": subtask["subtask_decoder_label"],
             })
     data = merged_data
     np.random.shuffle(data)
@@ -180,7 +180,7 @@ def collect_merged_train_test_data_from_embeddings(json_path, train_ratio, test_
     # Helper function to convert raw data to tensors
     def process_dataset(dataset):
         embeddings = [entry["embedding"] for entry in dataset]
-        goals = [[*entry["grid"]] for entry in dataset]
+        goals = [[*entry["goal"]] for entry in dataset]
 
         task_embeddings = torch.tensor(embeddings, dtype=torch.float32, device=device)
         goal_tensor = torch.tensor(goals, dtype=torch.float32, device=device)

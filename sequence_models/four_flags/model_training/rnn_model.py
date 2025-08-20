@@ -41,7 +41,7 @@ import itertools
 import wandb
 from pytorch_lightning.loggers import WandbLogger
 
-from sequence_models.hit_the_switch.model_training.mlp_decoder import Decoder
+from sequence_models.four_flags.model_training.mlp_decoder import Decoder
 
 
 ###############################################################################
@@ -49,6 +49,8 @@ from sequence_models.hit_the_switch.model_training.mlp_decoder import Decoder
 ###############################################################################
 
 MAX_SEQ_LEN = 15
+EVENT_DIM = 5
+STATE_DIM = 7
 
 ###############################################################################
 # Dataset + DataLoader helpers – identical to v1 (see comments there)
@@ -163,14 +165,21 @@ class EventRNN(pl.LightningModule):
         num_layers: int = 1,
         lr: float = 1e-4,
         cls_loss_weight: float = 2.0,
+        ground_truth_h_rate: float = 0.25,
         recon_loss: str = "cosine",
-        #decoder: Decoder,
+        decoder: Decoder = None,
     ) -> None:
         super().__init__()
         self.save_hyperparameters()
 
         D = latent_dim  # hidden size now equals target size
         I = input_dim
+        
+        if decoder is None:
+            self.use_label_decoder = False
+        else:
+            self.use_label_decoder = True
+
 
         # ─── Embeddings ──────────────────────────────────────────────
         self.e_proj = nn.Linear(event_dim, I)
@@ -201,13 +210,14 @@ class EventRNN(pl.LightningModule):
         )
 
         self.recon_head = nn.Identity()  # no reconstruction head
-        #self.recon_decoder = decoder
+        self.recon_decoder = decoder
 
         self.recon_loss = recon_loss.lower()
         if self.recon_loss not in {"mse", "cosine"}:
             raise ValueError("recon_loss must be 'mse' or 'cosine'")
         self.cls_w = cls_loss_weight
         self.lr = lr
+        self.ground_truth_h_rate = ground_truth_h_rate
 
     # ------------------------------------------------------------------
     def _rollout(self, e: Tensor, y: Tensor, lengths: Tensor) -> Tensor:
@@ -251,18 +261,23 @@ class EventRNN(pl.LightningModule):
         preds = []
         for t in range(T):
             
-            if h_gt is not None and torch.rand(1).item() < 0.25:
+            if h_gt is not None and torch.rand(1).item() < self.ground_truth_h_rate:
                 h = h_gt[:, t]
                 
             h = self.rnn(fused[:, t], h)
             # Randomily sometimes replace the latest hidden state with the ground truth
             preds.append(h.clone())
+            
         out = torch.stack(preds, dim=1)  # (B, T, D)                                              # (B,T,D)
 
         state_decoder_out = self.state_head(out)  # (B, T, state_dim)
         recon_out = self.recon_head(out)  # (B, T, state_dim)
+        if self.use_label_decoder:
+            decoder_label = self.recon_decoder(recon_out)  # (B, T, LABEL_SIZE)
+        else:
+            decoder_label = None
 
-        return state_decoder_out, recon_out #, recon_decoder_out
+        return state_decoder_out, recon_out, decoder_label
 
     def _initalized_rollout(self, e: Tensor, y: Tensor, h: Tensor) -> Tensor:
         B, T, _ = e.shape
@@ -280,7 +295,7 @@ class EventRNN(pl.LightningModule):
                 h = self.rnn(fused[:, t], h)
                 preds.append(h.clone())
             out = torch.stack(preds, dim=1)  # (B, T, D)
-        
+
         state_decoder_out = self.state_head(out)  # (B, T, state_dim)
         recon_out = self.recon_head(out)  # (B, T, state_dim)
 
@@ -292,7 +307,7 @@ class EventRNN(pl.LightningModule):
         fused = torch.cat([self.e_proj(e),self.y_proj(y)], dim=-1)  # (B, T, 2*I)
         h = self.rnn(fused, h)
         state_decoder_out = self.state_head(h)  # (B, T, state_dim)
-        
+
         return h, state_decoder_out
 
     # ------------------------------------------------------------------
@@ -300,13 +315,15 @@ class EventRNN(pl.LightningModule):
         e, y, target_h = batch["e"], batch["y"], batch["h"] # (B, T, e_dim), (B, T, y_dim), (B, T+1, D)
         lengths = batch["lengths"] # (B,)
         labels = batch["label"] # (B,T+1, state_dim)
+        decoder_labels = batch["subtask_labels"] # (B,T+1, subtask_dim)
         
         #Only compute reconstruction loss for positive labels      
         target = target_h[:, 1:]  # (B, T, D)
         label = labels[:, 1:]  # (B, T, state_dim)
+        decoder_label = decoder_labels[:, 1:]  # (B, T, subtask_dim)
 
         #pred_cls, pred_recon, pred_grid = self._rollout(e, y, lengths)
-        pred_cls, pred_recon = self.train_rollout(e, y, target_h)  # (B, T, state_dim), (B, T, D)
+        pred_cls, pred_recon, pred_decoder_label = self.train_rollout(e, y, target_h)  # (B, T, state_dim), (B, T, D)
 
         # Mask: (B, T)
         mask = (
@@ -315,13 +332,13 @@ class EventRNN(pl.LightningModule):
             < lengths.unsqueeze(1)
         )
 
-        # #================ Reconstruction Loss Calculation ==========
-        # if self.recon_loss == "mse":
-        #     mse = F.mse_loss(pred_recon, target, reduction='none').mean(dim=-1)
-        #     loss_recon_h = (mse * mask).sum() / mask.sum()
-        # else:
-        #     cos = F.cosine_similarity(pred_recon, target, dim=-1)  # (B, T)
-        #     loss_recon_h = ((1 - cos) * mask).sum() / mask.sum() 
+        #================ Reconstruction Loss Calculation ==========
+        if self.recon_loss == "mse":
+            mse = F.mse_loss(pred_recon, target, reduction='none').mean(dim=-1)
+            loss_recon_h = (mse * mask).sum() / mask.sum()
+        else:
+            cos = F.cosine_similarity(pred_recon, target, dim=-1)  # (B, T)
+            loss_recon_h = ((1 - cos) * mask).sum() / mask.sum() 
 
         # loss_grid = F.binary_cross_entropy_with_logits(pred_grid, grid, reduction='none').mean(dim=-1)  # (B, T)
         # # gt_grid = self.recon_decoder(target)  # (B, T, GRID_SIZE*GRID_SIZE + NUM_CLASSES)
@@ -335,42 +352,41 @@ class EventRNN(pl.LightningModule):
         raw_loss_cls = F.binary_cross_entropy_with_logits(pred_cls, label, reduction='none').mean(dim=-1) # (B, T, state_dim)
         masked_loss = raw_loss_cls * mask
         loss_cls = masked_loss.sum() / mask.sum()
+        
+        if self.use_label_decoder:
+            #label_2 = torch.sigmoid(self.recon_decoder(target))  # (B, T, LABEL_SIZE)
+            label_loss = F.binary_cross_entropy_with_logits(
+                pred_decoder_label,decoder_label, reduction='none'
+            ).mean(dim=-1)
+            masked_losslabel_loss = label_loss * mask
+            label_loss = masked_losslabel_loss.sum() / mask.sum()
+        else:
+            label_loss = 0
 
-        #loss = loss_recon + self.cls_w * loss_cls
-        loss = loss_cls
-        #return loss, loss_recon_h, loss_recon_grid, loss_cls
-        return loss
+        loss = self.cls_w * loss_cls.clone() + label_loss
+
+        return loss, loss_cls, loss_recon_h, label_loss
 
 
-    # ------------------------------------------------------------------
+    # ----------------------------§--------------------------------------
     def training_step(self, batch: Dict[str, Tensor], batch_idx: int):
-        loss = self._step(batch)
+        loss, loss_cls, loss_recon_h, label_loss = self._step(batch)
         self.log_dict({
             "train_loss": loss,
+            "train_loss_cls": loss_cls,
+            "train_loss_recon": loss_recon_h,
+            "train_label_loss": label_loss,
         }, prog_bar=True)
 
         return loss
 
     def validation_step(self, batch: Dict[str, Tensor], batch_idx: int):
-        loss = self._step(batch)
+        loss, loss_cls, loss_recon_h, label_loss = self._step(batch)
         self.log_dict({
-            "val_loss": loss
-        }, prog_bar=True)
-
-        return loss
-
-    def validation_step(self, batch: Dict[str, Tensor], batch_idx: int):
-        loss = self._step(batch)
-        self.log_dict({
-            "val_loss": loss
-        }, prog_bar=True)
-
-        return loss
-
-    def validation_step(self, batch: Dict[str, Tensor], batch_idx: int):
-        loss = self._step(batch)
-        self.log_dict({
-            "val_loss": loss
+            "val_loss": loss,
+            "val_loss_cls": loss_cls,
+            "val_loss_recon": loss_recon_h,
+            "val_label_loss": label_loss,
         }, prog_bar=True)
 
         return loss
@@ -378,31 +394,32 @@ class EventRNN(pl.LightningModule):
     def configure_optimizers(self):
         return torch.optim.AdamW(self.parameters(), lr=self.lr)
 
-def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "decoders/llm0_decoder_model_grid_scale.pth"):
+def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "sequence_models/four_flags/four_flags_decoder.pth"):
     train_loader, val_loader = make_loaders(
         "sequence_models/data/dataset_four_flags.json", batch_size=batch_size
     )
     
     # decoder = Decoder(
     #     emb_size=1024,
-    #     out_size=GRID_SIZE * GRID_SIZE + NUM_CLASSES,
+    #     out_size=EVENT_DIM+1,
     # )
-    # Initialize the model
-    # decoder.load_state_dict(torch.load(decoder_path, map_location="mps"))
-    # decoder.eval() # Freeze the decoder
-    # for param in decoder.parameters():
-    #     param.requires_grad = False
+    # # #Initialize the model
+    # # decoder.load_state_dict(torch.load(decoder_path, map_location="mps"))
+    # # decoder.eval() # Freeze the decoder
+    # # for param in decoder.parameters():
+    # #     param.requires_grad = False
 
     model = EventRNN(
         lr=3e-5,
-        event_dim=6,
+        event_dim=EVENT_DIM,
         y_dim=1024,
         latent_dim=1024,
-        state_dim=7,
+        state_dim=STATE_DIM,
         input_dim=input_dim,
         num_layers=1,
         cls_loss_weight=8.0,
-        #decoder=decoder,
+        ground_truth_h_rate=0.0,
+        decoder=None,
     )
 
     run_name = f"gru-in{input_dim}-bs{batch_size}"

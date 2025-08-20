@@ -3,7 +3,7 @@
 #  All rights reserved.
 
 import torch
-
+from tensordict import TensorDict
 from vmas import render_interactively
 from vmas.simulator.core import Agent, Box, Landmark, Line, Sphere, World
 from vmas.simulator.scenario import BaseScenario
@@ -12,16 +12,24 @@ from vmas.simulator.controllers.velocity_controller import VelocityController
 
 from scenarios.four_flags.load_config import load_scenario_config
 from scenarios.four_flags.language import LanguageUnit, load_decoder, load_sequence_model
-from scenarios.four_flags.language import FIND_GOAL, FIND_SWITCH, FIND_RED, FIND_GREEN, FIND_BLUE, FIND_PURPLE
+from scenarios.four_flags.language import FIND_GOAL, FIND_SWITCH, FIND_RED, FIND_GREEN, FIND_BLUE, FIND_PURPLE, STATES
+
+from hydra import initialize, compose
+from hydra.core.global_hydra import GlobalHydra
+from omegaconf import DictConfig, OmegaConf
+from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
+from sequence_models.four_flags.random_automaton_walk import NUM_AUTOMATA
 
 class FourFlagsScenario(BaseScenario):
     def make_world(self, batch_dim: int, device: torch.device, **kwargs):
         load_scenario_config(kwargs, self)
         assert 1 <= self.n_passages <= 20
+
         world = World(batch_dim, device, x_semidim=self.x_semidim, y_semidim=self.y_semidim)
         
-        self._prepare_obs_layout(world)
+        self._prepare_obs_layout()
         self._prepare_state_map(device)
+        self._prepare_task_state(world)
         
         self._add_passages(world)
         self._add_switch(world)
@@ -74,7 +82,7 @@ class FourFlagsScenario(BaseScenario):
                 name=f"flag {i}",
                 collide=False,
                 movable=False,
-                shape=Sphere(radius=self.agent_radius * 3),
+                shape=Sphere(radius=self.agent_radius * 5),
                 color=c,
                 collision_filter=lambda e: not isinstance(e.shape, Box),
             )
@@ -84,6 +92,10 @@ class FourFlagsScenario(BaseScenario):
     def _init_language_unit(self, world: World):
         #load_decoder(model_path=self.decoder_model_path, embedding_size=self.embedding_size, device=world.device)
         load_sequence_model(model_path=self.sequence_model_path, embedding_size=self.embedding_size, event_size=self.event_dim, state_size=self.state_dim, device=world.device)
+        
+        # Load Action Policy
+        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path)
+        self.policy = get_policy_from_cfg(cfg, seed)
 
         self.language_unit = LanguageUnit(
             batch_size=world.batch_dim,
@@ -95,9 +107,12 @@ class FourFlagsScenario(BaseScenario):
         self.visualize_semidims = False
 
     def _add_agents_and_goals(self, world: World):
+        
         self.goals = []
         self.team_hit_switch = torch.zeros((world.batch_dim,), dtype=torch.bool, device=world.device)
         self.team_found_flags = torch.zeros((world.batch_dim, 4), dtype=torch.bool, device=world.device)
+        self.prev_team_found_flags = self.team_found_flags.clone()
+        self.prev_team_hit_switch = self.team_hit_switch.clone()
 
         for i in range(self.n_agents):
             agent = Agent(
@@ -106,6 +121,8 @@ class FourFlagsScenario(BaseScenario):
                 v_range=self.agent_v_range,
                 f_range=self.agent_f_range,
                 u_range=self.agent_u_range,
+                discrete_action_nvec= [2 for _ in range(self.event_dim)]
+                #discrete_action_nvec=[self.event_dim]
             )
             if self.use_velocity_controller:
                 agent.controller = VelocityController(
@@ -129,6 +146,12 @@ class FourFlagsScenario(BaseScenario):
                 dtype=torch.float32,
                 device=world.device,
             )
+            
+            agent.state_ = torch.zeros(
+                (world.batch_dim,),
+                dtype=torch.float32,
+                device=world.device,
+            )
 
             goal = Landmark(
                 name=f"goal {i}",
@@ -143,10 +166,11 @@ class FourFlagsScenario(BaseScenario):
             self._set_initial_goal_coords(agent, world)
             agent.hit_switch = torch.zeros((world.batch_dim,), dtype=torch.bool, device=world.device)
             agent.found_flags = torch.zeros((world.batch_dim, 4), dtype=torch.bool, device=world.device)
+            agent.on_goal = torch.zeros((world.batch_dim,), dtype=torch.bool, device=world.device)
 
             world.add_agent(agent)
-    
-    def _prepare_obs_layout(self, world: World):
+            
+    def _prepare_obs_layout(self):
         # compute once
         P = 0 if self.break_all_wall else self.n_passages
         # 2 coords per relative vector
@@ -170,13 +194,93 @@ class FourFlagsScenario(BaseScenario):
         self._state_map[FIND_BLUE]   = 4
         self._state_map[FIND_PURPLE] = 5
     
+    def _prepare_task_state(self, world: World):
+        # task state is the automaton state
+        self.y = torch.zeros(
+            (world.batch_dim, self.embedding_size), dtype=torch.float32, device=world.device
+        )
+        self.h = torch.zeros(
+            (world.batch_dim, self.embedding_size), dtype=torch.float32, device=world.device
+        )
+        
+        self.new_state = torch.zeros((world.batch_dim,),dtype=bool, device=world.device)
+        self.init = torch.ones(world.batch_dim, dtype=torch.bool, device=world.device)
+
     def _set_initial_goal_coords(self, agent: Agent, world: World):
         agent.goal_coords = torch.zeros((world.batch_dim, 2), dtype=torch.float32, device=world.device)
         self.set_goal_coords(agent, world)
+    
+    def next_task_state(self, world: World, env_index: int = None):
+        # e_all: [E, F+1]
+        e_all = torch.cat(
+            [self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1
+        ).float()
+
+        E = e_all.shape[0]
+        device = world.device
+
+        # Select the working set of env indices
+        if env_index is None:
+            idx = torch.arange(E, device=device)
+        else:
+            idx = torch.as_tensor(env_index, device=device)
+
+        # Default to "no update" for the selected envs
+        self.new_state[idx] = False
+
+        # First call logic is per-env
+        first_time = self.init[idx]
+        later_time = ~first_time
+
+        update_idx_list = []
+
+        # First-time envs: always update and clear their init flags
+        if torch.any(first_time):
+            first_idx = idx[first_time]
+            update_idx_list.append(first_idx)
+            self.init[first_idx] = False
+
+        # Later-time envs: only update if team event state changed since last step
+        if torch.any(later_time):
+            later_idx = idx[later_time]
+            flags_same = torch.all(
+                self.team_found_flags[later_idx].eq(self.prev_team_found_flags[later_idx]),
+                dim=-1,
+            )
+            switch_same = self.team_hit_switch[later_idx].eq(self.prev_team_hit_switch[later_idx])
+            change_mask = ~(flags_same & switch_same)
+            if torch.any(change_mask):
+                update_idx_list.append(later_idx[change_mask])
+
+        if not update_idx_list:
+            # Nothing to do; selected envs remain False in self.new_state
+            return
+
+        upd_idx = torch.cat(update_idx_list)
+
+        # Mark which envs produced a new state this call
+        self.new_state[upd_idx] = True
+
+        # Run the RNN update only on updated envs
+        y = self.y[upd_idx]
+        h = self.h[upd_idx]
+        e = e_all[upd_idx]
+
+        next_h, state_one_hot = self.language_unit.compute_forward_rnn(event=e, y=y, h=h)
+
+        self.h[upd_idx] = next_h
+        states = torch.argmax(torch.sigmoid(state_one_hot[:, 1:]), dim=-1)
+        self.language_unit.states[upd_idx] = states
+
+        # Refresh snapshots for next diff (full refresh is simple and cheap)
+        self.prev_team_found_flags = self.team_found_flags.clone()
+        self.prev_team_hit_switch = self.team_hit_switch.clone()
+
 
     @torch.no_grad()
     def set_goal_coords(self, agent: Agent, world: World, env_index: int = None):
         # targets: [B,6,2]
+        self.next_task_state(world, env_index)
         targets = torch.stack(
             [
                 agent.goal.state.pos,         # 0
@@ -195,7 +299,7 @@ class FourFlagsScenario(BaseScenario):
         else:
             idx = int(self._state_map[int(self.language_unit.states[env_index])])
             agent.goal_coords[env_index] = targets[env_index, idx]
-    
+  
     def reset_landmarks(self, env_index: int = None):
         
         self.x_room_max = (self.x_semidim - self.chamber_width - self.agent_radius * 3 - self.passage_length / 2)
@@ -344,11 +448,11 @@ class FourFlagsScenario(BaseScenario):
     def reset_agents(self, env_index: int = None):
         
         for agent in self.world.agents:
-            
+
             self.set_goal_coords(agent, self.world, env_index)
-            
             # Reset agent variables
             if env_index is None:
+                agent.goal_coords = agent.goal.state.pos.clone()
                 agent.global_shaping = (
                     torch.linalg.vector_norm(
                         agent.state.pos - agent.goal_coords, dim=1
@@ -356,6 +460,7 @@ class FourFlagsScenario(BaseScenario):
                     * self.shaping_factor
                 )
             else:
+                agent.goal_coords[env_index] = agent.goal.state.pos[env_index].clone()
                 agent.global_shaping[env_index] = (
                     torch.linalg.vector_norm(
                         agent.state.pos[env_index] - agent.goal_coords[env_index]
@@ -364,16 +469,18 @@ class FourFlagsScenario(BaseScenario):
                 )
             agent.found_flags.zero_() if env_index is None else agent.found_flags[env_index].zero_()
             agent.hit_switch.zero_() if env_index is None else agent.hit_switch[env_index].zero_()
+            agent.on_goal.zero_() if env_index is None else agent.on_goal[env_index].zero_()
             
             if env_index is None:
                 agent.y = self.language_unit.task_embeddings.clone()
-                agent.h = self.language_unit.subtask_embeddings.clone()
+                agent.h.zero_()
                 agent.e.zero_()
+                agent.state_.zero_()
             else:
                 agent.y[env_index] = self.language_unit.task_embeddings[env_index].clone()
-                agent.h[env_index] = self.language_unit.subtask_embeddings[env_index].clone()
+                agent.h[env_index].zero_()
                 agent.e[env_index].zero_()
-            
+                agent.state_[env_index].zero_()
             # Set the agent positions
             self.reset_agent_pos(agent,env_index)
             
@@ -390,17 +497,27 @@ class FourFlagsScenario(BaseScenario):
         self.language_unit.sample_sequence_dataset(env_index)
         self.team_hit_switch.zero_() if env_index is None else self.team_hit_switch[env_index].zero_()
         self.team_found_flags.zero_() if env_index is None else self.team_found_flags[env_index].zero_()
+        self.prev_team_found_flags = self.team_found_flags.clone()
+        self.prev_team_hit_switch = self.team_hit_switch.clone()
+        self.init.zero_() if env_index is None else self.init[env_index].zero_()
+        self.new_state.zero_() if env_index is None else self.new_state[env_index].zero_()
         
-        # Initialize Goal Coordinates
+        # # Reset the automaton state
+        # if env_index is None:
+        #     self.automaton_state = [self.automaton._initial for _ in range(self.world.batch_dim)]
+        #     self.language_unit.states = torch.tensor([STATES[self.automaton._initial] for _ in range(self.world.batch_dim)], device=self.world.device)
+        # else:
+        #     self.automaton_state[env_index] = self.automaton._initial
+        #     self.language_unit.states[env_index] = STATES[self.automaton._initial]
         if env_index is None:
-                    hit_switch_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
-                    self.team_hit_switch[hit_switch_indices] = True
-                    self.team_found_flags[hit_switch_indices] = True
-
+            self.language_unit.states.zero_()
+            self.y = self.language_unit.task_embeddings.clone()
+            self.h.zero_()
         else:
-            self.team_hit_switch[env_index] = self.language_unit.states[env_index] == FIND_GOAL
-            self.team_found_flags[env_index] = self.language_unit.states[env_index] == FIND_GOAL
-        
+            self.language_unit.states[env_index].zero_()
+            self.y[env_index] = self.language_unit.task_embeddings[env_index].clone()
+            self.h[env_index].zero_()
+
         # Set the goal positions
         self.reset_goals(env_index)
         # Reset Agents
@@ -424,7 +541,6 @@ class FourFlagsScenario(BaseScenario):
             )
         self.landmark_poses = [landmark.state.pos.clone() for landmark in self.landmarks]
             
-
     def reward(self, agent: Agent):
         is_first = agent == self.world.agents[0]
 
@@ -463,20 +579,31 @@ class FourFlagsScenario(BaseScenario):
                 if landmark.collide:
                     self.rew[self.world.is_overlapping(agent, landmark)] -= 0
             for i, flag in enumerate(self.flags):
-                overlapping_flag = self.world.is_overlapping(agent, flag)
-                agent.found_flags[:,i] |= overlapping_flag.bool()
+                if i == 0:
+                    overlapping_flag = self.world.is_overlapping(agent, flag)
+                    agent.found_flags[:,i] |= overlapping_flag.bool()
+                    #self.rew[overlapping_flag] += 0.05
+                else:
+                    # If the previous flag was found, then this one can be found (Temporary)
+                    #overlapping_flag = self.world.is_overlapping(agent, flag) & self.team_found_flags[:,i-1] == True
+                    overlapping_flag = self.world.is_overlapping(agent, flag)
+                    agent.found_flags[:,i] |= overlapping_flag.bool()
+                    #self.rew[overlapping_flag] += 0.05
+                    # If this flag is found, then the team has found it
                 self.team_found_flags[:,i] |= agent.found_flags[:,i]
-                self.rew[overlapping_flag] += 0.05
                 
-            overlapping_switch = self.world.is_overlapping(agent, self.switch)
+            overlapping_switch = self.world.is_overlapping(agent, self.switch) & self.team_found_flags.all(dim=1)
             agent.hit_switch |= overlapping_switch.bool()
             self.team_hit_switch |= agent.hit_switch
-            self.rew[overlapping_switch] += 0.05
-            
-            overlapping_goal = self.world.is_overlapping(agent, agent.goal)
-            self.rew[overlapping_goal] += 0.05
+            #self.rew[overlapping_switch] += 0.05
+
+            #overlapping_goal = self.world.is_overlapping(agent, agent.goal)
+            #self.rew[overlapping_goal] += 0.05
             # only the *first-time* hits (overlap & never hit before)
         
+        # A shared reward for advancing the automaton state
+        self.rew += self.new_state.float() * 1.0
+
         # Despawn passage if switch is hit
         if self.team_hit_switch.any():
             indices = torch.where(self.team_hit_switch & torch.all(self.team_found_flags, dim=1))[0]
@@ -487,32 +614,32 @@ class FourFlagsScenario(BaseScenario):
         return self.rew * 0.01
 
     def observation(self, agent: Agent):
-        # pre-size once per call; the collector reuses tensors under the hood
-        obs_buf = torch.empty((self.world.batch_dim, self._obs_dim),
-                            device=self.world.device, dtype=torch.float32)
-
+        # get positions of all entities in this agent's reference frame
+        obs_dict = {}
+        obs_components = []
+        
         if not self.break_all_wall:
-            # Stack current passage poses to [B, P, 2] without Python loop
-            # (landmark.state.pos is already [B,2])
-            P = self.n_passages
-            pass_pos = torch.stack([lm.state.pos for lm in self.landmarks[:P]], dim=1)  # [B,P,2]
-            rel = pass_pos - agent.state.pos.unsqueeze(1)                                # [B,P,2]
-            obs_buf[:, self._sl_passages] = rel.reshape(self.world.batch_dim, -1)
+            passage_obs = []
+            for pose in self.landmark_poses[: self.n_passages]:
+                passage_obs.append(pose - agent.state.pos)
+            passage_obs = torch.stack(passage_obs, dim=1).view(self.world.batch_dim, -1)
+            obs_components.append(passage_obs)
+ 
+        obs_dict["pos"] = agent.state.pos
+        obs_dict["vel"] = agent.state.vel
+        obs_dict["event"] = torch.cat([agent.found_flags, agent.hit_switch.unsqueeze(1)], dim=-1).float()
+        obs_components.append(agent.goal.state.pos - agent.state.pos)
+        obs_components.append(self.switch.state.pos - agent.state.pos)
+        
+        for flag in self.flags:
+            obs_components.append(flag.state.pos - agent.state.pos)
 
-        obs_buf[:, self._sl_goal]   = agent.goal.state.pos - agent.state.pos
-        obs_buf[:, self._sl_switch] = self.switch.state.pos - agent.state.pos
+        obs_dict["sentence_embedding"] = agent.h.clone()
+        obs_dict["obs"] = torch.cat(obs_components, dim=-1)
+        obs_dict["task_state"] = self.language_unit.states.float()
+        obs_dict["agent_state"] = agent.state_.float()
 
-        # flags: build once, no loop
-        flags_pos = torch.stack([f.state.pos for f in self.flags], dim=1)               # [B,4,2]
-        obs_buf[:, self._sl_flags] = (flags_pos - agent.state.pos.unsqueeze(1)).reshape(self.world.batch_dim, 8)
-
-        return {
-            "pos": agent.state.pos,
-            "vel": agent.state.vel,
-            "event": agent.e,
-            "sentence_embedding": agent.h,
-            "obs": obs_buf,
-        }
+        return obs_dict
         
     def _get_outside_pos(self, env_index):
         """Get a position far outside the environment to hide entities."""
@@ -526,7 +653,28 @@ class FourFlagsScenario(BaseScenario):
         ).uniform_(-1000 * self.world.x_semidim, -10 * self.world.x_semidim)   
     
     def process_action(self, agent):
-            
+        
+        is_first = agent == self.world.agents[0]
+        if is_first:
+            # Replace agent action with the multitask policy action
+            obs_all_agents = self._collect_observations()
+            actions = self.policy(obs_all_agents)
+            for i, a in enumerate(self.world.agents):
+                # Clip e to 0, 1 integers
+                raw_event = a.action.u[:, :self.event_dim]
+                a.e = torch.where(
+                    raw_event > 0.,
+                    torch.ones_like(raw_event, dtype=torch.float32),
+                    torch.zeros_like(raw_event, dtype=torch.float32),
+                )
+                
+                # raw_event = a.action.u[:,0]
+                # idx = ((raw_event + 1.1) / (2.2) * self.event_dim).long()
+                # idx = idx.clamp(0, self.event_dim - 1)
+                # a.e = torch.nn.functional.one_hot(idx, num_classes=self.event_dim).float()
+                
+                a.action.u = actions.get(("agents", "action"))[:,i,:]
+
         # Clamp square to circle
         agent.action.u = TorchUtils.clamp_with_norm(agent.action.u, agent.u_range)
 
@@ -536,51 +684,110 @@ class FourFlagsScenario(BaseScenario):
 
         if self.use_velocity_controller and not self.use_kinematic_model:
             agent.controller.process_force()
+            
+    def _collect_observations(self):
+        data_dict = {} 
 
-    @torch.no_grad()
+        for agent in self.world.agents:
+            
+            obs = self.observation(agent)
+            for key, value in obs.items():
+                data_dict.setdefault(key, []).append(value.unsqueeze(1).float())
+
+        obs_dict = {
+            ("agents", "observation", key): torch.cat(tensor_list, dim=1)
+            for key, tensor_list in data_dict.items()
+        }
+
+        return TensorDict(obs_dict)
+    
+    def pre_step(self):
+
+        for agent in self.world.agents:
+            # agent.h: [E, H], agent.y: [E, Y] (batched per env)
+            h = agent.h.clone()
+            y = agent.y.clone()
+            e = agent.e.clone()
+            #e = torch.cat([self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1).float()
+            next_h, next_state = self.language_unit.compute_forward_rnn(
+                event=e,
+                y=y,
+                h=h,
+            )
+
+            # Write back only for the changed envs
+            agent.h = next_h
+            agent.state_ = torch.argmax(torch.sigmoid(next_state[:,1:]), dim=-1)
+            self.set_goal_coords(agent, self.world)
+ 
+    # def pre_step(self):
+    #     # Build the per-env event tensor once
+    #     # team_found_flags: [E, F], team_hit_switch: [E]
+    #     # e: [E, F+1]
+        
+    #     if not self.init:
+    #         e = torch.cat([self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1).float()
+    #         E = e.shape[0]
+    #         change_mask = torch.ones(E, dtype=torch.bool, device=self.world.device)
+
+    #         # Per-env comparisons
+    #         flags_same = torch.all(
+    #             self.team_found_flags.eq(self.prev_team_found_flags), dim=-1
+    #         )  # [E]
+    #         switch_same = self.team_hit_switch.eq(self.prev_team_hit_switch)  # [E]
+    #         change_mask = ~(flags_same & switch_same)  # [E]
+
+    #         # Nothing changed in any environment -> early exit
+    #         if not torch.any(change_mask) and self.init == False:
+    #             return
+    #     else:
+    #         e = torch.cat([self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1).float()
+    #         change_mask = torch.ones(e.shape[0], dtype=torch.bool, device=self.world.device)
+    #         E = e.shape[0]
+    #         self.init = False
+
+    #     # For changed environments only, run the RNN update per agent
+    #     e_changed = e[change_mask]  # [E_changed, F+1]
+
+    #     for agent in self.world.agents:
+    #         # agent.h: [E, H], agent.y: [E, Y] (batched per env)
+    #         h_changed = agent.h[change_mask].clone()
+    #         y_changed = agent.y[change_mask].clone()
+
+    #         next_h, next_state = self.language_unit.compute_forward_rnn(
+    #             event=e_changed,
+    #             y=y_changed,
+    #             h=h_changed,
+    #         )
+
+    #         # Write back only for the changed envs
+    #         agent.h[change_mask] = next_h
+    #         agent.state_[change_mask] = torch.sigmoid(next_state)
+
+    #     # Update prev_* snapshots (either full or masked; full is simplest and cheap)
+    #     self.prev_team_found_flags = self.team_found_flags.clone()
+    #     self.prev_team_hit_switch = self.team_hit_switch.clone()
+
+
     def done(self):
-        B = self.world.batch_dim
-        agents = self.world.agents
 
-        # 1) All agents on their goals
-        on_goal = torch.all(
-            torch.stack([
-                torch.linalg.vector_norm(a.state.pos - a.goal.state.pos, dim=1) <= a.shape.radius / 2
-                for a in agents
-            ], dim=1),
+        return torch.all(
+            torch.stack(
+                [
+                    torch.linalg.vector_norm(a.state.pos - a.goal.state.pos, dim=1)
+                    <= a.shape.radius / 2
+                    for a in self.world.agents
+                ],
+                dim=1,
+            ),
             dim=1,
-        )  # [B]
-
-        # 2) All agents have found each flag color
-        per_agent_flags = torch.stack([a.found_flags for a in agents], dim=1)  # [B,N,4]
-        all_found_each_color = per_agent_flags.all(dim=1)                      # [B,4] (R,G,B,P)
-
-        # 3) All agents have touched the switch
-        per_agent_switch = torch.stack([a.hit_switch for a in agents], dim=1)  # [B,N]
-        all_agents_hit_switch = per_agent_switch.all(dim=1)                    # [B]
-
-        # 4) Build state-conditional termination table
-        table = torch.stack(
-            [
-                on_goal,                    # FIND_GOAL
-                all_agents_hit_switch,      # FIND_SWITCH (now requires everyone)
-                all_found_each_color[:, 0], # FIND_RED
-                all_found_each_color[:, 1], # FIND_GREEN
-                all_found_each_color[:, 2], # FIND_BLUE
-                all_found_each_color[:, 3], # FIND_PURPLE
-            ],
-            dim=1,
-        )  # [B,6]
-
-        idx = self._state_map[self.language_unit.states]  # [B]
-        b = torch.arange(B, device=self.world.device)
-        return table[b, idx]
-
+        )
 
     def extra_render(self, env_index: int = 0):
         from vmas.simulator import rendering
 
         geoms = []
+        state_colors = [Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.YELLOW, Color.LIGHT_GREEN]
         for i in range(4):
             geom = Line(length=2 + self.agent_radius * 2).get_geometry()
             xform = rendering.Transform()
@@ -628,7 +835,17 @@ class FourFlagsScenario(BaseScenario):
                     ring.add_attr(xform)
                     ring.set_color(*self.colors[j].value)
                     geoms.append(ring)
-                    
+
+            dot = rendering.make_circle(
+                radius=0.015,
+                filled=True,
+            )
+            xform = rendering.Transform()
+            xform.set_translation(*agent1.state.pos[env_index])
+            dot.add_attr(xform)
+            dot.set_color(*state_colors[agent1.state_[env_index].item()].value)
+            geoms.append(dot)
+
             for j, agent2 in enumerate(self.world.agents):
                 if j <= i:
                     continue
@@ -636,11 +853,12 @@ class FourFlagsScenario(BaseScenario):
                     line = rendering.Line(
                         agent1.state.pos[env_index], agent2.state.pos[env_index], width=5
                     )
-                    line.set_color(*Color.GREEN.value)
+                    color = state_colors[self.language_unit.states[env_index].item()]
+                    line.set_color(*color.value)
                     geoms.append(line)
         
         try:
-            sentence = self.language_unit.response[env_index]
+            sentence = self.language_unit.summary[env_index]
             geom = rendering.TextLine(
                 text=sentence,
                 font_size=6
@@ -654,7 +872,29 @@ class FourFlagsScenario(BaseScenario):
             pass
             
         return geoms
+    
+import copy
+def get_policy_from_cfg(cfg: DictConfig, seed: int):
+    experiment = benchmarl_setup_experiment(cfg, seed=seed, main_experiment=False)
+    policy_copy = copy.deepcopy(experiment.policy)  # full independent copy
+    del experiment  # drop the rest
+    return policy_copy
 
+import os
+def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None) -> DictConfig:
+    overrides = overrides or []  # e.g., ["restore_path=some_path"]
+    # current working directory
+    print(f"Current working directory: {os.getcwd()}")
+    # Add directory to restore_path if it is not None
+    restore_path = os.path.join(os.getcwd(), restore_path) if restore_path else None
+    GlobalHydra.instance().clear()
+    with initialize(version_base=None, config_path=config_path):
+        cfg = compose(config_name=config_name, overrides=overrides)
+    experiment_name = list(cfg.keys())[0]
+    seed = cfg.seed
+    cfg[experiment_name].experiment.restore_file = restore_path
+    cfg = cfg[experiment_name]  # Get the config for the specific experiment
+    return cfg, seed
 
 if __name__ == "__main__":
     scenario = FourFlagsScenario()

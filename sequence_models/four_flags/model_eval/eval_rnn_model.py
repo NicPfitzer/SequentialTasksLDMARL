@@ -7,25 +7,46 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-from sequence_models.hit_the_switch.model_training.rnn_model import EventRNN
-
+from sequence_models.four_flags.model_training.rnn_model import EventRNN
+from sequence_models.four_flags.model_training.mlp_decoder import Decoder
+from sequence_models.four_flags.random_automaton_walk import R, G, B, P, SW
+GL = 5
 task_map = {
-    0: "Hit the Switch",
+    0: "Find flags in rgbp order, hit the switch and navigate to the goal",
 }
 
 subtask_map = {
-    0: "Navigate to the Switch",
-    1: "Navigate to the Goal",
+    SW: "Navigate to the Switch",
+    GL: "Navigate to the Goal",
+    R: "Find Red Flag",
+    G: "Find Green Flag",
+    B: "Find Blue Flag",
+    P: "Find Purple Flag",
 }
+
+print(subtask_map)
 
 DEVICE = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 # Load model from .pth checkpoint
-def load_event_rnn_model(checkpoint_path: str = "event_rnn_best.pth") -> EventRNN:
-    model = EventRNN(
-        event_dim=1, y_dim=1024, latent_dim=1024, state_dim=3, input_dim=64, num_layers=1
-    )
+def load_event_rnn_model(checkpoint_path: str = "event_rnn_best.pth", decoder: Decoder = None) -> EventRNN:
+    if decoder is None:
+        model = EventRNN(
+            event_dim=5, y_dim=1024, latent_dim=1024, state_dim=7, input_dim=64, num_layers=1
+        )
+    else:
+        print("Using provided decoder model.")
+        model = EventRNN(
+            event_dim=5, y_dim=1024, latent_dim=1024, state_dim=7, input_dim=64, num_layers=1, decoder=decoder
+        )
     model.load_state_dict(torch.load(checkpoint_path, map_location=DEVICE))
+    model.to(DEVICE)
+    model.eval()
+    return model
+
+def load_decoder_model(path: str, emb_size: int = 1024, out_size: int = 6) -> Decoder:
+    model = Decoder(emb_size, out_size)
+    model.load_state_dict(torch.load(path, map_location=DEVICE))
     model.to(DEVICE)
     model.eval()
     return model
@@ -56,7 +77,8 @@ def predict_state_rollout(task: str, subtask: str, events: list[list[float]], mo
         tasks = [task_map[i.item()] for i in task_index]
         
         # Subtask
-        subtask_index = probs[:,1:3].argmax(dim=-1)  #
+        subtask_index = probs[:,1:].argmax(dim=-1)  #
+        print(f"Subtask index: {subtask_index}")
         subtasks = [subtask_map[i.item()] for i in subtask_index]
 
 
@@ -68,15 +90,21 @@ def predict_state_rollout(task: str, subtask: str, events: list[list[float]], mo
     }
 
 # Run
-model = load_event_rnn_model("sequence_models/hit_the_switch/event_rnn_best_gru-in64-bs128.pth")
+decoder = load_decoder_model("sequence_models/four_flags/four_flags_decoder.pth")
+model = load_event_rnn_model("sequence_models/four_flags/event_rnn_best_gru-in64-bs128.pth", decoder)
 
 # ]
 events = [
-    [0.],
+    [0.,0.,0.,0.,0.],
+    [1.,0.,0.,0.,0.],
+    [1.,1.,0.,0.,0.],
+    [1.,1.,1.,0.,0.],
+    [1.,1.,1.,1.,0.],
+    [1.,1.,1.,1.,1.],
 ]
 
-task = "Ok agents, find the switch and then navigate to the goal.\n"
-subtask = "navigate to the switch" # Initialization subtask - We don't need to start at the beginning of the automaton.
+task = "Hunt flags, flip the switch, and race to the finish!\n"
+subtask = None # Initialization subtask - We don't need to start at the beginning of the automaton.
 
 result = predict_state_rollout(
     task=task,
@@ -93,7 +121,7 @@ def pretty_print(task, subtask, events, result):
         print(f"  Subtask : {subtask.strip()}")
     else:
         print("  Subtask : None")
-    print("  Events  (Hit Switch):")
+    print("  Events  (Red,Green,Blue,Purple,Switch):")
     for idx, event in enumerate(events, 1):
         print(f"    {idx:>2}. {event}")
 

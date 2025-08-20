@@ -154,8 +154,6 @@ class MyModel(Model):
     
     def _forward(self, tensordict: TensorDictBase) -> TensorDictBase:
 
-        self.freeze_layers()
-
         # Gather in_key
         pos = rot = vel = None
         if self.position_key is not None:
@@ -200,9 +198,6 @@ class MyModel(Model):
             x = self.gnn(**forward_gnn_params).view(
                 *batch_size, self.n_agents, self.gnn_emb_dim
             )
-        
-        if self.use_encoder:
-            sentence = self.encoder(sentence)
         
         # Stack all inputs
         x = torch.cat([x , sentence], dim=-1)

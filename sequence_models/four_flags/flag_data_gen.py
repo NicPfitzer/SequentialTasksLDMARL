@@ -81,22 +81,22 @@ _ADVERBS: List[str] = [
     "securely",
 ]
 
-# Common, banner/marker sense only
-FLAG_OBJECTS: List[str] = [
-    "flag",
-    "banner",
-    "ensign",
-    "pennant",
-    "emblem",
-    "symbol",
-    "marker",
-    "badge",
-    "tag",
-    "totem",
-    "token",
-]
+# # Common, banner/marker sense only
+# FLAG_OBJECTS: List[str] = [
+#     "flag",
+#     "banner",
+#     "ensign",
+#     "pennant",
+#     "emblem",
+#     "symbol",
+#     "marker",
+#     "badge",
+#     "tag",
+#     "totem",
+#     "token",
+# ]
 
-COLORS: List[str] = ["red", "green", "blue", "purple"]
+COLORS: List[str] = ["red flag", "green banner", "blue marker", "purple tag"]
 
 
 # ----- Prompt generation -----
@@ -106,14 +106,14 @@ def navigate_to_object_prompt(color: str) -> str:
     agent = random.choice(_AGENTS)
     verb = random.choice(_VERBS)
     adverb = random.choice(_ADVERBS)
-    obj = random.choice(FLAG_OBJECTS)
+    #obj = random.choice(FLAG_OBJECTS)
 
     # Some adverbs sound better after the object
     post_object_adverbs = {"without delay", "without hesitation", "expeditiously"}
     if adverb in post_object_adverbs:
-        return f"{agent}, {verb} to the {color} {obj} {adverb}."
+        return f"{agent}, {verb} to the {color} {adverb}."
     else:
-        return f"{agent}, {verb} {adverb} to the {color} {obj}."
+        return f"{agent}, {verb} {adverb} to the {color}."
 
 
 def collect_prompts(n: int, color: str) -> list[dict[str, str]]:

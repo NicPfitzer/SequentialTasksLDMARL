@@ -3,7 +3,7 @@ actor_model:
   _target_: trainers.models.team_event_gnn.MyModelConfig
   # ─── GNN settings ────────────────────────────────────────────────────────────
   topology: from_pos
-  edge_radius: 0.35
+  edge_radius: ${..model_shared.comms_radius}
   self_loops: false
   gnn_class: torch_geometric.nn.conv.GATv2Conv
   gnn_kwargs:

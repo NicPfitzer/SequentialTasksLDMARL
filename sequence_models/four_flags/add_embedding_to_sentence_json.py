@@ -1,12 +1,6 @@
 import json
 from sentence_transformers import SentenceTransformer
-
-FIND_GOAL = 0
-FIND_SWITCH = 1
-FIND_RED = 2
-FIND_GREEN = 3
-FIND_BLUE = 4
-FIND_PURPLE = 5
+from scenarios.four_flags.language import FIND_GOAL, FIND_SWITCH, FIND_RED, FIND_GREEN, FIND_BLUE, FIND_PURPLE
 
 input_file_dict   = {
     FIND_SWITCH: "sentences/navigate_to_switch.json",

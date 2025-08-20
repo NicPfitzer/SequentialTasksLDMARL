@@ -1,4 +1,5 @@
 defaults:
   - _self_
-  - /hit_the_switch/training/hit_the_switch_multitask.yaml
+  #- /hit_the_switch/training/hit_the_switch_multitask.yaml
+  - /four_flags/training/four_flags_multitask.yaml
 

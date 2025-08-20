@@ -5,7 +5,7 @@ import tqdm
 import wandb
 import pandas as pd
 from sentence_transformers import SentenceTransformer
-from sequence_models.hit_the_switch.model_training.process_gemini_data import  collect_merged_train_test_data_from_embeddings
+from sequence_models.four_flags.model_training.process_gemini_data import  collect_merged_train_test_data_from_embeddings
 
 
 class Decoder(nn.Module):
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         SentenceTransformer('thenlper/gte-large'): "thenlper/gte-large"
     }
 
-    json_data_file = "sequence_models/data/merged.json"
+    json_data_file = "sequence_models/data/four_flags_merged.json"
     # Initialize WandB
     wandb.login()
     wandb.init(project='grid_decoder_llm', name='mlp_decoder_grid_scale')
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     for llm, llm_name in llms.items():
         wandb.init(project='grid_decoder_llm', name=llm_name)
         batch_size = 64
-        epochs = 1500
+        epochs = 300
 
         train, test = collect_merged_train_test_data_from_embeddings(json_path=json_data_file,train_ratio=0.8,test_ratio=0.2, device="mps")
 

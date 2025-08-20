@@ -31,19 +31,18 @@ RNG_SEED: int | None = 42  # None ➟ do not reset RNG
 
 NUM_AUTOMATA: int = 1
 
-# Event vector: [R, G, B, P, SWITCH, GOAL]
+# Event vector: [R, G, B, P, SWITCH]
 EVENTS: Sequence[str] = (
     "found_red_flag",
     "found_green_flag",
     "found_blue_flag",
     "found_purple_flag",
     "found_switch",
-    "found_goal",
 )
 
-R, G, B, P, SW, GL = range(6)
+R, G, B, P, SW = range(5)
 
-Vector = List[int]               # e.g. [1,0,0,0,0,0]
+Vector = List[int]               # e.g. [1,0,0,0,0]
 State = str
 Trace = Tuple[Vector | None, State, List[int]]
 
@@ -74,7 +73,7 @@ class Automaton:
         return trace
 
     def state_to_one_hot(self, state: State) -> List[int]:
-        state_one_hot = [0] * (len(self._transition))
+        state_one_hot = [0] * (len(EVENTS))
         index = list(self._transition.keys()).index(state)
         state_one_hot[index] = 1
         automaton_one_hot = [0] * NUM_AUTOMATA
@@ -120,25 +119,17 @@ class DFAConfig:
 # --------------------------------------------------------------------------- #
 
 def find_colors_then_switch_then_goal_config() -> DFAConfig:
-    """
-    States (short & indicative):
-      red     → waiting for green
-      green   → waiting for blue
-      blue    → waiting for purple
-      purple  → waiting for switch
-      switch  → waiting for goal
-      goal    → at goal (before stay)
-    """
+    """Find flags in RGBP order, hit the switch, and navigate to the goal."""
 
     def advance_on(bit_idx: int, next_state: State, else_state: State) -> Callable[[Vector], State]:
         return lambda v, idx=bit_idx, ns=next_state, es=else_state: (ns if v[idx] else es)
 
     transition: Dict[State, Callable[[Vector], State]] = {
-        "red":    advance_on(G,  "green",  "red"),
-        "green":  advance_on(B,  "blue",   "green"),
-        "blue":   advance_on(P,  "purple", "blue"),
-        "purple": advance_on(SW, "switch", "purple"),
-        "switch": advance_on(GL, "goal",   "switch"),
+        "red":    advance_on(R,  "green",  "red"),
+        "green":  advance_on(G,  "blue",   "green"),
+        "blue":   advance_on(B,  "purple", "blue"),
+        "purple": advance_on(P, "switch", "purple"),
+        "switch": advance_on(SW, "goal",   "switch"),
         "goal":   (lambda v: "goal"),
     }
 

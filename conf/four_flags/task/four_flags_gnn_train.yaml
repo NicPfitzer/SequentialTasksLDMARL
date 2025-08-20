@@ -1,5 +1,5 @@
 name: PASSAGE                          # maps to VmasTask.SAMPLING
-scenario_class: scenarios.hit_the_switch.hit_the_switch_scenario_gnn_train.HitSwitchScenario
+scenario_class: scenarios.four_flags.four_flags_scenario_gnn_train.FourFlagsScenario
 
 params:
   # === Map & Layout ===
@@ -13,7 +13,7 @@ params:
   passage_length: 0.103
   switch_radius: 0.05
   break_all_wall: True
-  comms_radius: ${hit_the_switch.model.actor_model.edge_radius}
+  comms_radius: ${four_flags.model.actor_model.edge_radius}
 
   # === Rewards ===
   shaping_factor: 100
@@ -30,14 +30,14 @@ params:
   # === Language ===
   embedding_size: 1024
   use_embedding_ratio: 1.0
-  event_dim: 1
-  state_dim: 3
-  data_json_path: "data/dataset_hit_the_switch.json"
-  decoder_model_path: "decoders/llm0_decoder_model.pth"
-  sequence_model_path: "sequence_models/hit_the_switch/event_rnn_best_gru-in64-bs128.pth"
+  event_dim: 5
+  state_dim: 7
+  data_json_path: "data/dataset_four_flags.json"
+  decoder_model_path: "sequence_models/four_flags/four_flags_decoder.pth"
+  sequence_model_path: "sequence_models/four_flags/rnn_model.pth"
   policy_conf_dir: "../../conf"
   policy_conf_name: "config_state_two.yaml"
-  policy_restore_path: "checkpoints/hit_the_switch/policy.pt"
+  policy_restore_path: "checkpoints/four_flags/policy.pt"
 
 
    # === Additional Scenario ===

@@ -30,11 +30,11 @@ params:
   # === Language ===
   embedding_size: 1024
   use_embedding_ratio: 1.0
-  event_dim: 6
+  event_dim: 5
   state_dim: 7
   data_json_path: "data/dataset_four_flags.json"
-  decoder_model_path: "decoders/llm0_decoder_model.pth"
-  sequence_model_path: "sequence_models/four_flags/event_rnn_best_gru-in64-bs128.pth"
+  decoder_model_path: "sequence_models/four_flags/four_flags_decoder.pth"
+  sequence_model_path: "sequence_models/four_flags/rnn_model.pth"
 
    # === Additional Scenario ===
   max_steps: 250
