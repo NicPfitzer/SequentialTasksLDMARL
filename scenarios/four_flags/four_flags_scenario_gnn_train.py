@@ -12,13 +12,12 @@ from vmas.simulator.controllers.velocity_controller import VelocityController
 
 from scenarios.four_flags.load_config import load_scenario_config
 from scenarios.four_flags.language import LanguageUnit, load_decoder, load_sequence_model
-from scenarios.four_flags.language import FIND_GOAL, FIND_SWITCH, FIND_RED, FIND_GREEN, FIND_BLUE, FIND_PURPLE, STATES
+from scenarios.four_flags.language import FIND_GOAL, FIND_SWITCH, FIND_RED, FIND_GREEN, FIND_BLUE, FIND_PURPLE, STATES, NUM_AUTOMATA
 
 from hydra import initialize, compose
 from hydra.core.global_hydra import GlobalHydra
 from omegaconf import DictConfig, OmegaConf
 from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
-from sequence_models.four_flags.random_automaton_walk import NUM_AUTOMATA
 
 class FourFlagsScenario(BaseScenario):
     def make_world(self, batch_dim: int, device: torch.device, **kwargs):
@@ -211,7 +210,7 @@ class FourFlagsScenario(BaseScenario):
         self.set_goal_coords(agent, world)
     
     def next_task_state(self, world: World, env_index: int = None):
-        # e_all: [E, F+1]
+        # Build event tensor: [E, F+1]
         e_all = torch.cat(
             [self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1
         ).float()
@@ -225,43 +224,22 @@ class FourFlagsScenario(BaseScenario):
         else:
             idx = torch.as_tensor(env_index, device=device)
 
-        # Default to "no update" for the selected envs
-        self.new_state[idx] = False
-
-        # First call logic is per-env
-        first_time = self.init[idx]
-        later_time = ~first_time
-
-        update_idx_list = []
-
-        # First-time envs: always update and clear their init flags
-        if torch.any(first_time):
-            first_idx = idx[first_time]
-            update_idx_list.append(first_idx)
-            self.init[first_idx] = False
-
-        # Later-time envs: only update if team event state changed since last step
-        if torch.any(later_time):
-            later_idx = idx[later_time]
-            flags_same = torch.all(
-                self.team_found_flags[later_idx].eq(self.prev_team_found_flags[later_idx]),
-                dim=-1,
-            )
-            switch_same = self.team_hit_switch[later_idx].eq(self.prev_team_hit_switch[later_idx])
-            change_mask = ~(flags_same & switch_same)
-            if torch.any(change_mask):
-                update_idx_list.append(later_idx[change_mask])
-
-        if not update_idx_list:
-            # Nothing to do; selected envs remain False in self.new_state
+        if idx.numel() == 0:
             return
 
-        upd_idx = torch.cat(update_idx_list)
+        # Default to "no update" for the selected envs, then mark updated ones
+        self.new_state[idx] = False
 
-        # Mark which envs produced a new state this call
+        # First-time envs: clear their init flags (still update them below)
+        first_time = self.init[idx]
+        if torch.any(first_time):
+            self.init[idx[first_time]] = False
+
+        # We update ALL selected envs (no previous-state condition)
+        upd_idx = idx
         self.new_state[upd_idx] = True
 
-        # Run the RNN update only on updated envs
+        # Run the RNN update only on selected envs
         y = self.y[upd_idx]
         h = self.h[upd_idx]
         e = e_all[upd_idx]
@@ -269,12 +247,76 @@ class FourFlagsScenario(BaseScenario):
         next_h, state_one_hot = self.language_unit.compute_forward_rnn(event=e, y=y, h=h)
 
         self.h[upd_idx] = next_h
-        states = torch.argmax(torch.sigmoid(state_one_hot[:, 1:]), dim=-1)
+        state_one_hot = state_one_hot.unsqueeze(0) if state_one_hot.dim() == 1 else state_one_hot
+        states = torch.argmax(torch.sigmoid(state_one_hot[:, NUM_AUTOMATA:]), dim=-1)
         self.language_unit.states[upd_idx] = states
 
-        # Refresh snapshots for next diff (full refresh is simple and cheap)
-        self.prev_team_found_flags = self.team_found_flags.clone()
-        self.prev_team_hit_switch = self.team_hit_switch.clone()
+    
+    # def next_task_state(self, world: World, env_index: int = None):
+    #     # e_all: [E, F+1]
+    #     e_all = torch.cat(
+    #         [self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1
+    #     ).float()
+
+    #     E = e_all.shape[0]
+    #     device = world.device
+
+    #     # Select the working set of env indices
+    #     if env_index is None:
+    #         idx = torch.arange(E, device=device)
+    #     else:
+    #         idx = torch.as_tensor(env_index, device=device)
+
+    #     # Default to "no update" for the selected envs
+    #     self.new_state[idx] = False
+
+    #     # First call logic is per-env
+    #     first_time = self.init[idx]
+    #     later_time = ~first_time
+
+    #     update_idx_list = []
+
+    #     # First-time envs: always update and clear their init flags
+    #     if torch.any(first_time):
+    #         first_idx = idx[first_time]
+    #         update_idx_list.append(first_idx)
+    #         self.init[first_idx] = False
+
+    #     # Later-time envs: only update if team event state changed since last step
+    #     if torch.any(later_time):
+    #         later_idx = idx[later_time]
+    #         flags_same = torch.all(
+    #             self.team_found_flags[later_idx].eq(self.prev_team_found_flags[later_idx]),
+    #             dim=-1,
+    #         )
+    #         switch_same = self.team_hit_switch[later_idx].eq(self.prev_team_hit_switch[later_idx])
+    #         change_mask = ~(flags_same & switch_same)
+    #         if torch.any(change_mask):
+    #             update_idx_list.append(later_idx[change_mask])
+
+    #     if not update_idx_list:
+    #         # Nothing to do; selected envs remain False in self.new_state
+    #         return
+
+    #     upd_idx = torch.cat(update_idx_list)
+
+    #     # Mark which envs produced a new state this call
+    #     self.new_state[upd_idx] = True
+
+    #     # Run the RNN update only on updated envs
+    #     y = self.y[upd_idx]
+    #     h = self.h[upd_idx]
+    #     e = e_all[upd_idx]
+
+    #     next_h, state_one_hot = self.language_unit.compute_forward_rnn(event=e, y=y, h=h)
+
+    #     self.h[upd_idx] = next_h
+    #     states = torch.argmax(torch.sigmoid(state_one_hot[:, 1:]), dim=-1)
+    #     self.language_unit.states[upd_idx] = states
+
+    #     # Refresh snapshots for next diff (full refresh is simple and cheap)
+    #     self.prev_team_found_flags = self.team_found_flags.clone()
+    #     self.prev_team_hit_switch = self.team_hit_switch.clone()
 
 
     @torch.no_grad()
@@ -300,10 +342,11 @@ class FourFlagsScenario(BaseScenario):
             idx = int(self._state_map[int(self.language_unit.states[env_index])])
             agent.goal_coords[env_index] = targets[env_index, idx]
   
+    
     def reset_landmarks(self, env_index: int = None):
         
-        self.x_room_max = (self.x_semidim - self.chamber_width - self.agent_radius * 3 - self.passage_length / 2)
-        self.x_room_min = (-self.x_semidim + self.agent_radius * 3)
+        self.x_room_max = (self.x_semidim - self.chamber_width - self.agent_radius - self.passage_length / 2)
+        self.x_room_min = (-self.x_semidim + self.agent_radius)
         x_room_center = (self.x_room_max + self.x_room_min) / 2
         y_room_center = 0
         self.room_center =  torch.tensor([x_room_center, y_room_center], dtype=torch.float32, device=self.world.device)
@@ -574,42 +617,51 @@ class FourFlagsScenario(BaseScenario):
         if agent.collide:
             for a in self.world.agents:
                 if a != agent:
-                    self.rew[self.world.is_overlapping(a, agent)] -= 0
+                    self.rew[self.world.is_overlapping(a, agent)] -= 2
             for landmark in self.landmarks:
                 if landmark.collide:
                     self.rew[self.world.is_overlapping(agent, landmark)] -= 0
             for i, flag in enumerate(self.flags):
-                if i == 0:
-                    overlapping_flag = self.world.is_overlapping(agent, flag)
-                    agent.found_flags[:,i] |= overlapping_flag.bool()
-                    #self.rew[overlapping_flag] += 0.05
-                else:
-                    # If the previous flag was found, then this one can be found (Temporary)
-                    #overlapping_flag = self.world.is_overlapping(agent, flag) & self.team_found_flags[:,i-1] == True
-                    overlapping_flag = self.world.is_overlapping(agent, flag)
-                    agent.found_flags[:,i] |= overlapping_flag.bool()
-                    #self.rew[overlapping_flag] += 0.05
-                    # If this flag is found, then the team has found it
+                overlapping_flag = self.world.is_overlapping(agent, flag)
+                agent.found_flags[:,i] |= overlapping_flag.bool()
                 self.team_found_flags[:,i] |= agent.found_flags[:,i]
+                self.rew[overlapping_flag] += 0.05
                 
-            overlapping_switch = self.world.is_overlapping(agent, self.switch) & self.team_found_flags.all(dim=1)
+            overlapping_switch = self.world.is_overlapping(agent, self.switch)
             agent.hit_switch |= overlapping_switch.bool()
             self.team_hit_switch |= agent.hit_switch
-            #self.rew[overlapping_switch] += 0.05
+            self.rew[overlapping_switch] += 0.05
 
-            #overlapping_goal = self.world.is_overlapping(agent, agent.goal)
-            #self.rew[overlapping_goal] += 0.05
+            overlapping_goal = self.world.is_overlapping(agent, agent.goal)
+            self.rew[overlapping_goal] += 0.05
             # only the *first-time* hits (overlap & never hit before)
         
-        # A shared reward for advancing the automaton state
-        self.rew += self.new_state.float() * 1.0
+        # A shared reward for being on the team state
+        #self.rew += (self.language_unit.states == agent.state_).float() * 0.5
 
         # Despawn passage if switch is hit
-        if self.team_hit_switch.any():
-            indices = torch.where(self.team_hit_switch & torch.all(self.team_found_flags, dim=1))[0]
+        goal_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
+        if goal_indices.any():
             passages = self.landmarks[: self.n_passages]
             for passage in passages:
-                passage.state.pos[indices] = self._get_outside_pos(None)[indices]
+                passage.state.pos[goal_indices] = self._get_outside_pos(None)[goal_indices]
+                
+        # --- Edge penalty: outside the safe box (+/- (semidim - agent_radius)) ---
+        sx = self.world.x_semidim - self.agent_radius
+        sy = self.world.y_semidim - self.agent_radius
+
+        # agent.state.pos: [B, 2] -> x, y
+        pos = agent.state.pos  # on world.device
+        x, y = pos[:, 0], pos[:, 1]
+
+        # Touching or beyond the edges on either axis (allow optional tolerance)
+        eps = getattr(self, "edge_eps", 0.0)
+        at_or_beyond_x = (x >= sx - eps) | (x <= -sx + eps)
+        at_or_beyond_y = (y >= sy - eps) | (y <= -sy + eps)
+        hit_edge = at_or_beyond_x | at_or_beyond_y  # [B]
+
+        edge_penalty = getattr(self, "edge_penalty", 1.0)
+        self.rew[hit_edge] -= edge_penalty
 
         return self.rew * 0.01
 
@@ -707,8 +759,8 @@ class FourFlagsScenario(BaseScenario):
             # agent.h: [E, H], agent.y: [E, Y] (batched per env)
             h = agent.h.clone()
             y = agent.y.clone()
-            e = agent.e.clone()
-            #e = torch.cat([self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1).float()
+            #e = agent.e.clone()
+            e = torch.cat([self.team_found_flags, self.team_hit_switch.unsqueeze(1)], dim=-1).float()
             next_h, next_state = self.language_unit.compute_forward_rnn(
                 event=e,
                 y=y,
@@ -717,7 +769,7 @@ class FourFlagsScenario(BaseScenario):
 
             # Write back only for the changed envs
             agent.h = next_h
-            agent.state_ = torch.argmax(torch.sigmoid(next_state[:,1:]), dim=-1)
+            agent.state_ = torch.argmax(torch.sigmoid(next_state[:,NUM_AUTOMATA:]), dim=-1)
             self.set_goal_coords(agent, self.world)
  
     # def pre_step(self):
@@ -783,42 +835,51 @@ class FourFlagsScenario(BaseScenario):
             dim=1,
         )
 
+
     def extra_render(self, env_index: int = 0):
         from vmas.simulator import rendering
 
         geoms = []
-        state_colors = [Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.YELLOW, Color.LIGHT_GREEN]
+        # 0: right wall, 1: top wall, 2: left wall, 3: bottom wall
         for i in range(4):
-            geom = Line(length=2 + self.agent_radius * 2).get_geometry()
+            is_vertical = (i % 2 == 0)        # right/left walls are vertical
+            # Length along the wall’s axis:
+            length = (
+                2 * self.world.y_semidim + 2 * self.agent_radius if is_vertical
+                else 2 * self.world.x_semidim
+            )
+
+            geom = Line(length=length).get_geometry()
             xform = rendering.Transform()
             geom.add_attr(xform)
 
-            xform.set_translation(
-                (
-                    0.0
-                    if i % 2
-                    else (
-                        self.world.x_semidim + self.agent_radius
-                        if i == 0
-                        else -self.world.x_semidim - self.agent_radius
-                    )
-                ),
-                (
-                    0.0
-                    if not i % 2
-                    else (
-                        self.world.x_semidim + self.agent_radius
-                        if i == 1
-                        else -self.world.x_semidim - self.agent_radius
-                    )
-                ),
-            )
-            xform.set_rotation(torch.pi / 2 if not i % 2 else 0.0)
+            # Center position of each wall
+            if i == 0:   # right wall
+                cx =  self.world.x_semidim
+                cy = 0.0
+            elif i == 1: # top wall
+                cx = 0.0
+                cy =  self.world.y_semidim + self.agent_radius
+            elif i == 2: # left wall
+                cx = -self.world.x_semidim 
+                cy = 0.0
+            else:        # bottom wall
+                cx = 0.0
+                cy = -self.world.y_semidim - self.agent_radius
+
+            xform.set_translation(cx, cy)
+            xform.set_rotation(float(torch.pi / 2) if is_vertical else 0.0)
+
             color = Color.BLACK.value
-            if isinstance(color, torch.Tensor) and len(color.shape) > 1:
+            if isinstance(color, torch.Tensor) and color.ndim > 1:
+                # make env_index a plain int
+                if isinstance(env_index, torch.Tensor):
+                    env_index = int(env_index.item())
                 color = color[env_index]
             geom.set_color(*color)
+
             geoms.append(geom)
+
         
         for i, agent1 in enumerate(self.world.agents):
             
@@ -835,17 +896,8 @@ class FourFlagsScenario(BaseScenario):
                     ring.add_attr(xform)
                     ring.set_color(*self.colors[j].value)
                     geoms.append(ring)
-
-            dot = rendering.make_circle(
-                radius=0.015,
-                filled=True,
-            )
-            xform = rendering.Transform()
-            xform.set_translation(*agent1.state.pos[env_index])
-            dot.add_attr(xform)
-            dot.set_color(*state_colors[agent1.state_[env_index].item()].value)
-            geoms.append(dot)
-
+                    
+                    
             for j, agent2 in enumerate(self.world.agents):
                 if j <= i:
                     continue
@@ -853,12 +905,11 @@ class FourFlagsScenario(BaseScenario):
                     line = rendering.Line(
                         agent1.state.pos[env_index], agent2.state.pos[env_index], width=5
                     )
-                    color = state_colors[self.language_unit.states[env_index].item()]
-                    line.set_color(*color.value)
+                    line.set_color(*Color.GREEN.value)
                     geoms.append(line)
         
         try:
-            sentence = self.language_unit.summary[env_index]
+            sentence = self.language_unit.response[env_index]
             geom = rendering.TextLine(
                 text=sentence,
                 font_size=6

@@ -25,7 +25,7 @@ exploration_eps_end: 0.4
 exploration_anneal_frames: null
 
 max_n_iters: null
-max_n_frames: 12000000
+max_n_frames: 18000000
 
 on_policy_collected_frames_per_batch: 30000
 on_policy_n_envs_per_worker: 125

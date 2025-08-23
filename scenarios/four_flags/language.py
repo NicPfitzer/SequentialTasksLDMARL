@@ -4,6 +4,8 @@ import numpy as np
 import json
 
 from sequence_models.four_flags.model_training.rnn_model import EventRNN
+from sequence_models.four_flags.random_automaton_walk import STATES, FIND_RED, FIND_GREEN, FIND_BLUE, FIND_PURPLE, FIND_SWITCH, FIND_GOAL
+from sequence_models.four_flags.model_training.rnn_model import EVENT_DIM, MAX_SEQ_LEN, NUM_AUTOMATA
 
 import torch.nn as nn
 import torch.nn.functional as F
@@ -11,30 +13,6 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 DECODER_OUTPUT_SIZE = 100
-MAX_SEQ_LEN = 15
-EVENT_DIM = 5
-
-FIND_RED = 0
-FIND_GREEN = 1
-FIND_BLUE = 2
-FIND_PURPLE = 3
-FIND_SWITCH = 4
-FIND_GOAL = 5
-
-STATES = {
-    "FIND_GOAL": FIND_GOAL,
-    "goal": FIND_GOAL,
-    "FIND_SWITCH": FIND_SWITCH,
-    "switch": FIND_SWITCH,
-    "FIND_RED": FIND_RED,
-    "red": FIND_RED,
-    "FIND_GREEN": FIND_GREEN,
-    "green": FIND_GREEN,
-    "FIND_BLUE": FIND_BLUE,
-    "blue": FIND_BLUE,
-    "FIND_PURPLE": FIND_PURPLE,
-    "purple": FIND_PURPLE,
-}
 
 TextKeys = ("response", "text", "sentence", "prompt")
 EmbedKeys = ("embedding", "vector")
@@ -457,7 +435,7 @@ class LanguageUnit:
         sequence = sequence * mask.unsqueeze(-1)  # (B, MAX_SEQ_LEN, emb_size) 
         # Decode the state one_hot into a state index
         # First two values are Automaton index. Next 4 values are state one-hot encoding
-        states = torch.argmax(state_one_hot[:,:,1:],dim=-1)
+        states = torch.argmax(state_one_hot[:,:,NUM_AUTOMATA:],dim=-1)
         state_index = states[torch.arange(env_index.size(0)), lengths - 1]
         subtask = sequence[torch.arange(env_index.size(0)), lengths - 1, :]
 

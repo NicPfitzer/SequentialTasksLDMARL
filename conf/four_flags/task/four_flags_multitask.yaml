@@ -3,15 +3,17 @@ scenario_class: scenarios.four_flags.four_flags_scenario.FourFlagsScenario
 
 params:
   # === Map & Layout ===
-  x_semidim: 1.0
-  y_semidim: 1.0
+  x_semidim: 4.0
+  y_semidim: 2.0
   n_passages: 4
   shared_reward: False
-  agent_radius: 0.03
-  n_agents: 5
+  agent_radius: 0.17
+  n_agents: 3
   passage_width: 0.1
   passage_length: 0.2
+  agent_spacing: 0.4
   switch_radius: 0.05
+  chamber_width: 2.0
   break_all_wall: True
   comms_radius: ${four_flags.model.actor_model.edge_radius}
 
@@ -19,7 +21,7 @@ params:
   shaping_factor: 100
 
   # === Dynamics ===
-  use_velocity_controller: False
+  use_velocity_controller: True
   use_kinematic_model: False
   agent_weight: 1.0
   agent_v_range: 1.0
@@ -31,10 +33,10 @@ params:
   embedding_size: 1024
   use_embedding_ratio: 1.0
   event_dim: 5
-  state_dim: 7
-  data_json_path: "data/dataset_four_flags.json"
+  state_dim: 8
+  data_json_path: "data/dataset_one_color_ALL.json"
   decoder_model_path: "sequence_models/four_flags/four_flags_decoder.pth"
-  sequence_model_path: "sequence_models/four_flags/rnn_model.pth"
+  sequence_model_path: "sequence_models/four_flags/one_color.pth"
 
    # === Additional Scenario ===
   max_steps: 250

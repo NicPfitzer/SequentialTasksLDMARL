@@ -7,12 +7,12 @@ from vmas.simulator.utils import ScenarioUtils
 # --------------------------------------------------------------------------- #
 PARAMS = [
     
-    ("x_semidim", 1.0), ("y_semidim", 1.0),
+    ("x_semidim", 4.0), ("y_semidim", 2.0),
     ("n_passages", 1), ("shared_reward", False),
-    ("n_agents", 5), ("agent_radius", 0.03),
-    ("agent_spacing", 0.1), ("passage_length", 0.2),
+    ("n_agents", 3), ("agent_radius", 0.17),
+    ("agent_spacing", 0.4), ("passage_length", 0.2),
     ("switch_radius", 0.05), ("break_all_wall", True),
-    ("chamber_width", 1.0),
+    ("chamber_width", 2.0),
 
     # --- Rewards ------------------------------------------------------------
     ("shaping_factor", 100),
@@ -28,11 +28,11 @@ PARAMS = [
     
     # --- Language -----------------------------------------------------------
     ("embedding_size", 1024), ("use_embedding_ratio", 1.0),
-    ("event_dim", 6), ("state_dim", 7),
+    ("event_dim", 5), ("state_dim", 8),
 
     # --- Paths -----------------------------------------------------------
-    ("data_json_path", "data/dataset_four_flags.json"), ("decoder_model_path", ""),
-    ("sequence_model_path", "sequence_models/four_flags/event_rnn_best_gru-in64-bs128.pth"),
+    ("data_json_path", "data/dataset_one_color_ALL.json"), ("decoder_model_path", ""),
+    ("sequence_model_path", "sequence_models/four_flags/one_color.pth"),
     ("policy_config_path", "../../conf"), ("policy_config_name", "config_stage_two"),
     ("policy_restore_path", "../../checkpoints/four_flags/policy.pt")
 ]

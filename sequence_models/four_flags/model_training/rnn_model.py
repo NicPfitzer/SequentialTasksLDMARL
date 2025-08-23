@@ -48,9 +48,10 @@ from sequence_models.four_flags.model_training.mlp_decoder import Decoder
 # Constants – unchanged
 ###############################################################################
 
-MAX_SEQ_LEN = 15
+MAX_SEQ_LEN = 12
 EVENT_DIM = 5
-STATE_DIM = 7
+STATE_DIM = 8
+NUM_AUTOMATA = STATE_DIM - EVENT_DIM - 1
 
 ###############################################################################
 # Dataset + DataLoader helpers – identical to v1 (see comments there)
@@ -204,7 +205,7 @@ class EventRNN(pl.LightningModule):
         # ─── Classification head ────────────────────────────────────
         hidden_dim = max(D // 2, 4)
         self.state_head = nn.Sequential(
-            nn.Linear(D, hidden_dim),
+            nn.Linear(D + 2*I, hidden_dim),
             nn.LeakyReLU(),
             nn.Linear(hidden_dim, state_dim),
         )
@@ -245,7 +246,7 @@ class EventRNN(pl.LightningModule):
                 packed_out, batch_first=True, total_length=T
             )                                # (B,T,D)
 
-        state_decoder_out = self.state_head(out)  # (B, T, state_dim)
+        state_decoder_out = self.state_head(torch.cat([out,fused], dim=-1))  # (B, T, state_dim)
         recon_out = self.recon_head(out)  # (B, T, state_dim)
 
         return state_decoder_out, recon_out
@@ -270,7 +271,7 @@ class EventRNN(pl.LightningModule):
             
         out = torch.stack(preds, dim=1)  # (B, T, D)                                              # (B,T,D)
 
-        state_decoder_out = self.state_head(out)  # (B, T, state_dim)
+        state_decoder_out = self.state_head(torch.cat([out,fused], dim=-1)) # (B, T, state_dim)
         recon_out = self.recon_head(out)  # (B, T, state_dim)
         if self.use_label_decoder:
             decoder_label = self.recon_decoder(recon_out)  # (B, T, LABEL_SIZE)
@@ -296,7 +297,7 @@ class EventRNN(pl.LightningModule):
                 preds.append(h.clone())
             out = torch.stack(preds, dim=1)  # (B, T, D)
 
-        state_decoder_out = self.state_head(out)  # (B, T, state_dim)
+        state_decoder_out = self.state_head(torch.cat([out,fused], dim=-1))  # (B, T, state_dim)
         recon_out = self.recon_head(out)  # (B, T, state_dim)
 
         return state_decoder_out, recon_out
@@ -306,7 +307,7 @@ class EventRNN(pl.LightningModule):
         """Forward step of the RNN"""
         fused = torch.cat([self.e_proj(e),self.y_proj(y)], dim=-1)  # (B, T, 2*I)
         h = self.rnn(fused, h)
-        state_decoder_out = self.state_head(h)  # (B, T, state_dim)
+        state_decoder_out = self.state_head(torch.cat([h,fused],dim=-1))  # (B, T, state_dim)
 
         return h, state_decoder_out
 
@@ -396,7 +397,7 @@ class EventRNN(pl.LightningModule):
 
 def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "sequence_models/four_flags/four_flags_decoder.pth"):
     train_loader, val_loader = make_loaders(
-        "sequence_models/data/dataset_four_flags.json", batch_size=batch_size
+        "sequence_models/data/dataset_one_color_ALL.json", batch_size=batch_size
     )
     
     # decoder = Decoder(
@@ -418,7 +419,7 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
         input_dim=input_dim,
         num_layers=1,
         cls_loss_weight=8.0,
-        ground_truth_h_rate=0.0,
+        ground_truth_h_rate=0.25,
         decoder=None,
     )
 
@@ -431,19 +432,28 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
         filename=f"{run_name}" + "-{epoch:02d}-{val_loss:.4f}",
     )
 
-    wandb_logger = WandbLogger(
-        project="event-rnn",
-        name=run_name,
-        log_model=True
-    )
+    # wandb_logger = WandbLogger(
+    #     project="event-rnn",
+    #     name=run_name,
+    #     log_model=True
+    # )
 
+    # trainer = pl.Trainer(
+    #     max_epochs=1000,
+    #     accelerator="auto",
+    #     log_every_n_steps=10,
+    #     callbacks=[checkpoint_cb],
+    #     gradient_clip_val=1.0,
+    #     logger=wandb_logger
+    # )
+    
     trainer = pl.Trainer(
         max_epochs=1000,
         accelerator="auto",
         log_every_n_steps=10,
         callbacks=[checkpoint_cb],
         gradient_clip_val=1.0,
-        logger=wandb_logger
+        logger=False
     )
 
     trainer.fit(
@@ -474,4 +484,4 @@ if __name__ == "__main__":
 
     for bs, inp in itertools.product(batch_sizes, input_dims):
         run_training(bs, inp, resume_ckpt=args.resume)
-        wandb.finish()
+        #wandb.finish()

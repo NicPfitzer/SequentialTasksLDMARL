@@ -58,6 +58,7 @@ class Agent:
     self,
     node,
     robot_id: int,
+    count: int,
     deployment_config,
     device: DEVICE_TYPING):
         
@@ -68,6 +69,7 @@ class Agent:
         
         self.node = node
         self.robot_id = robot_id
+        self.count = count
     
         # Timer to update state
         self.obs_dt = deployment_config.obs_dt
@@ -96,8 +98,13 @@ class Agent:
             device=self.device
         )
         
+        self.set_goal()
+        
         self.h = torch.zeros((self.node.embedding_size,), dtype=torch.float32, device=self.device)
         self.e = torch.zeros((self.node.event_size,), dtype=torch.float32, device=self.device)
+        self.flags_found = torch.zeros((4,), dtype=torch.bool, device=self.device)
+        self.hit_switch = torch.zeros((1,), dtype=torch.bool, device=self.device)
+        self.task_state = torch.zeros((1,), dtype=torch.float32, device=self.device)
         self._prepare_obs_layout()
 
         # Get topic prefix from config or use default
@@ -143,6 +150,19 @@ class Agent:
         else:
             self.reference_state = Twist()
     
+    def set_goal(self):
+        
+        y_min = -self.node.y_semidim + self.node.agent_radius + self.node.agent_radius * 3
+        y_max = self.node.y_semidim - self.node.agent_radius - self.node.agent_radius * 3
+        x_min = self.node.x_semidim - self.node.chamber_width + self.node.agent_radius + self.node.agent_radius * 3 + self.node.passage_length / 2
+        x_max = self.node.x_semidim - self.node.agent_radius - self.node.agent_radius * 3
+        x_center = (x_min + x_max) / 2
+        n_agent = self.node.n_agents
+        ratio = self.count / (n_agent-1)
+        y = y_min + ratio * (y_max - y_min)
+        x = x_center
+        self.goal = torch.tensor([[x, y]], dtype=torch.float32, device=self.device)
+
     def _prepare_obs_layout(self):
 
         # 2 coords per relative vector
@@ -190,7 +210,40 @@ class Agent:
 
         self.state_received = True
     
+    def landmark_reached(self, landmark_type: str, landmark_id: int):
+        if landmark_type == "flag":
+            self.flags_found[landmark_id] = True
+        elif landmark_type == "switch":
+            self.hit_switch = True
+    
+    def landmark_overlap(self):
+        # Check for overlap with flags
+        for i, flag_pos in enumerate(self.node.flags):
+            distance = torch.norm(self.state.pos - flag_pos.unsqueeze(0))
+            if distance < self.node.agent_radius * 3:
+                self.landmark_reached("flag", i)
+                self.node.get_logger().info(f"Robot {self.robot_id} reached flag {i} at position {flag_pos.cpu().numpy()}")
+        
+        # Check for overlap with switch
+        distance_to_switch = torch.norm(self.state.pos - self.node.switch.unsqueeze(0))
+        if distance_to_switch < self.node.agent_radius * 3:
+            self.landmark_reached("switch", 0)
+            self.node.get_logger().info(f"Robot {self.robot_id} reached the switch at position {self.node.switch.cpu().numpy()}")
+
+    def next_step_rnn(self):
+        
+        self.e = torch.cat([self.flags_found.to(torch.float32), self.hit_switch.to(torch.float32)], dim=-1)
+        self.h, state_decoder_out = self.node.compute_forward_rnn(
+            event=self.e.unsqueeze(0),
+            y=self.node.y.unsqueeze(0),
+            h=self.h.unsqueeze(0)
+        )
+        self.task_state = torch.argmax(torch.sigmoid(state_decoder_out[:, self.node.num_automata:]), dim=-1)
+
     def collect_observation(self):
+        
+        self.landmark_overlap()
+        self.next_step_rnn()
         
         if self.goal is not None and self.state_received:
             
@@ -204,7 +257,6 @@ class Agent:
 
             obs = {
                 "pos": self.state.pos / self._scale,
-                "rot": self.state.rot,
                 "vel": self.state.vel / self._scale,
                 "event": self.e,
                 "sentence_embedding": self.h,
@@ -247,7 +299,6 @@ class VmasModelsROSInterface(Node):
         self.y_semidim = grid_config.y_semidim
         self.n_agents = task_config.n_agents
         
-        self.goal = None
         self.task_x_semidim = task_config.x_semidim
         self.task_y_semidim = task_config.y_semidim
         self.agent_radius = task_config.agent_radius
@@ -278,6 +329,8 @@ class VmasModelsROSInterface(Node):
         self.csv_writer = csv.writer(self.log_file)
         self.csv_writer.writerow(["experiment_time", "real_time", "robot_id", "cmd_vel", "cmd_omega", "cmd_vel_n", "cmd_vel_e",
                                   "cur_pos_n", "cur_pos_e", "cur_vel_n", "cur_vel_e"])
+        
+        self.set_landmarks()
 
         # Create Agents
         agents: List[Agent] = []
@@ -287,6 +340,7 @@ class VmasModelsROSInterface(Node):
             agent = Agent(
                 node=self,
                 robot_id=id_list[i],
+                count = i,
                 deployment_config = deployment_config,
                 device=self.device
             )
@@ -302,12 +356,36 @@ class VmasModelsROSInterface(Node):
     
     def set_landmarks(self):
         """Set the landmarks for the scenario."""
-        self.flags = [
-            (0.0, self.y_semidim * 0.9),
-            (0.0, -0.9 * self.y_semidim),
-            (-0.9 * self.x_semidim, -0.9 * self.y_semidim),
-            (-0.9 * self.x_semidim, 0.9 * self.y_semidim),
-        ]
+        self.flags = []
+        
+        self.x_room_max = (self.x_semidim - self.chamber_width - self.agent_radius - self.passage_length / 2)
+        self.x_room_min = (-self.x_semidim + self.agent_radius)
+        x_room_center = (self.x_room_max + self.x_room_min) / 2
+        y_room_center = 0
+        self.room_center =  torch.tensor([x_room_center, y_room_center], dtype=torch.float32, device=self.world.device)
+        self.switch = self.room_center.clone()
+        
+        # Set flag positions
+        indices = [0,1,2,3] # Red, Green, Blue, Yellow
+        for i in indices:
+            xx = self.x_room_min + self.agent_radius * 3 + (i % 2) * (self.x_room_max - self.x_room_min - 2 * (self.agent_radius * 3))
+            yy = -self.y_semidim + self.agent_radius + self.agent_radius * 3 + (i // 2) * (2 * self.y_semidim - 2 * (self.agent_radius + self.agent_radius * 3))
+            flag = torch.zeros((2,), dtype=torch.float32, device=self.world.device)
+            flag[0] = xx
+            flag[1] = yy
+            self.flags.append(flag)
+            print(f"Flag {i} position: {flag}")
+        
+        # Wall center
+        self.wall_center = torch.tensor([self.x_semidim - self.chamber_width, 0.0], dtype=torch.float32, device=self.world.device)
+    
+    def compute_forward_rnn(self, event: torch.Tensor, y: torch.Tensor, h: torch.Tensor):
+        """
+        Compute the next state of the RNN for the given environments.
+        """
+        next_h, state_decoder_out = self.sequence_model._forward(e=event, y=y, h=h)
+
+        return next_h, state_decoder_out
 
     def load_sequence_model(self, model_path, embedding_size, event_size, state_size, device):
         """ Load the sequence model from a given path."""
@@ -361,8 +439,9 @@ class VmasModelsROSInterface(Node):
             latest_state = agent.state_buffer[-1]
             feat = torch.cat([
                 latest_state["pos"],
-                latest_state["rot"],
                 latest_state["vel"],
+                latest_state["event"],
+                latest_state["sentence_embedding"],
                 latest_state["obs"],], dim=-1).float()   # shape (1, 7)
             obs_list.append(feat)
 

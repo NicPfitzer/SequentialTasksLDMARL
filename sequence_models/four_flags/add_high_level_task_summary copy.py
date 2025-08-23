@@ -30,46 +30,58 @@ from sequence_models.api_keys import GEMINI_API_KEY  # noqa: E402
 # ========================== Configuration ==========================
 
 # Gemini API Key
-genai_client = genai.Client(api_key=GEMINI_API_KEY)  # 🔐 Replace with your actual key
+#genai_client = genai.Client(api_key=GEMINI_API_KEY)  # 🔐 Replace with your actual key
 
 # Input files
 INPUT_FILES = [
-    (Path("sequence_models/data/dataset_no_summary_four_flags.json"), "FOUR_FLAGS_RGBP"),
+    (Path("sequence_models/data/dataset_no_summary_four_flags_rgbp.json"), "FOUR_FLAGS_RGBP"),
+    (Path("sequence_models/data/dataset_no_summary_four_flags_blue.json"), "FOUR_FLAGS_BGRP"),
+    (Path("sequence_models/data/dataset_no_summary_four_flags_switch_goal.json"), "HIT_THE_SWITCH"),
 ]
 
 # Output file
-OUTPUT_JSON = Path("sequence_models/data/dataset_four_flags.json")
+OUTPUT_JSON = Path("sequence_models/data/dataset_four_flags_all.json")
 
 MODEL_NAME = "gemini-2.0-flash-lite"
 TEMP = 0.2
 PRINT_EVERY = 100
 
 PROMPTS = {
-    "FLAG_HOME": textwrap.dedent("""
-        You are leading a team of robots in a capture the flag mission. Your team must find the flag and then return to base.
-        Write ONE sentence summarising the sequence of tasks. Ignore repetitions. Do **not** add anything else. The task sequence might mention an area of interest for the flag location.
-        TASK SEQUENCE:
-        {joined}
-    """),
-
-    "DEFEND": textwrap.dedent("""
-        You are leading a team of robots in a capture the flag mission. Your team must find the flag and then defend it.
-        Write ONE sentence summarising the sequence of tasks. Ignore repetitions. Do **not** add anything else. The task sequence might mention an area of interest for the flag location.
-        TASK SEQUENCE:
-        {joined}
-    """),
-
     "HIT_THE_SWITCH": textwrap.dedent("""
-        You are leading a team of robots in a mission. Your team must find a switch, trigger it and then reach the goal.
-        Write ONE sentence summarising the sequence of tasks. Ignore repetitions. Do **not** add anything else.
+        Write ONE short imperative sentence (≤16 words) that captures this mission:
+        find the switch, trigger it, then reach the goal. Ignore repetition and filler.
+        Return only the sentence, starting with a capital letter and ending with a period.
         TASK SEQUENCE:
         {joined}
     """),
+
     "FOUR_FLAGS_RGBP": textwrap.dedent("""
-        You are leading a team of robots in a mission. Your team must find all the flags, hit the switch and then reach the goal.
-        Write ONE sentence summarising the sequence of tasks. Be creative and brief. Ignore repetitions. Do **not** add anything else.
-    """)
+        Write ONE short imperative sentence (≤16 words), tagged as "Primary objective",
+        that states: find flags in RGBP order, hit the switch, then reach the goal.
+        Include the literal text "RGBP" and "Primary objective". Ignore repetition and filler.
+        Return only the sentence, starting with a capital letter and ending with a period.
+        TASK SEQUENCE:
+        {joined}
+    """),
+
+    "FOUR_FLAGS_BGRP": textwrap.dedent("""
+        Write ONE short imperative sentence (≤16 words), tagged as "Secondary objective",
+        that states: find flags in BGRP order, hit the button, then reach the objective.
+        Include the literal text "BGRP" and "Secondary objective". Ignore repetition and filler.
+        Return only the sentence, starting with a capital letter and ending with a period.
+        TASK SEQUENCE:
+        {joined}
+    """),
 }
+
+# sentence_override = ["Agents find all the flags in the red, green, blue, purple order then activate the switch and head for the target",
+#                      "Team find the blue target, then navigate to the switch and head for the objective",
+#                      "Agents, ignore the flags. Hit the switch directly and head for the target"]
+
+sentence_override = ["Agents find all the flags in the red, green, blue, purple order then activate the switch and head for the target",
+                     "Team find the blue target, then navigate to the switch and head for the objective",
+                     "Agents, ignore the flags. Hit the switch directly and head for the target"]
+
 
 llm = SentenceTransformer("thenlper/gte-large")
 #llm = SentenceTransformer("mixedbread-ai/mxbai-embed-large-v1")
@@ -99,29 +111,29 @@ def already_processed() -> int:
             pass
     return count
 
-def one_sentence_summary(responses: List[str], prompt_tmpl: str) -> str:
+# def one_sentence_summary(responses: List[str], prompt_tmpl: str) -> str:
     
-    bullet_responses = [f"- {r}" for r in responses]
-    joined = "\n".join(bullet_responses)
+#     bullet_responses = [f"- {r}" for r in responses]
+#     joined = "\n".join(bullet_responses)
 
-    # Truncate if too long
-    base_prompt = prompt_tmpl.format(joined="{joined}")
-    max_joined_chars = MAX_PROMPT_CHARS - len(base_prompt.format(joined=""))
+#     # Truncate if too long
+#     base_prompt = prompt_tmpl.format(joined="{joined}")
+#     max_joined_chars = MAX_PROMPT_CHARS - len(base_prompt.format(joined=""))
     
-    if len(joined) > max_joined_chars:
-        # Truncate from the start (keep latest instructions, which are likely most relevant)
-        truncated = joined[-max_joined_chars:]
-        # Ensure we don't cut in the middle of a bullet
-        truncated = "\n".join(truncated.split("\n")[1:])
-    else:
-        truncated = joined
+#     if len(joined) > max_joined_chars:
+#         # Truncate from the start (keep latest instructions, which are likely most relevant)
+#         truncated = joined[-max_joined_chars:]
+#         # Ensure we don't cut in the middle of a bullet
+#         truncated = "\n".join(truncated.split("\n")[1:])
+#     else:
+#         truncated = joined
 
-    prompt = prompt_tmpl.format(joined=truncated)
-    response = genai_client.models.generate_content(
-        model=MODEL_NAME,
-        contents=[prompt],
-    )
-    return response.text
+#     prompt = prompt_tmpl.format(joined=truncated)
+#     response = genai_client.models.generate_content(
+#         model=MODEL_NAME,
+#         contents=[prompt],
+#     )
+#     return response.text
 
 # Main streaming pipeline
 def stream_process():
@@ -141,7 +153,7 @@ def stream_process():
         processed = processed_global
         start_ts = time.time()
 
-        for input_file, prompt_key in INPUT_FILES:
+        for i, (input_file, prompt_key)in enumerate(INPUT_FILES):
             prompt_template = PROMPTS[prompt_key]
             with input_file.open("rb") as src:
                 items = ijson.items(src, "item")
@@ -150,7 +162,8 @@ def stream_process():
                         skipped += 1
                         continue
 
-                    sentence = one_sentence_summary(seq["responses"], prompt_template)
+                    #sentence = one_sentence_summary(seq["responses"], prompt_template)
+                    sentence = sentence_override[i]
                     seq["summary"] = sentence
                     seq["y"] = llm.encode(sentence, convert_to_numpy=True).tolist()
                     seq["h"] = [[float(x) for x in row] for row in seq["embeddings"]]
