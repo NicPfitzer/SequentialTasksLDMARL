@@ -419,7 +419,7 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
         input_dim=input_dim,
         num_layers=1,
         cls_loss_weight=8.0,
-        ground_truth_h_rate=0.25,
+        ground_truth_h_rate=0.0,
         decoder=None,
     )
 

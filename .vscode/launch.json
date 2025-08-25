@@ -110,5 +110,43 @@
         "PYTHONPATH": "${workspaceFolder}"
       }
     }
+    ,
+    {
+      "name": "Run four_flags_scenario_rl.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_flags/four_flags_scenario_rl.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
+    ,
+    {
+      "name": "Run four_flags_scenario_naive_rl.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_flags/four_flags_scenario_naive_rl.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_flags_scenario_gnn_train.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_flags/four_flags_scenario_gnn_train.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
   ]
 }

@@ -11,6 +11,8 @@ import torch
 from torchrl.envs.utils import ExplorationType, set_exploration_type
 from omegaconf import DictConfig, OmegaConf
 import hydra
+from hydra.core.global_hydra import GlobalHydra
+from hydra import initialize, compose
 import speech_recognition as sr
 
 from tensordict import TensorDict
@@ -19,6 +21,7 @@ from vmas.simulator.utils import TorchUtils
 
 from scenarios.exploration import agent
 from sequence_models.four_flags.model_training.rnn_model import EventRNN
+from scenarios.four_flags.load_config import load_scenario_config
 
 # ROS2
 import rclpy
@@ -292,43 +295,33 @@ class VmasModelsROSInterface(Node):
     def __init__(self, config_multitask: DictConfig, config_team_gnn: DictConfig, log_dir: Path):
         super().__init__("vmas_ros_interface")
         self.device = config_multitask.device 
-        grid_config = config_multitask["grid_config"]
+        arena_config = config_multitask["arena_config"]
         deployment_config = config_multitask["deployment"]
-        task_config = config_multitask["task"].params
-        self.x_semidim = grid_config.x_semidim
-        self.y_semidim = grid_config.y_semidim
-        self.n_agents = task_config.n_agents
         
+        task_config = config_multitask["task"].params
+        load_scenario_config(task_config,self)
+        
+        # Override environment dimensions
+        self.x_semidim = arena_config.x_semidim
+        self.y_semidim = arena_config.y_semidim
         self.task_x_semidim = task_config.x_semidim
         self.task_y_semidim = task_config.y_semidim
-        self.agent_radius = task_config.agent_radius
 
-        # Load experimenta and get policies
-        experiment_multitask = benchmarl_setup_experiment(cfg=config_multitask)
-        self.multitask_policy = experiment_multitask.policy
+        # Load Action Policy
+        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path)
+        self.policy = get_policy_from_cfg(cfg, seed)
         
-        experiment_team_gnn = benchmarl_setup_experiment(cfg=config_team_gnn)
-        self.team_gnn_policy = experiment_team_gnn.policy
+        # experiment_team_gnn = benchmarl_setup_experiment(cfg=config_team_gnn)
+        # self.team_gnn_policy = experiment_team_gnn.policy
         
         # Load sequence model
-        sequence_model_path = task_config.sequence_model_path
-        embedding_size = task_config.embedding_size
-        event_size = task_config.event_size
-        state_size = task_config.state_size
         self.load_sequence_model(
-            model_path=sequence_model_path,
-            embedding_size=embedding_size,
-            event_size=event_size,
-            state_size=state_size,
+            model_path=self.sequence_model_path,
+            embedding_size=self.embedding_size,
+            event_size=self.event_dim,
+            state_size=self.state_dim,
             device=self.device
         )
-
-        # Setup CSV logging
-        # Setup logging to CSV in runtime dir
-        self.log_file = open(log_dir / "vmas_log.csv", "w", newline='')
-        self.csv_writer = csv.writer(self.log_file)
-        self.csv_writer.writerow(["experiment_time", "real_time", "robot_id", "cmd_vel", "cmd_omega", "cmd_vel_n", "cmd_vel_e",
-                                  "cur_pos_n", "cur_pos_e", "cur_vel_n", "cur_vel_e"])
         
         self.set_landmarks()
 
@@ -625,7 +618,6 @@ class VmasModelsROSInterface(Node):
             agent.timer = self.create_timer(agent.obs_dt, agent.collect_observation)
         self.get_logger().info("Starting agents with new instruction.")
 
-
 def get_runtime_log_dir():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     runtime_dir = Path(hydra.core.hydra_config.HydraConfig.get().runtime.output_dir)
@@ -643,10 +635,33 @@ def extract_initial_config():
             config_name = arg.split("=", 1)[1]
     return config_path, config_name
 
+import copy
+def get_policy_from_cfg(cfg: DictConfig, seed: int):
+    experiment = benchmarl_setup_experiment(cfg, seed=seed, main_experiment=False)
+    policy_copy = copy.deepcopy(experiment.policy)  # full independent copy
+    del experiment  # drop the rest
+    return policy_copy
+
+import os
+def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None) -> DictConfig:
+    overrides = overrides or []  # e.g., ["restore_path=some_path"]
+    # current working directory
+    print(f"Current working directory: {os.getcwd()}")
+    # Add directory to restore_path if it is not None
+    restore_path = os.path.join(os.getcwd(), restore_path) if restore_path else None
+    GlobalHydra.instance().clear()
+    with initialize(version_base=None, config_path=config_path):
+        cfg = compose(config_name=config_name, overrides=overrides)
+    experiment_name = list(cfg.keys())[0]
+    seed = cfg.seed
+    cfg[experiment_name].experiment.restore_file = restore_path
+    cfg = cfg[experiment_name]  # Get the config for the specific experiment
+    return cfg, seed
+
 
 # Run script with:
 # python deployment/debug/debug_policy/navigation_deployment.py restore_path=/path_to_checkpoint.pt
-@hydra.main(version_base=None,config_path="../../../conf",config_name="deployment/single_agent_navigation")
+@hydra.main(version_base=None,config_path="../../conf",config_name="four_flags/deployment/single_agent_navigation")
 def main(cfg: DictConfig) -> None:
     print(OmegaConf.to_yaml(cfg, resolve=True))   # full merged config
     rclpy.init()

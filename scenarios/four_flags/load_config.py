@@ -10,12 +10,12 @@ PARAMS = [
     ("x_semidim", 4.0), ("y_semidim", 2.0),
     ("n_passages", 1), ("shared_reward", False),
     ("n_agents", 3), ("agent_radius", 0.17),
-    ("agent_spacing", 0.4), ("passage_length", 0.2),
+    ("agent_spacing", 0.8), ("passage_length", 0.2),
     ("switch_radius", 0.05), ("break_all_wall", True),
     ("chamber_width", 2.0),
 
     # --- Rewards ------------------------------------------------------------
-    ("shaping_factor", 100),
+    ("shaping_factor", 100), ("collision_penalty", 25.0),
     
     # --- Dynamics -----------------------------------------------------------
     ("use_velocity_controller", True), ("use_kinematic_model", False),
@@ -33,8 +33,8 @@ PARAMS = [
     # --- Paths -----------------------------------------------------------
     ("data_json_path", "data/dataset_one_color_ALL.json"), ("decoder_model_path", ""),
     ("sequence_model_path", "sequence_models/four_flags/one_color.pth"),
-    ("policy_config_path", "../../conf"), ("policy_config_name", "config_stage_two"),
-    ("policy_restore_path", "../../checkpoints/four_flags/policy.pt")
+    ("policy_config_path", "../../conf"), ("policy_config_name", "config_stage_two.yaml"),
+    ("policy_restore_path", "checkpoints/four_flags/one_color/policy.pt"),
 ]
 
 # Expand every entry to canonical (dest, key, default) form

@@ -1,5 +1,5 @@
-name: SAMPLING                       # maps to VmasTask.SAMPLING
-scenario_class: scenarios.four_flags.four_flags_scenario.FourFlagsScenario
+name: PASSAGE                          # maps to VmasTask.SAMPLING
+scenario_class: scenarios.four_flags.four_flags_scenario_rl.FourFlagsScenario
 
 params:
   # === Map & Layout ===
@@ -13,7 +13,7 @@ params:
   passage_length: 0.2
   agent_spacing: 0.8
   switch_radius: 0.05
-  chamber_width: 2.5
+  chamber_width: 2.0
   break_all_wall: True
   comms_radius: ${four_flags.model.actor_model.edge_radius}
 
@@ -38,6 +38,10 @@ params:
   data_json_path: "data/dataset_one_color_ALL.json"
   decoder_model_path: "sequence_models/four_flags/four_flags_decoder.pth"
   sequence_model_path: "sequence_models/four_flags/one_color.pth"
+  policy_conf_dir: "../../conf"
+  policy_conf_name: "config_state_two.yaml"
+  policy_restore_path: "checkpoints/four_flags/one_color/policy.pt"
+
 
    # === Additional Scenario ===
   max_steps: 250
