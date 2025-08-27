@@ -221,7 +221,6 @@ class FourFlagsScenario(BaseScenario):
             flag = self.flags[j]
             xx = self.x_room_min + self.flag_radius + (i % 2) * (self.x_room_max - self.x_room_min - 2 * self.flag_radius)
             yy = -self.y_semidim + self.flag_radius + (i // 2) * (2 * self.y_semidim - 2 * self.flag_radius)
-            print("Flag position:", xx, yy)
             if env_index is None:
                 flag.set_pos(
                     torch.tensor(
