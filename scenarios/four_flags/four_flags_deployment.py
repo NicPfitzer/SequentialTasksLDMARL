@@ -259,7 +259,7 @@ class Agent:
             h=self.h.unsqueeze(0)
         )
         self.task_state = torch.argmax(
-            torch.sigmoid(state_decoder_out[:, self.node.num_automata:]), dim=-1
+            torch.sigmoid(state_decoder_out[:, self.node.num_automata_bits:]), dim=-1
         )
 
     def collect_observation(self):
@@ -327,7 +327,7 @@ class VmasModelsROSInterface(Node):
         load_scenario_config(task_config,self)
         required = ["flag_radius","switch_radius","agent_radius","passage_length","chamber_width",
             "n_agents","sequence_model_path","embedding_size","event_dim","state_dim",
-            "policy_config_path","policy_config_name","policy_restore_path","num_automata"]
+            "policy_config_path","policy_config_name","policy_restore_path","num_automata_bits"]
         for k in required:
             assert hasattr(self, k), f"Missing config attribute: {k}"
         

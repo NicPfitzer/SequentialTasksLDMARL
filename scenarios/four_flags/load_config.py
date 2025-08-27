@@ -28,7 +28,7 @@ PARAMS = [
     
     # --- Language -----------------------------------------------------------
     ("embedding_size", 1024), ("use_embedding_ratio", 1.0),
-    ("event_dim", 5), ("state_dim", 8),
+    ("event_dim", 5), ("state_dim", 8), ("num_automata_bits", 2),
 
     # --- Paths -----------------------------------------------------------
     ("data_json_path", "data/dataset_one_color_ALL.json"), ("decoder_model_path", ""),
