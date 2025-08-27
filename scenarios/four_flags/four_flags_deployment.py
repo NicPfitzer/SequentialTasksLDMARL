@@ -694,7 +694,7 @@ def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", conf
 
 # Run script with:
 # python deployment/debug/debug_policy/navigation_deployment.py restore_path=/path_to_checkpoint.pt
-@hydra.main(version_base=None,config_path="../../conf",config_name="four_flags/deployment/single_agent_navigation")
+@hydra.main(version_base=None,config_path="../../conf",config_name="four_flags/deployment/four_flags_deployment")
 def main(cfg: DictConfig) -> None:
     print(OmegaConf.to_yaml(cfg, resolve=True))   # full merged config
     rclpy.init()
