@@ -2,7 +2,6 @@ name: PASSAGE                          # maps to VmasTask.SAMPLING
 scenario_class: scenarios.four_flags.four_flags_scenario_gnn_train.FourFlagsScenario
 
 params:
-params:
   # === Map & Layout ===
   x_semidim: 4.0
   y_semidim: 2.0
