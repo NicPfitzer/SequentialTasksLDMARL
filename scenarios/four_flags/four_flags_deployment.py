@@ -410,8 +410,8 @@ class VmasModelsROSInterface(Node):
         # Set flag positions
         indices = [0,1,2,3] # Red, Green, Blue, Yellow
         for i in indices:
-            xx = self.x_room_min + self.agent_radius * 3 + (i % 2) * (self.x_room_max - self.x_room_min - 2 * (self.agent_radius * 3))
-            yy = -self.y_semidim + self.agent_radius + self.agent_radius * 3 + (i // 2) * (2 * self.y_semidim - 2 * (self.agent_radius + self.agent_radius * 3))
+            xx = self.x_room_min + self.flag_radius + (i % 2) * (self.x_room_max - self.x_room_min - 2 * self.flag_radius)
+            yy = -self.y_semidim + self.flag_radius + self.flag_radius * 3 + (i // 2) * (2 * self.y_semidim - 2 * self.flag_radius)
             flag = torch.zeros((2,), dtype=torch.float32, device=self.device)
             flag[0] = xx
             flag[1] = yy

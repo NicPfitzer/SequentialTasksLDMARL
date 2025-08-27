@@ -2,18 +2,20 @@ name: PASSAGE                          # maps to VmasTask.SAMPLING
 scenario_class: scenarios.four_flags.four_flags_scenario_gnn_train.FourFlagsScenario
 
 params:
+params:
   # === Map & Layout ===
-  x_semidim: 1.0
-  y_semidim: 1.0
+  x_semidim: 4.0
+  y_semidim: 2.0
   n_passages: 4
-  shared_reward: False
-  agent_radius: 0.03333
+  shared_reward: True
+  agent_radius: 0.17
   n_agents: 3
-  passage_width: 0.2
-  passage_length: 0.103
+  passage_width: 0.1
+  passage_length: 0.2
+  agent_spacing: 0.8
   switch_radius: 0.45
   flag_radius: 0.45
-  chamber_width: 1.5
+  chamber_width: 2.5
   break_all_wall: True
   comms_radius: ${four_flags.model.actor_model.edge_radius}
 

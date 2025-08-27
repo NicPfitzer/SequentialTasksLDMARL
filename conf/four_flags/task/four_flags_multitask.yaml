@@ -12,7 +12,7 @@ params:
   passage_width: 0.1
   passage_length: 0.2
   agent_spacing: 0.8
-  switch_radius: 0.05
+  switch_radius: 0.45
   chamber_width: 2.5
   break_all_wall: True
   comms_radius: ${four_flags.model.actor_model.edge_radius}
