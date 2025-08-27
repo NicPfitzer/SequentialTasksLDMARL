@@ -41,7 +41,7 @@ else:
 
 
 # Local Modules
-from trainer.benchmarl_setup_experiment_ import benchmarl_setup_experiment
+from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
 
 def convert_ne_to_xy(north: float, east: float) -> tuple[float, float]:
     """
