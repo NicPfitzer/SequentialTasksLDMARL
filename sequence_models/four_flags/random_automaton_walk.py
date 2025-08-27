@@ -253,11 +253,7 @@ def make_color_then_goal_config(color: State, automaton_id: int) -> DFAConfig:
     """Generic two-step color sequence then goal."""
 
     transition: Dict[State, Callable[[Vector], State]] = {
-        color: advance_case(
-            (all_of(has(idx_map[color]), has(SW)), "goal"),
-            (has(idx_map[color]), "switch"),
-            default=color,
-        ),
+        color: advance_if(has(B),  "switch", color),
         "switch": advance_case(
             (has(SW), "goal"),
             (not_has(idx_map[color]), color),

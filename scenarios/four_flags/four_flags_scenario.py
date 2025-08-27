@@ -64,15 +64,16 @@ class FourFlagsScenario(BaseScenario):
         
     def _add_flags(self, world):
         self.flags = []
-        self.colors = [Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE]
+        self.state_color_map = {FIND_RED: Color.RED, FIND_GREEN: Color.GREEN, FIND_BLUE: Color.BLUE, FIND_PURPLE: Color.PURPLE}
+        self.flag_state_map = {0: FIND_RED, 1: FIND_GREEN, 2: FIND_BLUE, 3: FIND_PURPLE}
         self.flag_radius = 1.1 * (self.agent_spacing + self.agent_radius) / (3)**0.5
-        for i,c in enumerate(self.colors):
+        for i,c in self.flag_state_map.items():
             flag = Landmark(
                 name=f"flag {i}",
                 collide=False,
                 movable=False,
                 shape=Sphere(radius=self.flag_radius),
-                color=c,
+                color=self.state_color_map[c],
                 collision_filter=lambda e: not isinstance(e.shape, Box),
             )
             self.flags.append(flag)
@@ -123,6 +124,12 @@ class FourFlagsScenario(BaseScenario):
             
             agent.e = torch.zeros(
                 (world.batch_dim, self.event_dim),
+                dtype=torch.float32,
+                device=world.device,
+            )
+            
+            agent.state_ = torch.zeros(
+                (world.batch_dim,),
                 dtype=torch.float32,
                 device=world.device,
             )
@@ -381,9 +388,16 @@ class FourFlagsScenario(BaseScenario):
     def switch_hit_logic(self, agent: Agent):
         
         overlapping_switch = self.world.is_overlapping(agent, self.switch)
-        agent.hit_switch |= overlapping_switch.bool()
+        flag_on_switch = overlapping_switch.bool() & (agent.found_flags[torch.arange(self.world.batch_dim),self.switch.target_flag] == 1)
+        agent.hit_switch |= flag_on_switch
         self.team_hit_switch |= agent.hit_switch
-        self.rew[overlapping_switch] += 0.05
+        self.rew[overlapping_switch & (self.language_unit.states == self.switch.state)] += 0.05
+
+        is_first = agent == self.world.agents[0]
+        if is_first:
+            override_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
+            if override_indices.numel() > 0:
+                self.team_hit_switch[override_indices] = True
 
     def reward(self, agent: Agent):
         is_first = agent == self.world.agents[0]
@@ -411,12 +425,11 @@ class FourFlagsScenario(BaseScenario):
                             overlapping_flag = self.world.is_overlapping(a, flag)
                             a.found_flags[:,i] |= overlapping_flag.bool()
                             self.team_found_flags[:,i] |= a.found_flags[:,i]
-                            self.rew[overlapping_flag] += 0.05
+                            self.rew[overlapping_flag & (self.language_unit.states == self.flag_state_map[i])] += 0.05
 
                         self.switch_hit_logic(a)
-
                         overlapping_goal = self.world.is_overlapping(a, a.goal)
-                        self.rew[overlapping_goal] += 0.05
+                        self.rew[overlapping_goal & (self.language_unit.states == FIND_GOAL)] += 0.05
         else:
             self.rew = torch.zeros(
                 self.world.batch_dim,
@@ -438,17 +451,17 @@ class FourFlagsScenario(BaseScenario):
                     overlapping_flag = self.world.is_overlapping(agent, flag)
                     agent.found_flags[:,i] |= overlapping_flag.bool()
                     self.team_found_flags[:,i] |= agent.found_flags[:,i]
-                    self.rew[overlapping_flag] += 0.05
+                    self.rew[overlapping_flag & (self.language_unit.states == self.flag_state_map[i])] += 0.05
 
                 self.switch_hit_logic(agent)
 
             overlapping_goal = self.world.is_overlapping(agent, agent.goal)
-            self.rew[overlapping_goal] += 0.05
+            self.rew[overlapping_goal & (self.language_unit.states == FIND_GOAL)] += 0.05
             # only the *first-time* hits (overlap & never hit before)
 
         # Despawn passage if goal is hit
-        goal_indices = torch.where(self.language_unit.states == FIND_GOAL)[0]
-        if goal_indices.any():
+        goal_indices = torch.where(self.team_hit_switch)[0]
+        if goal_indices.numel() > 0:
             passages = self.landmarks[: self.n_passages]
             for passage in passages:
                 passage.state.pos[goal_indices] = self._get_outside_pos(None)[goal_indices]
@@ -537,44 +550,58 @@ class FourFlagsScenario(BaseScenario):
         if self.use_velocity_controller and not self.use_kinematic_model:
             agent.controller.process_force()
 
-    @torch.no_grad()
+    # @torch.no_grad()
+    # def done(self):
+    #     B = self.world.batch_dim
+    #     agents = self.world.agents
+
+    #     # 1) All agents on their goals
+    #     on_goal = torch.all(
+    #         torch.stack([
+    #             torch.linalg.vector_norm(a.state.pos - a.goal.state.pos, dim=1) <= a.shape.radius / 2
+    #             for a in agents
+    #         ], dim=1),
+    #         dim=1,
+    #     )  # [B]
+
+    #     # 2) All agents have found each flag color
+    #     per_agent_flags = torch.stack([a.found_flags for a in agents], dim=1)  # [B,N,4]
+    #     all_found_each_color = per_agent_flags.all(dim=1)                      # [B,4] (R,G,B,P)
+
+    #     # 3) All agents have touched the switch
+    #     per_agent_switch = torch.stack([a.hit_switch for a in agents], dim=1)  # [B,N]
+    #     all_agents_hit_switch = per_agent_switch.all(dim=1)                    # [B]
+
+    #     # 4) Build state-conditional termination table
+    #     table = torch.stack(
+    #         [
+    #             on_goal,                    # FIND_GOAL
+    #             all_agents_hit_switch,      # FIND_SWITCH (now requires everyone)
+    #             all_found_each_color[:, 0], # FIND_RED
+    #             all_found_each_color[:, 1], # FIND_GREEN
+    #             all_found_each_color[:, 2], # FIND_BLUE
+    #             all_found_each_color[:, 3], # FIND_PURPLE
+    #         ],
+    #         dim=1,
+    #     )  # [B,6]
+
+    #     idx = self._state_map[self.language_unit.states]  # [B]
+    #     b = torch.arange(B, device=self.world.device)
+    #     return table[b, idx]
+    
     def done(self):
-        B = self.world.batch_dim
-        agents = self.world.agents
 
-        # 1) All agents on their goals
-        on_goal = torch.all(
-            torch.stack([
-                torch.linalg.vector_norm(a.state.pos - a.goal.state.pos, dim=1) <= a.shape.radius / 2
-                for a in agents
-            ], dim=1),
+        return torch.all(
+            torch.stack(
+                [
+                    torch.linalg.vector_norm(a.state.pos - a.goal.state.pos, dim=1)
+                    <= a.shape.radius / 2
+                    for a in self.world.agents
+                ],
+                dim=1,
+            ),
             dim=1,
-        )  # [B]
-
-        # 2) All agents have found each flag color
-        per_agent_flags = torch.stack([a.found_flags for a in agents], dim=1)  # [B,N,4]
-        all_found_each_color = per_agent_flags.all(dim=1)                      # [B,4] (R,G,B,P)
-
-        # 3) All agents have touched the switch
-        per_agent_switch = torch.stack([a.hit_switch for a in agents], dim=1)  # [B,N]
-        all_agents_hit_switch = per_agent_switch.all(dim=1)                    # [B]
-
-        # 4) Build state-conditional termination table
-        table = torch.stack(
-            [
-                on_goal,                    # FIND_GOAL
-                all_agents_hit_switch,      # FIND_SWITCH (now requires everyone)
-                all_found_each_color[:, 0], # FIND_RED
-                all_found_each_color[:, 1], # FIND_GREEN
-                all_found_each_color[:, 2], # FIND_BLUE
-                all_found_each_color[:, 3], # FIND_PURPLE
-            ],
-            dim=1,
-        )  # [B,6]
-
-        idx = self._state_map[self.language_unit.states]  # [B]
-        b = torch.arange(B, device=self.world.device)
-        return table[b, idx]
+        )
 
 
     def extra_render(self, env_index: int = 0):
@@ -636,18 +663,31 @@ class FourFlagsScenario(BaseScenario):
         for i, agent1 in enumerate(self.world.agents):
             
             # Add rings for visited flags
-            for j, _ in enumerate(self.flags):
+            for j, state in self.flag_state_map.items():
                 if agent1.found_flags[env_index, j]:
                     ring = rendering.make_circle(
                         radius=0.05 + j * 0.02,
                         filled=False,
                     )
-                    ring.set_linewidth(2)
+                    ring.set_linewidth(3)
                     xform = rendering.Transform()
                     xform.set_translation(*agent1.state.pos[env_index])
                     ring.add_attr(xform)
-                    ring.set_color(*self.colors[j].value)
+                    ring.set_color(*self.state_color_map[state].value)
                     geoms.append(ring)
+            
+            # Add a ring for switch hit
+            if agent1.hit_switch[env_index]:
+                ring = rendering.make_circle(
+                    radius=0.05 + len(self.flags) * 0.02,
+                    filled=False,
+                )
+                ring.set_linewidth(3)
+                xform = rendering.Transform()
+                xform.set_translation(*agent1.state.pos[env_index])
+                ring.add_attr(xform)
+                ring.set_color(*Color.YELLOW.value)
+                geoms.append(ring)
                     
             # Communication lines
             for j, agent2 in enumerate(self.world.agents):

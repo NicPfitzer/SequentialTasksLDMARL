@@ -1,7 +1,6 @@
 import sys
 import csv
 import math
-import shutil
 import signal
 from pathlib import Path
 from datetime import datetime
@@ -19,7 +18,6 @@ from tensordict import TensorDict
 from benchmarl.utils import DEVICE_TYPING
 from vmas.simulator.utils import TorchUtils
 
-from scenarios.exploration import agent
 from sequence_models.four_flags.model_training.rnn_model import EventRNN
 from scenarios.four_flags.load_config import load_scenario_config
 
@@ -104,7 +102,7 @@ class Agent:
         self.set_goal()
         
         self.h = torch.zeros((self.node.embedding_size,), dtype=torch.float32, device=self.device)
-        self.e = torch.zeros((self.node.event_size,), dtype=torch.float32, device=self.device)
+        self.e = torch.zeros((self.node.event_dim,), dtype=torch.float32, device=self.device)
         self.flags_found = torch.zeros((4,), dtype=torch.bool, device=self.device)
         self.hit_switch = torch.zeros((1,), dtype=torch.bool, device=self.device)
         self.task_state = torch.zeros((1,), dtype=torch.float32, device=self.device)
@@ -154,14 +152,14 @@ class Agent:
             self.reference_state = Twist()
     
     def set_goal(self):
-        
-        y_min = -self.node.y_semidim + self.node.agent_radius + self.node.agent_radius * 3
-        y_max = self.node.y_semidim - self.node.agent_radius - self.node.agent_radius * 3
-        x_min = self.node.x_semidim - self.node.chamber_width + self.node.agent_radius + self.node.agent_radius * 3 + self.node.passage_length / 2
-        x_max = self.node.x_semidim - self.node.agent_radius - self.node.agent_radius * 3
+
+        y_min = -self.node.y_semidim + self.node.agent_radius + self.node.flag_radius
+        y_max = self.node.y_semidim - self.node.agent_radius - self.node.flag_radius
+        x_min = self.node.x_semidim - self.node.chamber_width + self.node.agent_radius + self.node.flag_radius + self.node.passage_length / 2
+        x_max = self.node.x_semidim - self.node.agent_radius - self.node.flag_radius
         x_center = (x_min + x_max) / 2
         n_agent = self.node.n_agents
-        ratio = self.count / (n_agent-1)
+        ratio = 0.0 if n_agent <= 1 else self.count / (n_agent - 1)
         y = y_min + ratio * (y_max - y_min)
         x = x_center
         self.goal = torch.tensor([[x, y]], dtype=torch.float32, device=self.device)
@@ -217,58 +215,99 @@ class Agent:
         if landmark_type == "flag":
             self.flags_found[landmark_id] = True
         elif landmark_type == "switch":
-            self.hit_switch = True
+            self.hit_switch[0] = True
     
     def landmark_overlap(self):
-        # Check for overlap with flags
         for i, flag_pos in enumerate(self.node.flags):
-            distance = torch.norm(self.state.pos - flag_pos.unsqueeze(0))
-            if distance < self.node.agent_radius * 3:
+            distance = torch.norm(self.state.pos - flag_pos.unsqueeze(0)).item()
+            if distance < self.node.flag_radius:
                 self.landmark_reached("flag", i)
                 self.node.get_logger().info(f"Robot {self.robot_id} reached flag {i} at position {flag_pos.cpu().numpy()}")
-        
-        # Check for overlap with switch
-        distance_to_switch = torch.norm(self.state.pos - self.node.switch.unsqueeze(0))
-        if distance_to_switch < self.node.agent_radius * 3:
+
+        distance_to_switch = torch.norm(self.state.pos - self.node.switch.unsqueeze(0)).item()
+        if distance_to_switch < self.node.switch_radius:
             self.landmark_reached("switch", 0)
             self.node.get_logger().info(f"Robot {self.robot_id} reached the switch at position {self.node.switch.cpu().numpy()}")
+            
+    def compute_shared_event(self) -> torch.Tensor:
+        """
+        Aggregate all agents' binary event vectors via OR.
+        Returns a float32 tensor of shape (event_dim,) on self.device.
+        """
+        if not self.node.agents:
+            return torch.zeros((self.event_dim,), device=self.device, dtype=torch.float32)
+
+        # start from all-zeros bool
+        agg = torch.zeros((self.event_dim,), device=self.device, dtype=torch.bool)
+        for ag in self.node.agents:
+            # ag.e is float [0/1]; threshold to bool then OR
+            ev_bool = (ag.e.to(torch.bool))
+            # handle potential length mismatches defensively
+            if ev_bool.numel() != agg.numel():
+                self.get_logger().warn(
+                    f"Event length mismatch for agent {ag.robot_id}: {ev_bool.numel()} vs {agg.numel()}")
+                m = min(ev_bool.numel(), agg.numel())
+                agg[:m] |= ev_bool[:m]
+            else:
+                agg |= ev_bool
+
+        return agg.to(torch.float32)
+
 
     def next_step_rnn(self):
-        
-        self.e = torch.cat([self.flags_found.to(torch.float32), self.hit_switch.to(torch.float32)], dim=-1)
+        # use shared events if available
+        shared_e = getattr(self.node, "compute_shared_event", None)
+        if callable(shared_e):
+            e_vec = self.node.compute_shared_event()
+            # also keep local flags so agents can still set them
+            self.e = e_vec
+        else:
+            self.e = torch.cat([self.flags_found.to(torch.float32),
+                                self.hit_switch.to(torch.float32)], dim=-1)
+
+        if getattr(self.node, "y", None) is None:
+            return
         self.h, state_decoder_out = self.node.compute_forward_rnn(
             event=self.e.unsqueeze(0),
             y=self.node.y.unsqueeze(0),
             h=self.h.unsqueeze(0)
         )
-        self.task_state = torch.argmax(torch.sigmoid(state_decoder_out[:, self.node.num_automata:]), dim=-1)
+        self.task_state = torch.argmax(
+            torch.sigmoid(state_decoder_out[:, self.node.num_automata:]), dim=-1
+        )
 
     def collect_observation(self):
         
         self.landmark_overlap()
         self.next_step_rnn()
         
-        if self.goal is not None and self.state_received:
+        if self.goal is None or not self.state_received:
+            return
             
-            obs_buf = torch.empty((self._obs_dim,),
-                            device=self.device, dtype=torch.float32)
-            obs_buf[:, self._sl_goal]   = (self.goal - self.state.pos) / self._scale
-            obs_buf[:, self._sl_switch] = (self.node.switch - self.state.pos) / self._scale
+        obs_buf = torch.empty(self._obs_dim, device=self.device, dtype=torch.float32)
 
-            flags_pos = torch.stack([f for f in self.node.flags], dim=1)
-            obs_buf[:, self._sl_flags] = (flags_pos - self.state.pos) / self._scale
+        # goal and switch relative vectors (1×2 -> 2)
+        rel_goal   = ((self.goal[0] - self.state.pos[0])   / self._scale).to(torch.float32)
+        rel_switch = ((self.node.switch - self.state.pos[0]) / self._scale).to(torch.float32)
+        obs_buf[self._sl_goal]   = rel_goal
+        obs_buf[self._sl_switch] = rel_switch
 
-            obs = {
-                "pos": self.state.pos / self._scale,
-                "vel": self.state.vel / self._scale,
-                "event": self.e,
-                "sentence_embedding": self.h,
-                "obs": obs_buf,
-            }
-            
-            self.state_buffer.append(obs)
-            if len(self.state_buffer) > self.state_buffer_length:
-                self.state_buffer = self.state_buffer[-self.state_buffer_length:]
+        # flags: (4,2) -> flatten to (8,)
+        flags_pos = torch.stack(list(self.node.flags), dim=0)  # (4,2)
+        rel_flags = ((flags_pos - self.state.pos[0]) / self._scale).to(torch.float32).reshape(-1)
+        obs_buf[self._sl_flags] = rel_flags  # (8,)
+
+        obs = {
+            "pos": (self.state.pos[0] / self._scale).to(torch.float32),   # (2,)
+            "vel": (self.state.vel[0] / self._scale).to(torch.float32),   # (2,)
+            "event": self.e.to(torch.float32),                             # (5,)
+            "sentence_embedding": self.h.to(torch.float32),                # (E,)
+            "obs": obs_buf,                                               # (12,)
+        }
+
+        self.state_buffer.append(obs)
+        if len(self.state_buffer) > self.state_buffer_length:
+            self.state_buffer = self.state_buffer[-self.state_buffer_length:]
        
         
     def send_zero_velocity(self):
@@ -291,15 +330,19 @@ class World:
         self.dt = dt
 
 class VmasModelsROSInterface(Node):
-
-    def __init__(self, config_multitask: DictConfig, config_team_gnn: DictConfig, log_dir: Path):
+    def __init__(self, config: DictConfig, log_dir: Path, config_team_gnn: Optional[DictConfig]=None):
         super().__init__("vmas_ros_interface")
-        self.device = config_multitask.device 
-        arena_config = config_multitask["arena_config"]
-        deployment_config = config_multitask["deployment"]
+        self.device = config.device
+        arena_config = config["arena_config"]
+        deployment_config = config["deployment"]
+        task_config = config["task"].params
         
-        task_config = config_multitask["task"].params
         load_scenario_config(task_config,self)
+        required = ["flag_radius","switch_radius","agent_radius","passage_length","chamber_width",
+            "n_agents","sequence_model_path","embedding_size","event_dim","state_dim",
+            "policy_config_path","policy_config_name","policy_restore_path","num_automata"]
+        for k in required:
+            assert hasattr(self, k), f"Missing config attribute: {k}"
         
         # Override environment dimensions
         self.x_semidim = arena_config.x_semidim
@@ -324,6 +367,12 @@ class VmasModelsROSInterface(Node):
         )
         
         self.set_landmarks()
+        
+        self.log_dir = log_dir
+        (self.log_dir / "logs").mkdir(parents=True, exist_ok=True)
+        self.log_file = open(self.log_dir / f"control_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv", "w", newline="")
+        self.csv_writer = csv.writer(self.log_file)
+        self.csv_writer.writerow(["sim_time","wall_time","robot_id","cmd_vel_xy","cmd_omega","vel_n","vel_e","pos_x","pos_y","vel_x","vel_y"])
 
         # Create Agents
         agents: List[Agent] = []
@@ -355,7 +404,7 @@ class VmasModelsROSInterface(Node):
         self.x_room_min = (-self.x_semidim + self.agent_radius)
         x_room_center = (self.x_room_max + self.x_room_min) / 2
         y_room_center = 0
-        self.room_center =  torch.tensor([x_room_center, y_room_center], dtype=torch.float32, device=self.world.device)
+        self.room_center = torch.tensor([x_room_center, y_room_center], dtype=torch.float32, device=self.device)
         self.switch = self.room_center.clone()
         
         # Set flag positions
@@ -363,14 +412,14 @@ class VmasModelsROSInterface(Node):
         for i in indices:
             xx = self.x_room_min + self.agent_radius * 3 + (i % 2) * (self.x_room_max - self.x_room_min - 2 * (self.agent_radius * 3))
             yy = -self.y_semidim + self.agent_radius + self.agent_radius * 3 + (i // 2) * (2 * self.y_semidim - 2 * (self.agent_radius + self.agent_radius * 3))
-            flag = torch.zeros((2,), dtype=torch.float32, device=self.world.device)
+            flag = torch.zeros((2,), dtype=torch.float32, device=self.device)
             flag[0] = xx
             flag[1] = yy
             self.flags.append(flag)
             print(f"Flag {i} position: {flag}")
         
         # Wall center
-        self.wall_center = torch.tensor([self.x_semidim - self.chamber_width, 0.0], dtype=torch.float32, device=self.world.device)
+        self.wall_center = torch.tensor([self.x_semidim - self.chamber_width, 0.0], dtype=torch.float32, device=self.device)
     
     def compute_forward_rnn(self, event: torch.Tensor, y: torch.Tensor, h: torch.Tensor):
         """
@@ -403,7 +452,7 @@ class VmasModelsROSInterface(Node):
         input_td = self._prepare_input_tensor(obs_list)
 
         with torch.no_grad(), set_exploration_type(ExplorationType.DETERMINISTIC):
-            output_td = self.multitask_policy(input_td)
+            output_td = self.policy(input_td)
         action = output_td[("agents", "action")]
 
         self._issue_commands_to_agents(action)
@@ -419,33 +468,22 @@ class VmasModelsROSInterface(Node):
         self.get_logger().info(f"Robots reached {self.max_steps} steps. Stopping.")
         self.timer.cancel()
         self.stop_all_agents()
-        self.prompt_for_new_instruction()
+        self.prompt_for_new_task_instruction()
 
     def _collect_observations(self):
         obs_list = []
-
-        for agent in self.world.agents:
-            if not agent.state_buffer:
-                self.get_logger().warn(f"No state in buffer for agent {agent.robot_id}")
-                return
-
-            latest_state = agent.state_buffer[-1]
-            feat = torch.cat([
-                latest_state["pos"],
-                latest_state["vel"],
-                latest_state["event"],
-                latest_state["sentence_embedding"],
-                latest_state["obs"],], dim=-1).float()   # shape (1, 7)
-            obs_list.append(feat)
-
+        for ag in self.world.agents:
+            if not ag.state_buffer:
+                self.get_logger().warn(f"No state in buffer for agent {ag.robot_id}")
+                continue
+            s = ag.state_buffer[-1]
+            feat_1d = torch.cat([s["pos"], s["vel"], s["event"], s["sentence_embedding"], s["obs"]], dim=0)  # (D,)
+            obs_list.append(feat_1d.unsqueeze(0))  # (1,D)
         return obs_list
 
     def _prepare_input_tensor(self, obs_list):
-        obs_tensor = torch.cat(obs_list, dim=0)
-
-        return TensorDict({
-            ("agents", "observation"): obs_tensor,
-        }, batch_size=[len(obs_list)])
+        obs_tensor = torch.cat(obs_list, dim=0)  # (N,D)
+        return TensorDict({("agents","observation"): obs_tensor}, batch_size=[obs_tensor.shape[0]])
     
     def clamp_velocity_to_bounds(self, action: torch.Tensor, agent) -> List[float]:
         """
@@ -456,8 +494,13 @@ class VmasModelsROSInterface(Node):
         theta = agent.state.rot[0]  # shape: (1,)
         vel = action.clone()
         
-        vel_norm = action[X]
-        omega = action[Y]  
+        if self.use_kinematic_model:
+            vel_norm = action[X]
+            omega    = action[Y]
+            vel[X]   = vel_norm * torch.cos(theta)
+            vel[Y]   = vel_norm * torch.sin(theta)
+        else:
+            omega = None
         
         vel[X] = vel_norm * torch.cos(theta)
         vel[Y] = vel_norm * torch.sin(theta)
@@ -481,7 +524,7 @@ class VmasModelsROSInterface(Node):
 
         # Clamp to the agent's max velocity norm
         clamped_vel = TorchUtils.clamp_with_norm(vel, agent.v_range)
-        return clamped_vel.tolist(), omega.item()
+        return clamped_vel.tolist(), None if omega is None else omega.item()
 
     def _wrap_to_pi(self, angle: float) -> float:
         """Return the equivalent angle in the range [-π, π)."""
@@ -495,8 +538,12 @@ class VmasModelsROSInterface(Node):
             cmd_vel, cmd_omega = self.clamp_velocity_to_bounds(action_tensor[i], agent)
             vel_n, vel_e = convert_xy_to_ne(*cmd_vel)
 
-            yaw_now   = agent.state.rot.item()                      # current estimate from localisation
-            yaw_ref   = self._wrap_to_pi(yaw_now + cmd_omega * self.action_dt)
+            if self.use_kinematic_model:
+                yaw_now = agent.state.rot.item()          # current estimate
+                yaw_ref = self._wrap_to_pi(yaw_now + cmd_omega * self.action_dt)
+            else:
+                yaw_ref   = math.pi / 2                   # legacy fixed heading
+                cmd_omega = 0.0
 
             if USING_FREYJA:
                 agent.reference_state.vn = vel_n
@@ -518,10 +565,10 @@ class VmasModelsROSInterface(Node):
             )
 
             self.csv_writer.writerow([
-                agent.mytime, real_time_str, agent.robot_id,
-                cmd_vel, cmd_omega, vel_n, vel_e,
-                agent.state.pos[0,X], agent.state.pos[0,Y],
-                agent.state.vel[0,X], agent.state.vel[0,Y]
+                float(agent.mytime), real_time_str, int(agent.robot_id),
+                [float(cmd_vel[0]), float(cmd_vel[1])], float(cmd_omega), float(vel_n), float(vel_e),
+                float(agent.state.pos[0,X].item()), float(agent.state.pos[0,Y].item()),
+                float(agent.state.vel[0,X].item()), float(agent.state.vel[0,Y].item())
             ])
             self.log_file.flush()
 
@@ -596,7 +643,7 @@ class VmasModelsROSInterface(Node):
                 new_sentence = user_input
             else:
                 self.get_logger().info("Retrying speech recognition...")
-                return self.prompt_for_new_speech_instruction()
+                return self.prompt_for_new_task_instruction()
         except Exception as e:
             self.get_logger().error(f"Unexpected error during speech recognition: {e}")
             return
@@ -676,8 +723,8 @@ def main(cfg: DictConfig) -> None:
         log_dir=log_dir
     )
 
-    ros_interface_node.prompt_for_new_instruction()
-
+    ros_interface_node.prompt_for_new_task_instruction()
+    
     def sigint_handler(sig, frame):
         ros_interface_node.get_logger().info('SIGINT received. Stopping timer and sending zero velocity...')
         ros_interface_node.stop_all_agents()

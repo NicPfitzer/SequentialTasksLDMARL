@@ -11,7 +11,8 @@ params:
   n_agents: 3
   passage_width: 0.2
   passage_length: 0.103
-  switch_radius: 0.05
+  switch_radius: 0.45
+  flag_radius: 0.45
   chamber_width: 1.5
   break_all_wall: True
   comms_radius: ${four_flags.model.actor_model.edge_radius}
@@ -33,6 +34,8 @@ params:
   use_embedding_ratio: 1.0
   event_dim: 5
   state_dim: 8
+  num_automata_bits: 2
+  compute_shared_event: True
   data_json_path: "data/dataset_one_color_ALL.json"
   decoder_model_path: "sequence_models/four_flags/four_flags_decoder.pth"
   sequence_model_path: "sequence_models/four_flags/one_color.pth"

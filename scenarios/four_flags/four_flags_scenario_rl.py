@@ -19,6 +19,7 @@ from hydra.core.global_hydra import GlobalHydra
 from omegaconf import DictConfig, OmegaConf
 from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
 from scenarios.four_flags.four_flags_scenario_gnn_train import FourFlagsScenario as BaseFourFlagsScenarioGNN
+from scenarios.four_flags.four_flags_scenario import FourFlagsScenario as BaseFourFlagsScenario
 
 class FourFlagsScenario(BaseFourFlagsScenarioGNN):
     def make_world(self, batch_dim: int, device: torch.device, **kwargs):
@@ -34,8 +35,8 @@ class FourFlagsScenario(BaseFourFlagsScenarioGNN):
         self._add_passages(world)
         self._add_switch(world)
         self._add_flags(world)
-        self._init_language_unit(world)
-        self._add_agents_and_goals(world)
+        BaseFourFlagsScenario._init_language_unit(self, world)
+        BaseFourFlagsScenario._add_agents_and_goals(self, world)
 
         return world
     
@@ -66,19 +67,11 @@ class FourFlagsScenario(BaseFourFlagsScenarioGNN):
             "sentence_embedding": agent.y,
             "obs": obs_buf,
         }
-        
-    def process_action(self, agent):
-        
-        # Clamp square to circle
-        agent.action.u = TorchUtils.clamp_with_norm(agent.action.u, agent.u_range)
-
-        # Zero small input
-        action_norm = torch.linalg.vector_norm(agent.action.u, dim=1)
-        agent.action.u[action_norm < 0.005] = 0
-
-        if self.use_velocity_controller and not self.use_kinematic_model:
-            agent.controller.process_force()
     
+    def process_action(self, agent):
+            
+        BaseFourFlagsScenario.process_action(self, agent)
+            
     def pre_step(self):
 
         for agent in self.world.agents:
@@ -171,7 +164,7 @@ class FourFlagsScenario(BaseFourFlagsScenarioGNN):
                     geoms.append(line)
         
         try:
-            sentence = self.language_unit.response[env_index]
+            sentence = self.language_unit.summary[env_index]
             geom = rendering.TextLine(
                 text=sentence,
                 font_size=6
@@ -192,10 +185,3 @@ if __name__ == "__main__":
        scenario, control_two_agents=True, n_passages=1, shared_reward=False, display_info=False
     )
     
-
-
-if __name__ == "__main__":
-    scenario = FourFlagsScenario()
-    render_interactively(
-       scenario, control_two_agents=True, n_passages=1, shared_reward=False
-    )

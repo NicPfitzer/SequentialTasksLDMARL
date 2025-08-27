@@ -45,7 +45,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         load_sequence_model(model_path=self.sequence_model_path, embedding_size=self.embedding_size, event_size=self.event_dim, state_size=self.state_dim, device=world.device)
         
         # Load Action Policy
-        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path)
+        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path, device=world.device.type)
         self.policy = get_policy_from_cfg(cfg, seed)
 
         self.language_unit = LanguageUnit(
@@ -251,8 +251,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         flag_on_switch = overlapping_switch.bool() & (agent.found_flags[torch.arange(self.world.batch_dim),self.switch.target_flag] == 1)
         agent.hit_switch |= flag_on_switch
         self.team_hit_switch |= agent.hit_switch
-        self.rew[overlapping_switch] += 0.05
-        
+        self.rew[overlapping_switch & (self.language_unit.states == FIND_SWITCH)] += 0.05
 
     def observation(self, agent: Agent):
         # get positions of all entities in this agent's reference frame
@@ -424,14 +423,14 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         state_color = colors.get(state, Color.GRAY).value
         
         # Add ring on switch to indicate target flag
-        target_flag = int(self.switch.target_flag[env_index].item())
-        if self.switch._target_set[env_index] and 0 <= target_flag < len(self.colors):
+        target_state = self.flag_state_map[int(self.switch.target_flag[env_index].item())]
+        if self.switch._target_set[env_index] and 0 <= target_state < len(self.state_color_map):
             ring = rendering.make_circle(radius=self.switch.shape.radius + 0.05, filled=False)
             ring.set_linewidth(10)
             xform = rendering.Transform()
             xform.set_translation(*self.switch.state.pos[env_index])
             ring.add_attr(xform)
-            ring.set_color(*self.colors[target_flag].value)
+            ring.set_color(*self.state_color_map[target_state].value)
             geoms.append(ring)
 
 
@@ -447,7 +446,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
             geoms.append(circle)
             
             # Add rings for visited flags
-            for j, _ in enumerate(self.flags):
+            for j, state in self.flag_state_map.items():
                 if agent1.found_flags[env_index, j]:
                     ring = rendering.make_circle(
                         radius=0.05 + j * 0.02,
@@ -457,9 +456,22 @@ class FourFlagsScenario(BaseFourFlagsScenario):
                     xform = rendering.Transform()
                     xform.set_translation(*agent1.state.pos[env_index])
                     ring.add_attr(xform)
-                    ring.set_color(*self.colors[j].value)
+                    ring.set_color(*self.state_color_map[state].value)
                     geoms.append(ring)
-                    
+            
+            # Add a ring for switch hit
+            if agent1.hit_switch[env_index]:
+                ring = rendering.make_circle(
+                    radius=0.05 + len(self.flags) * 0.02,
+                    filled=False,
+                )
+                ring.set_linewidth(3)
+                xform = rendering.Transform()
+                xform.set_translation(*agent1.state.pos[env_index])
+                ring.add_attr(xform)
+                ring.set_color(*Color.YELLOW.value)
+                geoms.append(ring)
+                
             # Communication lines
             for j, agent2 in enumerate(self.world.agents):
                 if j <= i:
@@ -496,7 +508,7 @@ def get_policy_from_cfg(cfg: DictConfig, seed: int):
     return policy_copy
 
 import os
-def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None) -> DictConfig:
+def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None, device: str = "cpu") -> DictConfig:
     overrides = overrides or []  # e.g., ["restore_path=some_path"]
     # current working directory
     print(f"Current working directory: {os.getcwd()}")
@@ -508,6 +520,7 @@ def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", conf
     experiment_name = list(cfg.keys())[0]
     seed = cfg.seed
     cfg[experiment_name].experiment.restore_file = restore_path
+    cfg[experiment_name].experiment.restore_map_location = device
     cfg = cfg[experiment_name]  # Get the config for the specific experiment
     return cfg, seed
 
