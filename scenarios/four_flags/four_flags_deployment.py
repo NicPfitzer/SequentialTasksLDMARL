@@ -256,9 +256,9 @@ class Agent:
         if getattr(self.node, "y", None) is None:
             return
         self.h, state_decoder_out = self.node.compute_forward_rnn(
-            event=self.e.unsqueeze(0),
-            y=self.node.y.unsqueeze(0),
-            h=self.h.unsqueeze(0)
+            event=self.e,
+            y=self.node.y,
+            h=self.h
         )
         self.task_state = torch.argmax(
             torch.sigmoid(state_decoder_out[:, self.node.num_automata_bits:]), dim=-1
