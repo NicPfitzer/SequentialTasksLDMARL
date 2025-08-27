@@ -700,8 +700,9 @@ def main(cfg: DictConfig) -> None:
     rclpy.init()
     
     print(cfg)
+    experiment_name = list(cfg.keys())[0]
 
-    cfg.experiment.restore_file = cfg.task.params.policy_restore_path
+    cfg[experiment_name].experiment.restore_file = cfg[experiment_name].task.params.policy_restore_path
 
     log_dir = get_runtime_log_dir()
 
