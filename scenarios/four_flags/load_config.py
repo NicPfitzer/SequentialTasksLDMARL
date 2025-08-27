@@ -9,7 +9,7 @@ PARAMS = [
     
     ("x_semidim", 4.0), ("y_semidim", 2.0),
     ("n_passages", 1), ("shared_reward", False),
-    ("n_agents", 3), ("agent_radius", 0.17),
+    ("n_agents", 3), ("agent_radius", 0.17), ("flag_radius", 0.45),
     ("agent_spacing", 0.8), ("passage_length", 0.2),
     ("switch_radius", 0.05), ("break_all_wall", True),
     ("chamber_width", 2.0),
