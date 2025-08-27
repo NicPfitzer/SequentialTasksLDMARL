@@ -316,9 +316,9 @@ class World:
         self.dt = dt
 
 class VmasModelsROSInterface(Node):
-    def __init__(self, config: DictConfig, log_dir: Path, config_team_gnn: Optional[DictConfig]=None):
+    def __init__(self, config: DictConfig, log_dir: Path, config_team_gnn: Optional[DictConfig]=None, device: DEVICE_TYPING = "cpu"):
         super().__init__("vmas_ros_interface")
-        self.device = config.device
+        self.device = device
         arena_config = config["arena_config"]
         deployment_config = config["deployment"]
         task_config = config["task"].params
@@ -708,8 +708,9 @@ def main(cfg: DictConfig) -> None:
 
     # Instantiate interface
     ros_interface_node = VmasModelsROSInterface(
-        config=cfg,
-        log_dir=log_dir
+        config=cfg[experiment_name],
+        log_dir=log_dir,
+        device=cfg.device
     )
 
     ros_interface_node.prompt_for_new_task_instruction()
