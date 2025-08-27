@@ -26,8 +26,8 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, UInt8
 
-USING_FREYJA = False;
-CREATE_MAP_FRAME = True;
+USING_FREYJA = True;
+CREATE_MAP_FRAME = False;
 
 if USING_FREYJA:
     sys.path.insert(0, "/home/npfitzer/robomaster_ws/install/freyja_msgs/lib/python3.10/site-packages")
@@ -41,8 +41,22 @@ else:
 
 
 # Local Modules
-from deployment.helper_utils import convert_ne_to_xy, convert_xy_to_ne
 from trainer.benchmarl_setup_experiment_ import benchmarl_setup_experiment
+
+def convert_ne_to_xy(north: float, east: float) -> tuple[float, float]:
+    """
+    Convert coordinates from north–east (NE) ordering to x–y ordering.
+    Here, x corresponds to east and y corresponds to north.
+    """
+    return east, north
+
+
+def convert_xy_to_ne(x: float, y: float) -> tuple[float, float]:
+    """
+    Convert coordinates from x–y ordering to north–east (NE) ordering.
+    Here, north corresponds to y and east corresponds to x.
+    """
+    return y, x
 
 X = 0
 Y = 1
