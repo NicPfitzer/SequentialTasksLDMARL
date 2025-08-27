@@ -316,12 +316,13 @@ class World:
         self.dt = dt
 
 class VmasModelsROSInterface(Node):
-    def __init__(self, config: DictConfig, log_dir: Path, config_team_gnn: Optional[DictConfig]=None, device: DEVICE_TYPING = "cpu"):
+    def __init__(self, config: DictConfig, log_dir: Path, config_team_gnn: Optional[DictConfig]=None):
         super().__init__("vmas_ros_interface")
-        self.device = device
+        self.device = config.device
         arena_config = config["arena_config"]
         deployment_config = config["deployment"]
-        task_config = config["task"].params
+        experiment_name = list(config.keys())[0]
+        task_config = config[experiment_name].task.params
         
         load_scenario_config(task_config,self)
         required = ["flag_radius","switch_radius","agent_radius","passage_length","chamber_width",
@@ -708,9 +709,8 @@ def main(cfg: DictConfig) -> None:
 
     # Instantiate interface
     ros_interface_node = VmasModelsROSInterface(
-        config=cfg[experiment_name],
-        log_dir=log_dir,
-        device=cfg.device
+        config=cfg,
+        log_dir=log_dir
     )
 
     ros_interface_node.prompt_for_new_task_instruction()
