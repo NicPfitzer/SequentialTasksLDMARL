@@ -14,6 +14,8 @@ from hydra.core.global_hydra import GlobalHydra
 from hydra import initialize, compose
 import speech_recognition as sr
 
+from sentence_transformers import SentenceTransformer
+
 from tensordict import TensorDict
 from benchmarl.utils import DEVICE_TYPING
 from vmas.simulator.utils import TorchUtils
@@ -323,6 +325,8 @@ class VmasModelsROSInterface(Node):
         deployment_config = config["deployment"]
         experiment_name = list(config.keys())[0]
         task_config = config[experiment_name].task.params
+        
+        self.llm = SentenceTransformer(deployment_config.llm_model, device="cpu")
         
         load_scenario_config(task_config,self)
         required = ["flag_radius","switch_radius","agent_radius","passage_length","chamber_width",
