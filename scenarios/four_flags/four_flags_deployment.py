@@ -29,15 +29,10 @@ from std_msgs.msg import String, UInt8
 USING_FREYJA = True;
 CREATE_MAP_FRAME = False;
 
-if USING_FREYJA:
-    sys.path.insert(0, "/home/npfitzer/robomaster_ws/install/freyja_msgs/lib/python3.10/site-packages")
-    from freyja_msgs.msg import ReferenceState
-    from freyja_msgs.msg import CurrentState
-    from freyja_msgs.msg import WaypointTarget
-else:
-    from geometry_msgs.msg import Twist, PoseStamped, Pose
-    from nav_msgs.msg import Odometry
-    from tf_transformations import euler_from_quaternion
+sys.path.insert(0, "/home/npfitzer/robomaster_ws/install/freyja_msgs/lib/python3.10/site-packages")
+from freyja_msgs.msg import ReferenceState
+from freyja_msgs.msg import CurrentState
+from freyja_msgs.msg import WaypointTarget
 
 
 # Local Modules
@@ -200,29 +195,6 @@ class Agent:
         self.state.vel[0,X], self.state.vel[0,Y] = convert_ne_to_xy(current_vel_n, current_vel_e)
         self.state.rot[0] = current_rot
         
-        self.state_received = True
-
-    def odom_current_state_callback(self, msg: Odometry):
-        # Extract current state values from the state vector
-        euler = euler_from_quaternion([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w]);
-
-        current_pos_n = msg.pose.pose.position.x;
-        current_pos_e = msg.pose.pose.position.y;
-        current_vel_n = msg.twist.twist.linear.x;
-        current_vel_e = msg.twist.twist.linear.y;
-
-        if CREATE_MAP_FRAME and self.home_pe is None:
-            self.home_pn = current_pos_n;
-            self.home_pe = current_pos_e;
-
-        current_pos_n = (current_pos_n - self.home_pn);
-        current_pos_e = (current_pos_e - self.home_pe);
-        print(f"Robot {self.robot_id} - Euler[2]: {euler[2]:.4f}, pos_n: {current_pos_n:.4f}, pos_e: {current_pos_e:.4f}")
-
-        self.state.pos[0,X], self.state.pos[0,Y] = convert_ne_to_xy(current_pos_n, current_pos_e)
-        self.state.vel[0,X], self.state.vel[0,Y] = convert_ne_to_xy(current_vel_n, current_vel_e)
-        self.state.rot[0] = euler[2];
-
         self.state_received = True
     
     def landmark_reached(self, landmark_type: str, landmark_id: int):
