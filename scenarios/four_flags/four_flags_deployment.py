@@ -699,7 +699,7 @@ def main(cfg: DictConfig) -> None:
     print(OmegaConf.to_yaml(cfg, resolve=True))   # full merged config
     rclpy.init()
 
-    cfg.experiment.restore_file = cfg.policy_restore_path
+    cfg.experiment.restore_file = cfg.task.params.policy_restore_path
 
     log_dir = get_runtime_log_dir()
 
