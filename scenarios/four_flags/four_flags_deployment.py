@@ -338,7 +338,7 @@ class VmasModelsROSInterface(Node):
         self.task_y_semidim = task_config.y_semidim
 
         # Load Action Policy
-        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path)
+        cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path, device=self.device)
         self.policy = get_policy_from_cfg(cfg, seed)
         
         # experiment_team_gnn = benchmarl_setup_experiment(cfg=config_team_gnn)
@@ -677,7 +677,7 @@ def get_policy_from_cfg(cfg: DictConfig, seed: int):
     return policy_copy
 
 import os
-def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None) -> DictConfig:
+def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", config_name: str = "conf", restore_path: str = None, device: str = "cpu") -> DictConfig:
     overrides = overrides or []  # e.g., ["restore_path=some_path"]
     # current working directory
     print(f"Current working directory: {os.getcwd()}")
@@ -689,6 +689,7 @@ def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", conf
     experiment_name = list(cfg.keys())[0]
     seed = cfg.seed
     cfg[experiment_name].experiment.restore_file = restore_path
+    cfg[experiment_name].experiment.restore_map_location = device
     cfg = cfg[experiment_name]  # Get the config for the specific experiment
     return cfg, seed
 
@@ -699,8 +700,6 @@ def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", conf
 def main(cfg: DictConfig) -> None:
     print(OmegaConf.to_yaml(cfg, resolve=True))   # full merged config
     rclpy.init()
-    
-    print(cfg)
     experiment_name = list(cfg.keys())[0]
 
     cfg[experiment_name].experiment.restore_file = cfg[experiment_name].task.params.policy_restore_path
