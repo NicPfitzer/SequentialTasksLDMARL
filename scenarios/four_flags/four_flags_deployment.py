@@ -698,6 +698,8 @@ def generate_cfg(overrides: list[str] = None, config_path: str = "../conf", conf
 def main(cfg: DictConfig) -> None:
     print(OmegaConf.to_yaml(cfg, resolve=True))   # full merged config
     rclpy.init()
+    
+    print(cfg)
 
     cfg.experiment.restore_file = cfg.task.params.policy_restore_path
 
