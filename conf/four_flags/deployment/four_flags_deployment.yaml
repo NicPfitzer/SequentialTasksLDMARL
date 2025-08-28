@@ -12,12 +12,12 @@ device: cpu
 deployment:
   a_range: 1.0
   v_range: 1.0
-  id_list: [1,2,3]
-  max_steps: 200
+  id_list: [4,7,6]
+  max_steps: 500
   action_dt: 0.1
   obs_dt: 0.05
   llm_model: "thenlper/gte-large"
 
 arena_config:
-  x_semidim: 3.7
-  y_semidim: 1.7
+  x_semidim: 4.0
+  y_semidim: 2.0

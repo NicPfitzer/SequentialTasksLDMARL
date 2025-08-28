@@ -89,7 +89,8 @@ class FourFlagsScenario(BaseScenario):
             use_embedding_ratio=self.use_embedding_ratio,
             device=world.device,
         )
-        self.language_unit.load_sequence_data(json_path=self.data_json_path, device=world.device)
+        if not self.load_dataset:
+            self.language_unit.load_sequence_data(json_path=self.data_json_path, device=world.device)
         self.visualize_semidims = False
 
     def _add_agents_and_goals(self, world: World):
