@@ -138,17 +138,17 @@ class FourFlagsScenario(BaseFourFlagsScenarioGNN):
         for i, agent1 in enumerate(self.world.agents):
             
             # Add rings for visited flags
-            for j, _ in enumerate(self.flags):
+            for j, state in self.flag_state_map.items():
                 if agent1.found_flags[env_index, j]:
                     ring = rendering.make_circle(
                         radius=0.05 + j * 0.02,
                         filled=False,
                     )
-                    ring.set_linewidth(2)
+                    ring.set_linewidth(5)
                     xform = rendering.Transform()
                     xform.set_translation(*agent1.state.pos[env_index])
                     ring.add_attr(xform)
-                    ring.set_color(*self.colors[j].value)
+                    ring.set_color(*self.state_color_map[state].value)
                     geoms.append(ring)
                     
             # Communication lines

@@ -1,0 +1,53 @@
+name: SAMPLING                       # maps to VmasTask.SAMPLING
+scenario_class: scenarios.four_rooms.four_rooms_rollout.FourRoomsRolloutScenario
+
+params:
+  # === Map & Layout ===
+  x_semidim: 1.0
+  y_semidim: .5
+  shared_reward: True
+  agent_radius: 0.025
+  n_agents: 3
+  agent_spacing: 0.2
+
+  # Gates & Targets
+  gate_thickness: 0.075
+  switch_radius: 0.125
+  goal_radius: null               # defaults to agent_radius if null
+  require_all_to_finish: True
+  comms_radius: ${four_rooms.model.actor_model.edge_radius}
+
+  # === Rewards ===
+  shaping_factor: 100
+  collision_penalty: 0.0
+  edge_eps: 0.0
+  edge_penalty: 1.0
+  min_separation: 0.8
+
+  # === Dynamics ===
+  use_velocity_controller: True
+  use_kinematic_model: False
+  agent_weight: 1.0
+  agent_v_range: 1.0
+  agent_a_range: 1.0
+  min_collision_distance: 0.1
+  linear_friction: 0.1
+
+  # === Language ===
+  embedding_size: 1024
+  use_embedding_ratio: 1.0
+  event_dim: 3
+  state_dim: 5
+  data_json_path: "sequence_models/data/four_rooms/dataset_four_rooms.json"
+  sequence_model_path: "sequence_models/four_rooms/four_rooms_language.pth"
+  policy_config_path: "../../conf"
+  policy_config_name: "config_stage_two.yaml"
+  policy_restore_path: "checkpoints/four_rooms/policy.pt"
+
+  # Evaluation Configs
+  initial_room: null               # if None, scenario will randomize initial room
+  even_distribution: False         # if True, will spawn agents evenly across rooms
+  initialized_rnn: False          # if True, will initialize RNN hidden state
+
+  # === Additional Scenario ===
+  max_steps: 250

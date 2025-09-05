@@ -1,0 +1,3002 @@
+[
+  {
+    "response": "Autonomous nodes, head immediately to the second unlock switch in room 1, past the first gate. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, head expeditiously to the second trigger in the second room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, locate directly straight to the second activation pad in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Support bots, head quickly until you reach the second release plate in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, go to the second control switch directly in the mid-left room; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, reach directly toward the second trigger in the mid-left room, near the divider gate."
+  },
+  {
+    "response": "Autonomous nodes, move securely to the second release plate in the second room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, head steadily to the second unlock switch in the second room from the left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, move quickly to the second unlock switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Support bots, head without hesitation to the second activation pad in the second room from the left near the middle divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, reach carefully to the second switch located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Task units, reach efficiently to the second toggle in room 1, past the first gate. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, make your way carefully to the second control switch in the room after the left-most bay near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, reach steadily toward the second release plate in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Swarm members, approach expeditiously to the second switch in the second room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Exploration drones, navigate to the second release plate quickly in the room after the left-most bay; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, proceed without delay to the second release plate in the room after the left-most bay. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, move quickly toward the second trigger in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Support bots, reach expeditiously to the second release plate in the mid-left room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, advance without hesitation toward the second unlock switch in the room after the left-most bay, near the divider gate."
+  },
+  {
+    "response": "Navigation bots, make your way immediately to the second unlock switch in the mid-left room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, approach without delay until you reach the second trigger in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, go immediately toward the second trigger in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Control units, travel steadily straight to the second unlock switch in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Recon agents, make your way securely to the second control switch in the room after the left-most bay. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, go immediately until you reach the second control switch in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Navigation bots, navigate immediately to the second activation pad in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, reach expeditiously to the second toggle in room 1, past the first gate. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, head expeditiously until you reach the second switch in room 1, past the first gate beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, locate efficiently until you reach the second toggle in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Agents, find your way to the second activation pad without hesitation in the room after the left-most bay; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, go without hesitation to the second unlock switch in the second room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, move smoothly to the second activation pad located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Navigation bots, head without hesitation toward the second unlock switch in room 1, past the first gate, beside the gate post."
+  },
+  {
+    "response": "Recon agents, find your way promptly to the second trigger in the mid-left room near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, reach immediately to the second release plate in the second room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Swarm members, travel carefully to the second release plate in the room after the left-most bay near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, locate carefully to the second activation pad located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Support bots, approach without delay straight to the second toggle in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Navigation bots, locate promptly to the second activation pad located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Sentinel units, go carefully toward the second unlock switch in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Swarm members, find your way immediately to the second trigger located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Control units, reach without delay toward the second activation pad in the second room from the left, beside the gate post."
+  },
+  {
+    "response": "Robots, make your way immediately to the second switch located by the middle divider gate in room 1, past the first gate."
+  },
+  {
+    "response": "Units, find your way immediately to the second activation pad in the second room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, reach to the second control switch securely in room 1, past the first gate; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, move directly straight to the second trigger in room 1, past the first gate, right next to the middle divider gate."
+  },
+  {
+    "response": "Task units, locate carefully to the second switch in room 1, past the first gate. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Navigation bots, travel carefully to the second unlock switch in the room after the left-most bay. On approach, scan along the back wall."
+  },
+  {
+    "response": "Sentinel units, make your way expeditiously straight to the second release plate in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Exploration drones, head immediately to the second control switch in room 1, past the first gate near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, locate expeditiously straight to the second unlock switch in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Control units, make your way immediately to the second release plate in room 1, past the first gate. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, make your way without hesitation to the second unlock switch in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, proceed securely to the second activation pad in the room after the left-most bay. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Units, make your way smoothly to the second release plate in the room after the left-most bay near the middle divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, go steadily to the second unlock switch located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Units, find your way steadily to the second control switch in the room after the left-most bay. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, advance promptly to the second unlock switch in the room after the left-most bay. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Support bots, advance smoothly to the second toggle in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Robots, get to immediately toward the second toggle in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Agents, reach without delay to the second release plate in room 1, past the first gate. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, go carefully straight to the second activation pad in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Swarm members, advance without hesitation to the second switch in the mid-left room. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, travel quickly to the second release plate located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Agents, locate expeditiously until you reach the second control switch in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Support bots, head immediately straight to the second control switch in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Swarm members, get to swiftly toward the second trigger in room 1, past the first gate, near the divider gate."
+  },
+  {
+    "response": "Support bots, reach promptly toward the second control switch in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Recon agents, approach to the second trigger quickly in the mid-left room; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, travel steadily to the second toggle in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, advance without delay straight to the second switch in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Support bots, reach carefully to the second control switch in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, find your way without hesitation to the second unlock switch in the second room from the left. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, get to to the second toggle directly in the second room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, travel without hesitation to the second release plate in the mid-left room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, find your way directly to the second control switch in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, navigate steadily to the second trigger in the second room from the left near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, find your way swiftly to the second switch in the mid-left room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Navigation bots, travel promptly to the second activation pad in the second room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, travel efficiently straight to the second activation pad in the second room from the left, right next to the second barrier."
+  },
+  {
+    "response": "Control units, head efficiently to the second control switch in the second room from the left. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, head securely until you reach the second control switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, get to directly to the second release plate in the mid-left room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, approach smoothly to the second toggle in room 1, past the first gate. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, advance immediately until you reach the second unlock switch in room 1, past the first gate beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, head smoothly straight to the second control switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Units, go steadily to the second switch in the mid-left room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, locate without hesitation to the second unlock switch in the mid-left room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, move directly to the second switch in the room after the left-most bay near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, make your way carefully until you reach the second trigger in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Agents, head smoothly to the second trigger located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Task units, move without hesitation to the second activation pad in the room after the left-most bay. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Agents, travel swiftly to the second toggle in room 1, past the first gate near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, go quickly to the second release plate in room 1, past the first gate. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Exploration drones, head expeditiously until you reach the second release plate in the room after the left-most bay beside the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, proceed swiftly straight to the second release plate in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Swarm members, make your way swiftly until you reach the second release plate in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Task units, move to the second activation pad directly in the mid-left room; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, reach directly to the second toggle in room 1, past the first gate near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, find your way efficiently toward the second trigger in room 1, past the first gate, near the divider gate."
+  },
+  {
+    "response": "Swarm members, get to without delay to the second unlock switch in the mid-left room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Sentinel units, proceed quickly to the second switch in the mid-left room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, go steadily to the second activation pad in the room after the left-most bay. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, head without hesitation toward the second release plate in the mid-left room, near the divider gate."
+  },
+  {
+    "response": "Navigation bots, locate immediately to the second trigger in room 1, past the first gate. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, make your way smoothly to the second control switch in the mid-left room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, move securely to the second activation pad in room 1, past the first gate. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, reach efficiently to the second switch located by the middle divider gate in room 1, past the first gate."
+  },
+  {
+    "response": "Recon agents, make your way expeditiously toward the second trigger in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Exploration drones, approach expeditiously to the second unlock switch located by the middle divider gate in room 1, past the first gate."
+  },
+  {
+    "response": "Task units, travel without hesitation toward the second trigger in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Swarm members, approach to the second toggle without delay in the mid-left room; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, make your way promptly to the second activation pad in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, get to expeditiously to the second release plate in the room after the left-most bay. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Units, navigate efficiently toward the second toggle in the mid-left room, by the room divider."
+  },
+  {
+    "response": "Robots, go to the second switch steadily in the room after the left-most bay; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, proceed efficiently to the second release plate in the second room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, get to promptly to the second switch in room 1, past the first gate near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Units, navigate smoothly straight to the second release plate in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Recon agents, reach expeditiously to the second activation pad in room 1, past the first gate. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Exploration drones, approach directly to the second release plate located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Units, make your way efficiently to the second release plate in the room after the left-most bay near the second barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, proceed without delay to the second activation pad in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, proceed without hesitation until you reach the second switch in the room after the left-most bay beside the middle divider gate."
+  },
+  {
+    "response": "Autonomous nodes, make your way carefully straight to the second unlock switch in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, get to smoothly to the second unlock switch located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Autonomous nodes, head quickly to the second release plate in room 1, past the first gate near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, move quickly to the second switch in the room after the left-most bay near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, travel quickly to the second trigger in the room after the left-most bay. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Recon agents, go efficiently to the second activation pad in the mid-left room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Robots, go to the second switch efficiently in room 1, past the first gate; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, locate carefully to the second toggle in the second room from the left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, make your way efficiently until you reach the second activation pad in the room after the left-most bay beside the middle divider gate."
+  },
+  {
+    "response": "Sentinel units, move immediately until you reach the second activation pad in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Task units, get to securely until you reach the second switch in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Units, make your way without delay to the second toggle in the second room from the left near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, approach promptly to the second unlock switch in the mid-left room near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, go to the second activation pad efficiently in the mid-left room; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, proceed carefully to the second activation pad in room 1, past the first gate. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Swarm members, reach quickly to the second release plate in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, advance steadily toward the second control switch in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Agents, go promptly to the second trigger in the second room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Exploration drones, go swiftly to the second toggle located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Task units, make your way smoothly to the second toggle in room 1, past the first gate. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, navigate to the second trigger smoothly in room 1, past the first gate; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, locate steadily to the second release plate in the mid-left room near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Units, find your way quickly straight to the second unlock switch in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, approach quickly to the second activation pad in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, go expeditiously to the second unlock switch in the mid-left room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Navigation bots, move immediately until you reach the second trigger in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, proceed without delay until you reach the second toggle in the room after the left-most bay beside the middle divider gate."
+  },
+  {
+    "response": "Autonomous nodes, navigate without hesitation to the second trigger located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Units, get to promptly to the second release plate in room 1, past the first gate. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, advance carefully straight to the second release plate in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Support bots, proceed without delay straight to the second switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Units, navigate directly until you reach the second release plate in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Support bots, approach securely toward the second activation pad in the mid-left room, by the room divider."
+  },
+  {
+    "response": "Sentinel units, go without hesitation to the second activation pad in the second room from the left. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, proceed promptly to the second activation pad in the mid-left room near the middle divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, reach without delay toward the second control switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Navigation bots, proceed carefully straight to the second unlock switch in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Units, find your way efficiently to the second switch in the room after the left-most bay. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, advance quickly straight to the second trigger in the second room from the left, right next to the second barrier."
+  },
+  {
+    "response": "Task units, navigate without delay to the second release plate in the room after the left-most bay near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, navigate promptly to the second switch located by the gate between rooms 1 and 2 in the room after the left-most bay."
+  },
+  {
+    "response": "Support bots, proceed steadily to the second release plate in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, find your way carefully to the second activation pad in the room after the left-most bay near the second barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, head efficiently to the second unlock switch in the room after the left-most bay. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, locate directly straight to the second control switch in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, head promptly to the second switch in the mid-left room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Autonomous nodes, find your way expeditiously straight to the second release plate in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, make your way expeditiously to the second activation pad in room 1, past the first gate. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Support bots, make your way directly to the second trigger located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Agents, reach expeditiously until you reach the second release plate in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Autonomous nodes, make your way carefully to the second trigger in room 1, past the first gate near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, reach quickly to the second activation pad in room 1, past the first gate. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, navigate to the second trigger directly in the second room from the left; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, find your way quickly to the second trigger in the second room from the left near the middle divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, find your way immediately straight to the second control switch in the second room from the left, right next to the second barrier."
+  },
+  {
+    "response": "Support bots, head quickly to the second activation pad in the mid-left room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, get to efficiently to the second control switch in room 1, past the first gate near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, proceed securely until you reach the second trigger in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Robots, find your way to the second unlock switch smoothly in room 1, past the first gate; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, approach securely to the second control switch in the second room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Support bots, get to directly until you reach the second trigger in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, make your way steadily to the second toggle in room 1, past the first gate near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, navigate steadily to the second trigger in the mid-left room near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, travel carefully to the second trigger in room 1, past the first gate. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, proceed immediately to the second activation pad in the room after the left-most bay near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, go quickly to the second control switch located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Autonomous nodes, get to to the second switch expeditiously in the second room from the left; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, make your way smoothly to the second activation pad in the second room from the left. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, move quickly to the second unlock switch in the second room from the left near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, head efficiently to the second activation pad in room 1, past the first gate. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Task units, find your way immediately to the second switch in the room after the left-most bay. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Recon agents, advance efficiently to the second unlock switch in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, head securely straight to the second trigger in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Control units, make your way without delay to the second release plate in the second room from the left. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, navigate promptly to the second toggle in the room after the left-most bay. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, advance carefully to the second unlock switch in the mid-left room near the gate between rooms 1 and 2; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, approach steadily straight to the second toggle in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Task units, locate quickly to the second switch in room 1, past the first gate. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, approach securely to the second trigger in the second room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, approach to the second unlock switch securely in the second room from the left; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, make your way promptly to the second trigger in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, get to to the second trigger without hesitation in the mid-left room; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, advance expeditiously to the second trigger in room 1, past the first gate. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Units, go swiftly straight to the second switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Control units, reach to the second unlock switch carefully in room 1, past the first gate; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, find your way immediately to the second unlock switch in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, reach quickly toward the second release plate in room 1, past the first gate, beside the gate post."
+  },
+  {
+    "response": "Units, move to the second unlock switch without delay in the mid-left room; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, locate expeditiously to the second release plate in the second room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, proceed quickly to the second switch in the second room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, find your way carefully straight to the second release plate in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Support bots, make your way without delay to the second release plate in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, head quickly to the second control switch in the second room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Sentinel units, get to swiftly to the second trigger in the mid-left room near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, make your way expeditiously until you reach the second unlock switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Swarm members, head without hesitation to the second control switch in the mid-left room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Robots, get to without delay until you reach the second release plate in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, make your way to the second trigger without delay in the mid-left room; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, move promptly to the second control switch in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, proceed expeditiously to the second unlock switch in the mid-left room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Sentinel units, find your way securely toward the second trigger in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Task units, reach efficiently until you reach the second switch in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Exploration drones, go promptly straight to the second control switch in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, move without delay toward the second activation pad in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Units, head without hesitation until you reach the second toggle in the room after the left-most bay beside the middle divider gate."
+  },
+  {
+    "response": "Sentinel units, reach immediately toward the second trigger in the second room from the left, beside the gate post."
+  },
+  {
+    "response": "Recon agents, proceed swiftly toward the second activation pad in room 1, past the first gate, beside the gate post."
+  },
+  {
+    "response": "Agents, head immediately to the second unlock switch in room 1, past the first gate near the middle divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, head promptly to the second release plate in the second room from the left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, navigate securely to the second toggle in the second room from the left near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, get to without delay to the second unlock switch in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, proceed expeditiously to the second toggle located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Robots, proceed quickly to the second trigger in the second room from the left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, find your way to the second unlock switch without delay in the mid-left room; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, go carefully to the second trigger in the mid-left room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, get to immediately straight to the second release plate in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Units, proceed immediately to the second release plate in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, proceed expeditiously toward the second control switch in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Sentinel units, make your way efficiently to the second control switch in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, go carefully to the second release plate in the room after the left-most bay near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, reach securely to the second release plate located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Navigation bots, advance quickly to the second activation pad in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, approach without delay to the second release plate in the second room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Sentinel units, get to expeditiously to the second control switch in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, approach quickly straight to the second toggle in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Navigation bots, advance without hesitation until you reach the second toggle in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Recon agents, get to quickly toward the second switch in room 1, past the first gate, near the divider gate."
+  },
+  {
+    "response": "Task units, advance without hesitation to the second toggle in room 1, past the first gate. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, navigate expeditiously until you reach the second unlock switch in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Control units, travel directly toward the second switch in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Units, locate expeditiously to the second toggle in the second room from the left. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, move carefully to the second release plate in the second room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, advance smoothly to the second unlock switch in the second room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, travel immediately to the second trigger in the room after the left-most bay. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Autonomous nodes, go to the second trigger without delay in the second room from the left; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, find your way immediately to the second unlock switch in room 1, past the first gate. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, head immediately to the second release plate in the mid-left room. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, proceed swiftly to the second activation pad in the mid-left room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, head swiftly to the second release plate in the second room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, head carefully straight to the second control switch in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, navigate securely to the second switch in the room after the left-most bay. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Task units, reach promptly to the second control switch in the room after the left-most bay near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, make your way securely to the second control switch in the mid-left room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Exploration drones, head swiftly toward the second control switch in the mid-left room, near the divider gate."
+  },
+  {
+    "response": "Exploration drones, make your way promptly until you reach the second toggle in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, travel swiftly to the second trigger located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Navigation bots, move to the second toggle securely in the room after the left-most bay; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, advance without hesitation to the second trigger in the mid-left room. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, locate to the second toggle without delay in the room after the left-most bay; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, head immediately until you reach the second toggle in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, move without hesitation to the second switch in the room after the left-most bay. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, reach smoothly to the second unlock switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Navigation bots, proceed swiftly to the second release plate in the mid-left room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, proceed immediately toward the second switch in the second room from the left, near the divider gate."
+  },
+  {
+    "response": "Recon agents, navigate directly to the second switch in room 1, past the first gate. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, make your way promptly straight to the second activation pad in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Control units, find your way efficiently to the second activation pad in room 1, past the first gate. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, travel expeditiously straight to the second toggle in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Recon agents, move immediately to the second release plate in the mid-left room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Exploration drones, reach smoothly straight to the second switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Units, head steadily until you reach the second trigger in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, reach steadily toward the second activation pad in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Units, proceed immediately to the second trigger located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Task units, advance securely to the second activation pad located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Support bots, get to quickly to the second control switch in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Exploration drones, find your way carefully straight to the second activation pad in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, advance without delay to the second control switch in the second room from the left near the second barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, advance without delay to the second switch in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, go directly to the second control switch in the second room from the left near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, advance smoothly to the second toggle located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Navigation bots, move carefully to the second unlock switch in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, go swiftly to the second activation pad in the second room from the left. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, travel swiftly to the second control switch in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, head quickly to the second release plate in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, go immediately to the second switch in the room after the left-most bay near the middle divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, get to smoothly to the second switch located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Autonomous nodes, find your way directly until you reach the second control switch in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, find your way promptly to the second toggle in room 1, past the first gate near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, get to securely straight to the second switch in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Recon agents, approach efficiently toward the second toggle in the second room from the left, near the divider gate."
+  },
+  {
+    "response": "Autonomous nodes, find your way immediately to the second unlock switch in room 1, past the first gate. Approach near the divider gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, navigate swiftly to the second toggle in the second room from the left. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, head to the second unlock switch steadily in the mid-left room; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, reach immediately to the second switch in the mid-left room. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, reach quickly to the second toggle located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Swarm members, go expeditiously straight to the second control switch in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, approach to the second release plate without hesitation in room 1, past the first gate; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, find your way without delay to the second activation pad in the room after the left-most bay. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, head to the second activation pad immediately in the second room from the left; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, proceed expeditiously to the second activation pad in the mid-left room near the gate between rooms 1 and 2; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, advance smoothly to the second release plate in room 1, past the first gate. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, travel smoothly to the second control switch in room 1, past the first gate. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, make your way efficiently to the second activation pad in the second room from the left near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, find your way carefully to the second switch in the room after the left-most bay. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, proceed immediately to the second activation pad in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, find your way steadily to the second unlock switch located by the middle divider gate in room 1, past the first gate."
+  },
+  {
+    "response": "Agents, navigate efficiently until you reach the second trigger in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Recon agents, approach immediately to the second toggle in the mid-left room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, locate to the second toggle securely in the second room from the left; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, approach promptly toward the second control switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Agents, advance carefully straight to the second control switch in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Swarm members, get to steadily to the second release plate in the room after the left-most bay near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, make your way without delay to the second trigger in the room after the left-most bay. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, go quickly until you reach the second switch in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Robots, reach securely to the second control switch in room 1, past the first gate. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, reach promptly to the second trigger in the room after the left-most bay near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Units, locate without delay to the second control switch in the room after the left-most bay. On approach, scan along the back wall."
+  },
+  {
+    "response": "Autonomous nodes, make your way promptly to the second toggle in room 1, past the first gate. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, move expeditiously to the second release plate in the mid-left room. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, travel directly to the second unlock switch in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, approach immediately until you reach the second unlock switch in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Exploration drones, locate carefully to the second unlock switch in room 1, past the first gate near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, reach to the second control switch carefully in the room after the left-most bay; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, locate to the second switch without delay in the mid-left room; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, find your way carefully to the second unlock switch in the room after the left-most bay. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Agents, approach without delay to the second toggle in the second room from the left near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, navigate to the second release plate expeditiously in the second room from the left; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, travel directly to the second release plate in the second room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, make your way without delay to the second trigger in the second room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, locate to the second control switch carefully in the room after the left-most bay; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, go securely to the second control switch in room 1, past the first gate near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, make your way without hesitation until you reach the second unlock switch in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Exploration drones, travel carefully straight to the second activation pad in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, approach promptly until you reach the second switch in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Sentinel units, advance quickly straight to the second trigger in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Control units, get to efficiently to the second unlock switch in the second room from the left. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, approach directly until you reach the second control switch in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Task units, reach to the second activation pad expeditiously in room 1, past the first gate; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, advance without delay to the second switch in the second room from the left. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, locate quickly to the second trigger in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, locate directly until you reach the second toggle in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Units, go efficiently to the second toggle located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Support bots, get to without delay to the second unlock switch in the mid-left room near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, proceed quickly to the second release plate in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, head quickly to the second release plate in the second room from the left. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, travel to the second release plate smoothly in the room after the left-most bay; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, head swiftly to the second control switch in the mid-left room near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, go immediately to the second release plate in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, navigate securely until you reach the second control switch in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Control units, make your way expeditiously to the second release plate in the mid-left room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Task units, find your way smoothly to the second toggle in room 1, past the first gate. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, find your way smoothly to the second activation pad in the room after the left-most bay near the middle divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, go carefully to the second toggle in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, reach without delay to the second trigger in the second room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Agents, navigate smoothly toward the second release plate in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Support bots, head carefully to the second switch located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Recon agents, approach expeditiously to the second switch in room 1, past the first gate near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Units, move directly to the second unlock switch in the mid-left room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, locate quickly to the second toggle in the second room from the left. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, navigate promptly straight to the second release plate in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Sentinel units, go quickly to the second toggle in the second room from the left near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, head swiftly toward the second control switch in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Swarm members, get to to the second toggle without delay in room 1, past the first gate; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, reach to the second toggle without hesitation in the second room from the left; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, make your way smoothly to the second trigger in the mid-left room near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, navigate directly to the second release plate in room 1, past the first gate. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, head to the second trigger smoothly in the room after the left-most bay; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, approach carefully to the second release plate located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Navigation bots, get to quickly until you reach the second unlock switch in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Navigation bots, reach carefully to the second toggle in room 1, past the first gate. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, approach to the second switch immediately in the second room from the left; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, make your way immediately to the second unlock switch in the second room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, advance without delay to the second trigger in the room after the left-most bay. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, find your way without hesitation toward the second unlock switch in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Task units, navigate securely straight to the second switch in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, go carefully to the second switch in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Swarm members, proceed without delay to the second control switch located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Units, get to directly straight to the second unlock switch in the room after the left-most bay, right next to the middle divider gate."
+  },
+  {
+    "response": "Agents, make your way without hesitation to the second activation pad in room 1, past the first gate. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, find your way swiftly to the second switch in the second room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, make your way directly to the second trigger in room 1, past the first gate. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, get to without delay to the second switch in the mid-left room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Task units, navigate without delay toward the second unlock switch in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Agents, navigate without delay toward the second unlock switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Units, approach directly straight to the second toggle in the room after the left-most bay, right next to the second barrier."
+  },
+  {
+    "response": "Exploration drones, move carefully straight to the second toggle in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Recon agents, locate expeditiously until you reach the second unlock switch in room 1, past the first gate beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, navigate smoothly straight to the second trigger in the room after the left-most bay, right next to the second barrier."
+  },
+  {
+    "response": "Swarm members, get to expeditiously to the second trigger in the second room from the left. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, make your way swiftly to the second unlock switch in the second room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, advance securely to the second switch in room 1, past the first gate. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, proceed expeditiously straight to the second control switch in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, go directly until you reach the second trigger in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, advance smoothly to the second control switch in the room after the left-most bay. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, navigate carefully to the second release plate located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Navigation bots, approach steadily to the second release plate in the room after the left-most bay. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, get to swiftly to the second release plate in the second room from the left. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, proceed quickly to the second control switch located by the gate between rooms 1 and 2 in the room after the left-most bay."
+  },
+  {
+    "response": "Support bots, reach steadily to the second toggle in the mid-left room. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, advance immediately toward the second unlock switch in the second room from the left, beside the gate post."
+  },
+  {
+    "response": "Exploration drones, reach immediately until you reach the second unlock switch in room 1, past the first gate beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Agents, proceed steadily to the second release plate in room 1, past the first gate. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Autonomous nodes, get to steadily to the second activation pad in room 1, past the first gate near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, find your way to the second unlock switch promptly in the second room from the left; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, find your way steadily until you reach the second switch in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Units, reach to the second control switch steadily in the second room from the left; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, go quickly to the second trigger in the mid-left room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, head promptly straight to the second unlock switch in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, proceed securely to the second activation pad in room 1, past the first gate. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, head securely toward the second release plate in the second room from the left, beside the gate post."
+  },
+  {
+    "response": "Sentinel units, find your way quickly to the second release plate located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Units, find your way expeditiously to the second trigger in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, find your way immediately to the second toggle in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, travel securely until you reach the second switch in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Robots, find your way securely to the second toggle in room 1, past the first gate near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, reach efficiently to the second switch in room 1, past the first gate. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, approach quickly to the second switch in room 1, past the first gate near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, approach expeditiously straight to the second control switch in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, proceed carefully to the second toggle in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, move smoothly to the second control switch in room 1, past the first gate. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, make your way promptly to the second release plate in room 1, past the first gate near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, navigate quickly to the second release plate located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Recon agents, approach without hesitation until you reach the second toggle in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, reach smoothly to the second activation pad in the second room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, travel carefully to the second activation pad located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Exploration drones, move directly to the second trigger in the room after the left-most bay. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, go steadily until you reach the second switch in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, proceed directly to the second control switch located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Support bots, advance securely to the second release plate in the room after the left-most bay near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, approach to the second release plate steadily in room 1, past the first gate; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, locate immediately to the second release plate in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, reach without delay to the second unlock switch in the second room from the left. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, get to quickly to the second toggle in the second room from the left. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, proceed expeditiously straight to the second unlock switch in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Recon agents, get to steadily to the second release plate in room 1, past the first gate. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, get to smoothly to the second trigger in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, find your way to the second switch expeditiously in the second room from the left; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, make your way carefully to the second control switch located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Recon agents, locate swiftly to the second unlock switch in the second room from the left. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, proceed directly to the second unlock switch located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Support bots, approach without hesitation to the second toggle in the room after the left-most bay. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Task units, make your way without delay to the second switch in the room after the left-most bay near the gate between rooms 1 and 2; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, reach quickly to the second unlock switch in the mid-left room near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, get to directly toward the second unlock switch in room 1, past the first gate, beside the gate post."
+  },
+  {
+    "response": "Task units, go steadily to the second toggle in the room after the left-most bay. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Recon agents, locate expeditiously to the second activation pad in the mid-left room. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, find your way smoothly to the second toggle located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Sentinel units, get to efficiently toward the second release plate in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Exploration drones, move securely to the second switch in the room after the left-most bay. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, navigate expeditiously to the second toggle in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, navigate without delay to the second unlock switch in the mid-left room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, make your way carefully straight to the second control switch in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Robots, head efficiently to the second activation pad in room 1, past the first gate. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, head directly to the second toggle located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Agents, proceed carefully to the second unlock switch in the room after the left-most bay. On approach, scan along the back wall."
+  },
+  {
+    "response": "Navigation bots, move steadily straight to the second release plate in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Recon agents, navigate smoothly to the second unlock switch in the room after the left-most bay near the second barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, go expeditiously until you reach the second activation pad in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, advance securely to the second trigger in the room after the left-most bay. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, move to the second switch carefully in the second room from the left; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, travel efficiently straight to the second trigger in the second room from the left, right next to the second barrier."
+  },
+  {
+    "response": "Units, get to without hesitation to the second release plate in the mid-left room. Approach near the divider gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, travel steadily to the second activation pad in the mid-left room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Agents, advance steadily to the second activation pad in the second room from the left near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, reach smoothly to the second release plate in room 1, past the first gate near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, proceed smoothly until you reach the second activation pad in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, navigate efficiently to the second control switch in the room after the left-most bay near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, proceed promptly to the second activation pad in the room after the left-most bay. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, travel carefully straight to the second activation pad in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Exploration drones, head promptly toward the second trigger in the mid-left room, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, move without hesitation to the second control switch located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Navigation bots, move directly to the second unlock switch in the second room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, make your way without hesitation until you reach the second unlock switch in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Swarm members, head expeditiously toward the second trigger in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Robots, navigate promptly to the second unlock switch located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Units, navigate swiftly toward the second control switch in the mid-left room, beside the gate post."
+  },
+  {
+    "response": "Exploration drones, approach carefully to the second release plate in the second room from the left. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, travel directly to the second unlock switch in the second room from the left. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Units, get to to the second unlock switch promptly in the mid-left room; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, reach quickly until you reach the second switch in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Swarm members, move efficiently to the second activation pad in the second room from the left near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, locate securely to the second control switch in the second room from the left. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, reach directly to the second unlock switch in the mid-left room. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, find your way smoothly to the second release plate in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, find your way immediately to the second activation pad in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, head immediately to the second release plate in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, advance directly to the second control switch in the mid-left room. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, proceed promptly to the second activation pad located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Navigation bots, get to quickly to the second release plate in the mid-left room. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, travel immediately to the second unlock switch in the second room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, head efficiently to the second unlock switch in room 1, past the first gate. On approach, scan along the back wall."
+  },
+  {
+    "response": "Control units, navigate promptly to the second toggle in the mid-left room. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, advance without hesitation to the second trigger in the mid-left room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, proceed quickly to the second unlock switch in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, travel directly to the second toggle in the mid-left room. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, locate carefully to the second control switch located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Support bots, approach to the second unlock switch smoothly in the mid-left room; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, locate to the second switch steadily in the room after the left-most bay; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, move swiftly to the second toggle in the mid-left room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, locate securely to the second release plate in the second room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, approach expeditiously until you reach the second control switch in the second room from the left beside the second barrier."
+  },
+  {
+    "response": "Units, move without delay toward the second trigger in the room after the left-most bay, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, get to swiftly straight to the second control switch in room 1, past the first gate, right next to the middle divider gate."
+  },
+  {
+    "response": "Navigation bots, approach quickly straight to the second activation pad in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Units, proceed efficiently to the second trigger in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, find your way efficiently to the second trigger in room 1, past the first gate. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, navigate without delay until you reach the second release plate in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Control units, navigate without hesitation to the second unlock switch in room 1, past the first gate. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, advance steadily toward the second control switch in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Recon agents, make your way carefully to the second switch in the mid-left room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, advance smoothly toward the second switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Support bots, reach quickly to the second control switch in the room after the left-most bay near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, reach efficiently to the second unlock switch located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Support bots, navigate carefully straight to the second toggle in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Swarm members, advance to the second release plate directly in the mid-left room; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, navigate securely to the second unlock switch in the second room from the left near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, head directly to the second control switch in the room after the left-most bay near the gate between rooms 1 and 2; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, find your way quickly to the second activation pad in the mid-left room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, make your way quickly straight to the second activation pad in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Recon agents, head directly to the second activation pad located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Recon agents, make your way carefully until you reach the second unlock switch in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Task units, make your way swiftly straight to the second unlock switch in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Control units, find your way without delay to the second switch in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, go efficiently to the second switch located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Autonomous nodes, get to carefully toward the second unlock switch in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Units, approach efficiently to the second control switch in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, advance without delay to the second activation pad in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Units, move immediately to the second activation pad in room 1, past the first gate near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, go efficiently until you reach the second trigger in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, approach efficiently straight to the second toggle in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Support bots, travel swiftly until you reach the second switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, find your way promptly to the second control switch in the room after the left-most bay. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, advance swiftly to the second switch in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, locate without hesitation to the second release plate in room 1, past the first gate. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, locate expeditiously until you reach the second switch in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, head without hesitation toward the second control switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Agents, make your way without hesitation toward the second unlock switch in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Task units, move directly straight to the second trigger in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Task units, find your way securely until you reach the second switch in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Exploration drones, advance quickly to the second activation pad in room 1, past the first gate near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, proceed without hesitation to the second switch in the second room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, advance quickly to the second trigger in the second room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, go securely until you reach the second switch in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Units, go immediately to the second toggle in room 1, past the first gate. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, go carefully until you reach the second unlock switch in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, navigate carefully to the second trigger in the second room from the left. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, reach directly to the second control switch in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, advance efficiently to the second trigger in the mid-left room. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, approach to the second activation pad promptly in the mid-left room; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, go expeditiously to the second trigger located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Swarm members, find your way to the second toggle expeditiously in room 1, past the first gate; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, proceed smoothly to the second switch in the mid-left room. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, locate to the second release plate immediately in the second room from the left; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, get to efficiently straight to the second release plate in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Autonomous nodes, head promptly to the second unlock switch in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, find your way steadily to the second toggle in the mid-left room near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, navigate quickly until you reach the second activation pad in the mid-left room beside the second barrier."
+  },
+  {
+    "response": "Recon agents, find your way quickly straight to the second activation pad in the second room from the left, right next to the second barrier."
+  },
+  {
+    "response": "Sentinel units, proceed immediately straight to the second activation pad in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Autonomous nodes, travel without delay to the second switch in the second room from the left. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, navigate to the second trigger steadily in the mid-left room; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, approach smoothly to the second toggle located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Navigation bots, go quickly to the second unlock switch in room 1, past the first gate near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, proceed efficiently to the second release plate in room 1, past the first gate. On approach, scan along the back wall."
+  },
+  {
+    "response": "Autonomous nodes, head quickly to the second control switch in the second room from the left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Support bots, locate steadily to the second activation pad in the room after the left-most bay. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Swarm members, travel swiftly to the second activation pad located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Task units, advance expeditiously to the second trigger in the second room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Swarm members, travel promptly straight to the second switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, navigate carefully to the second control switch in the second room from the left. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, proceed swiftly toward the second toggle in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Autonomous nodes, move steadily straight to the second activation pad in room 1, past the first gate, right next to the middle divider gate."
+  },
+  {
+    "response": "Navigation bots, advance quickly toward the second switch in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Task units, proceed without delay toward the second activation pad in the room after the left-most bay, near the divider gate."
+  },
+  {
+    "response": "Agents, find your way promptly toward the second switch in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Task units, navigate directly to the second activation pad in the room after the left-most bay. On approach, scan along the back wall."
+  },
+  {
+    "response": "Control units, move securely to the second switch in the mid-left room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, make your way to the second release plate immediately in the room after the left-most bay; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, go steadily until you reach the second switch in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Autonomous nodes, make your way without hesitation until you reach the second unlock switch in room 1, past the first gate beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, proceed carefully to the second toggle in room 1, past the first gate. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, head quickly to the second switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Navigation bots, move carefully to the second trigger in the room after the left-most bay. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Support bots, navigate without delay to the second trigger in the room after the left-most bay. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, find your way directly to the second unlock switch in the mid-left room. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, approach immediately until you reach the second trigger in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, advance to the second unlock switch swiftly in the second room from the left; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, find your way smoothly toward the second switch in the mid-left room, near the divider gate."
+  },
+  {
+    "response": "Autonomous nodes, find your way directly to the second unlock switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Exploration drones, travel steadily to the second switch in the mid-left room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, get to steadily to the second control switch in the room after the left-most bay near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, head without hesitation to the second switch in room 1, past the first gate near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, make your way to the second release plate expeditiously in the mid-left room; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, go to the second toggle without hesitation in the second room from the left; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, head promptly until you reach the second release plate in the room after the left-most bay beside the middle divider gate."
+  },
+  {
+    "response": "Control units, travel without delay until you reach the second activation pad in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Agents, locate to the second activation pad expeditiously in the mid-left room; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, approach without delay to the second activation pad in the room after the left-most bay. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, approach expeditiously to the second trigger in the mid-left room. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, move carefully to the second activation pad in the second room from the left. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, advance quickly to the second release plate in the second room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, advance carefully to the second control switch in the mid-left room. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, move smoothly to the second control switch in the room after the left-most bay near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, proceed quickly to the second release plate in room 1, past the first gate. Approach near the divider gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, head securely toward the second trigger in the room after the left-most bay, beside the gate post."
+  },
+  {
+    "response": "Task units, navigate swiftly to the second switch in the mid-left room near the middle divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, get to expeditiously straight to the second toggle in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Swarm members, go directly to the second activation pad in the room after the left-most bay near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, make your way efficiently toward the second activation pad in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Agents, head smoothly to the second release plate located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Robots, proceed swiftly to the second toggle in the second room from the left near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, go to the second toggle without hesitation in the mid-left room; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, head immediately to the second control switch in the mid-left room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, find your way promptly to the second toggle in room 1, past the first gate. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, navigate quickly to the second trigger in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, go promptly straight to the second activation pad in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, travel directly to the second toggle in the mid-left room. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, travel expeditiously straight to the second control switch in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Sentinel units, approach quickly to the second trigger located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Robots, go carefully straight to the second switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Agents, approach steadily to the second toggle in the room after the left-most bay. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, head without delay until you reach the second release plate in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Control units, move immediately until you reach the second activation pad in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Control units, advance swiftly to the second trigger in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, get to without delay to the second release plate located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Swarm members, advance securely to the second activation pad located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Support bots, approach efficiently to the second toggle in the mid-left room near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, approach directly until you reach the second unlock switch in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Units, navigate carefully to the second control switch in the room after the left-most bay near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, travel securely to the second trigger located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Support bots, advance promptly to the second control switch in room 1, past the first gate. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, head expeditiously to the second activation pad in the room after the left-most bay. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, reach promptly straight to the second activation pad in the room after the left-most bay, right next to the second barrier."
+  },
+  {
+    "response": "Exploration drones, get to efficiently to the second activation pad in the second room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, head quickly until you reach the second activation pad in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Swarm members, get to to the second unlock switch without hesitation in the room after the left-most bay; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, advance smoothly to the second activation pad in the mid-left room. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, make your way without hesitation to the second trigger in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, make your way immediately to the second switch in the mid-left room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, approach smoothly to the second release plate located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Units, travel securely to the second activation pad located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Units, get to smoothly to the second control switch in the mid-left room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, proceed promptly straight to the second activation pad in room 1, past the first gate, right next to the middle divider gate."
+  },
+  {
+    "response": "Swarm members, advance carefully to the second control switch in the mid-left room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Agents, head to the second trigger steadily in the room after the left-most bay; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, get to securely to the second toggle located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Navigation bots, locate swiftly to the second release plate in the mid-left room. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, travel swiftly to the second activation pad located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Swarm members, travel to the second trigger steadily in the room after the left-most bay; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, locate steadily straight to the second toggle in the room after the left-most bay, right next to the second barrier."
+  },
+  {
+    "response": "Task units, approach directly to the second control switch in the mid-left room near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, approach swiftly toward the second unlock switch in the room after the left-most bay, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, approach swiftly to the second control switch in the mid-left room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, navigate immediately straight to the second toggle in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, advance efficiently to the second switch in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, move without delay until you reach the second release plate in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, find your way smoothly to the second release plate located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Units, proceed to the second control switch securely in room 1, past the first gate; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, make your way directly to the second activation pad in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, approach steadily to the second control switch in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, advance without delay until you reach the second toggle in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, reach without delay to the second release plate in room 1, past the first gate. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, locate immediately until you reach the second control switch in the second room from the left beside the second barrier."
+  },
+  {
+    "response": "Navigation bots, proceed efficiently to the second activation pad in room 1, past the first gate near the gate between rooms 1 and 2; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, find your way smoothly to the second switch in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, advance expeditiously to the second release plate in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, locate immediately to the second activation pad in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, make your way without delay toward the second unlock switch in room 1, past the first gate, beside the gate post."
+  },
+  {
+    "response": "Robots, get to expeditiously to the second trigger in the room after the left-most bay near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, go without delay until you reach the second switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, make your way carefully to the second switch located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Robots, proceed expeditiously to the second toggle in the room after the left-most bay. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, find your way to the second unlock switch steadily in the room after the left-most bay; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, get to smoothly to the second activation pad in the room after the left-most bay near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, move to the second activation pad securely in the mid-left room; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, get to to the second switch securely in room 1, past the first gate; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, reach immediately to the second release plate in room 1, past the first gate. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Sentinel units, approach securely to the second activation pad in room 1, past the first gate near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, get to swiftly toward the second trigger in the mid-left room, near the divider gate."
+  },
+  {
+    "response": "Robots, locate without delay to the second switch located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Control units, make your way without hesitation to the second toggle in the room after the left-most bay near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, locate carefully to the second switch in the second room from the left near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, approach steadily to the second unlock switch in the room after the left-most bay near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, head expeditiously to the second release plate in the mid-left room near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, head directly to the second control switch located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Recon agents, travel expeditiously to the second activation pad in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, proceed expeditiously to the second toggle in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, find your way smoothly straight to the second toggle in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Sentinel units, head without hesitation to the second unlock switch located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Units, get to quickly until you reach the second release plate in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Support bots, head promptly straight to the second activation pad in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Sentinel units, make your way to the second activation pad smoothly in room 1, past the first gate; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, navigate to the second activation pad immediately in the mid-left room; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, find your way swiftly to the second trigger in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, advance expeditiously to the second activation pad in the second room from the left. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, advance immediately until you reach the second release plate in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, find your way carefully to the second control switch located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Robots, get to immediately toward the second control switch in room 1, past the first gate, close to the vertical gate."
+  },
+  {
+    "response": "Task units, get to without hesitation to the second unlock switch in the mid-left room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, locate without delay to the second activation pad in room 1, past the first gate. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, make your way expeditiously until you reach the second switch in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Units, locate swiftly until you reach the second switch in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Support bots, head steadily to the second toggle in the room after the left-most bay. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, locate steadily to the second trigger located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Recon agents, advance expeditiously to the second unlock switch in the second room from the left. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, advance without hesitation to the second activation pad in the second room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, travel without hesitation to the second trigger in room 1, past the first gate. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, reach swiftly to the second toggle in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, advance immediately to the second switch located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Autonomous nodes, head swiftly to the second trigger in room 1, past the first gate. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, locate to the second trigger carefully in the mid-left room; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, head securely to the second trigger in the second room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, move swiftly toward the second switch in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Control units, move to the second trigger swiftly in the room after the left-most bay; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, go securely to the second trigger in the second room from the left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Units, make your way promptly to the second release plate in the mid-left room near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, get to carefully to the second switch in the room after the left-most bay. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, locate promptly to the second unlock switch in the mid-left room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Task units, travel smoothly to the second toggle located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Autonomous nodes, get to directly toward the second trigger in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Sentinel units, navigate securely to the second control switch in the room after the left-most bay near the second barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, head to the second activation pad securely in room 1, past the first gate; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, navigate to the second switch without delay in the second room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, move without delay straight to the second control switch in the room after the left-most bay, right next to the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, navigate quickly to the second release plate in the room after the left-most bay near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, move quickly to the second activation pad in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, advance steadily to the second release plate located by the gate between rooms 1 and 2 in the room after the left-most bay."
+  },
+  {
+    "response": "Robots, head swiftly to the second release plate located by the middle divider gate in room 1, past the first gate."
+  },
+  {
+    "response": "Navigation bots, navigate promptly to the second switch in the mid-left room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Robots, make your way directly toward the second toggle in room 1, past the first gate, near the divider gate."
+  },
+  {
+    "response": "Navigation bots, reach immediately to the second control switch in the second room from the left near the middle divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, approach steadily to the second switch located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Recon agents, reach smoothly until you reach the second unlock switch in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Units, advance carefully to the second control switch in the second room from the left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, make your way directly to the second release plate in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, advance efficiently toward the second toggle in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Navigation bots, find your way steadily to the second switch in the mid-left room near the gate between rooms 1 and 2; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, approach smoothly to the second release plate in the mid-left room. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, go without hesitation toward the second control switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Agents, travel expeditiously until you reach the second control switch in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Agents, advance expeditiously until you reach the second activation pad in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, locate to the second release plate swiftly in the mid-left room; near the divider gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, move quickly to the second trigger in the second room from the left. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, navigate swiftly to the second unlock switch in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, approach to the second release plate steadily in room 1, past the first gate; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, locate smoothly to the second activation pad located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Robots, reach immediately to the second release plate in room 1, past the first gate near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, navigate directly to the second unlock switch in room 1, past the first gate. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, locate efficiently to the second release plate in the room after the left-most bay near the second barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, approach promptly to the second control switch in the mid-left room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, go steadily to the second release plate in room 1, past the first gate. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, advance to the second toggle securely in the mid-left room; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, navigate without hesitation until you reach the second toggle in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, make your way steadily to the second release plate in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Agents, make your way efficiently to the second toggle in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, travel swiftly until you reach the second activation pad in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Control units, travel securely to the second switch in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Recon agents, navigate without hesitation to the second unlock switch in the mid-left room. On approach, scan along the back wall."
+  },
+  {
+    "response": "Support bots, make your way directly straight to the second unlock switch in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Navigation bots, move to the second switch quickly in the mid-left room; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, move securely to the second toggle in the second room from the left. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, head quickly to the second release plate located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Units, approach to the second switch quickly in room 1, past the first gate; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, approach without hesitation to the second toggle in the mid-left room. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, go smoothly to the second toggle in the second room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, move carefully until you reach the second toggle in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Recon agents, locate efficiently to the second unlock switch in the mid-left room. On approach, scan along the back wall."
+  },
+  {
+    "response": "Exploration drones, proceed directly to the second control switch in the second room from the left. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, go promptly toward the second toggle in the second room from the left, beside the gate post."
+  },
+  {
+    "response": "Support bots, make your way carefully until you reach the second control switch in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Sentinel units, head without delay to the second trigger in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, advance expeditiously until you reach the second trigger in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Agents, make your way securely toward the second unlock switch in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Exploration drones, proceed promptly to the second control switch in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, navigate directly straight to the second toggle in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Units, navigate carefully straight to the second activation pad in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Control units, locate directly to the second unlock switch located by the middle divider gate in the mid-left room."
+  },
+  {
+    "response": "Exploration drones, get to to the second activation pad efficiently in the room after the left-most bay; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, locate swiftly straight to the second unlock switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, get to swiftly to the second trigger in room 1, past the first gate. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, advance immediately to the second unlock switch in the room after the left-most bay near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, move directly toward the second switch in the mid-left room, by the room divider."
+  },
+  {
+    "response": "Swarm members, travel directly to the second activation pad in the mid-left room near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, reach efficiently to the second unlock switch located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Sentinel units, navigate carefully to the second toggle in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, proceed carefully until you reach the second release plate in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Navigation bots, head steadily straight to the second release plate in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, proceed steadily to the second release plate in room 1, past the first gate. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, make your way immediately straight to the second unlock switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Sentinel units, approach without hesitation to the second unlock switch in room 1, past the first gate. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, make your way directly to the second activation pad in the mid-left room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, proceed directly toward the second unlock switch in the room after the left-most bay, close to the vertical gate."
+  },
+  {
+    "response": "Control units, move without delay to the second release plate in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Exploration drones, head securely to the second activation pad in room 1, past the first gate. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, go directly straight to the second activation pad in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Robots, reach directly straight to the second trigger in the room after the left-most bay, right next to the middle divider gate."
+  },
+  {
+    "response": "Support bots, reach carefully to the second release plate in the room after the left-most bay. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, approach carefully to the second release plate in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, head securely toward the second unlock switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Navigation bots, head to the second toggle securely in the room after the left-most bay; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, head promptly to the second toggle in the room after the left-most bay near the middle divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, move directly to the second release plate in the second room from the left. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Autonomous nodes, get to carefully to the second activation pad in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, locate carefully toward the second unlock switch in the room after the left-most bay, beside the gate post."
+  },
+  {
+    "response": "Task units, approach directly to the second unlock switch in the second room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, locate carefully to the second switch in the room after the left-most bay. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, find your way steadily straight to the second switch in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, get to securely toward the second release plate in the mid-left room, close to the vertical gate."
+  },
+  {
+    "response": "Navigation bots, move expeditiously to the second trigger in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, make your way without delay to the second activation pad in room 1, past the first gate. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, get to swiftly to the second control switch in room 1, past the first gate. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, locate expeditiously to the second control switch in the room after the left-most bay. On approach, scan along the back wall."
+  },
+  {
+    "response": "Navigation bots, approach promptly toward the second control switch in the mid-left room, by the room divider."
+  },
+  {
+    "response": "Support bots, proceed without hesitation to the second release plate in the room after the left-most bay. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, go quickly to the second trigger in the room after the left-most bay near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Units, navigate immediately straight to the second control switch in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, find your way immediately to the second trigger in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, advance swiftly to the second switch in room 1, past the first gate. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, approach directly to the second release plate in room 1, past the first gate near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, proceed smoothly until you reach the second switch in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Task units, navigate without delay until you reach the second unlock switch in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Support bots, navigate carefully to the second release plate in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, find your way promptly to the second activation pad located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Task units, move quickly straight to the second switch in the mid-left room, right next to the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, reach swiftly to the second unlock switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Control units, find your way carefully to the second control switch in the room after the left-most bay near the middle divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, reach swiftly to the second control switch in the room after the left-most bay. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, head quickly to the second toggle in the mid-left room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Autonomous nodes, get to directly straight to the second toggle in the room after the left-most bay, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Exploration drones, navigate quickly to the second release plate in the room after the left-most bay. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, find your way immediately until you reach the second toggle in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Navigation bots, go smoothly to the second switch in the room after the left-most bay. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, head steadily to the second trigger in room 1, past the first gate near the second barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, advance promptly to the second trigger in the second room from the left near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, approach promptly to the second activation pad in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, get to without delay until you reach the second unlock switch in the second room from the left beside the middle divider gate."
+  },
+  {
+    "response": "Task units, find your way promptly to the second switch in the room after the left-most bay. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, find your way swiftly toward the second toggle in the mid-left room, beside the gate post."
+  },
+  {
+    "response": "Exploration drones, reach carefully toward the second activation pad in the mid-left room, beside the gate post."
+  },
+  {
+    "response": "Control units, navigate smoothly to the second control switch in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, find your way swiftly to the second trigger in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Swarm members, head to the second trigger without delay in the room after the left-most bay; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, get to without delay to the second release plate in the room after the left-most bay near the gate between rooms 1 and 2; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, find your way without hesitation to the second switch located by the gate between rooms 1 and 2 in room 1, past the first gate."
+  },
+  {
+    "response": "Swarm members, advance swiftly to the second release plate in the second room from the left. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, reach expeditiously to the second toggle in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, find your way swiftly toward the second unlock switch in room 1, past the first gate, close to the vertical gate."
+  },
+  {
+    "response": "Robots, locate without hesitation to the second unlock switch in room 1, past the first gate. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, move securely to the second control switch located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Sentinel units, advance steadily straight to the second activation pad in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, reach smoothly until you reach the second switch in room 1, past the first gate beside the middle divider gate."
+  },
+  {
+    "response": "Swarm members, navigate steadily toward the second switch in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Support bots, locate swiftly to the second switch in the mid-left room near the middle divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, reach quickly to the second unlock switch in room 1, past the first gate. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, navigate to the second activation pad directly in the room after the left-most bay; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, travel expeditiously to the second activation pad in the second room from the left. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Recon agents, find your way efficiently to the second trigger in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, advance steadily to the second trigger in the second room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, navigate swiftly to the second trigger in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, make your way immediately to the second toggle in the room after the left-most bay near the gate between rooms 1 and 2; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, go directly straight to the second control switch in the room after the left-most bay, right next to the second barrier."
+  },
+  {
+    "response": "Exploration drones, proceed carefully to the second unlock switch in room 1, past the first gate. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Sentinel units, make your way to the second switch steadily in room 1, past the first gate; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, reach expeditiously to the second activation pad located by the second barrier in the mid-left room."
+  },
+  {
+    "response": "Support bots, get to smoothly to the second activation pad in the room after the left-most bay. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, head expeditiously toward the second release plate in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Task units, travel without hesitation toward the second trigger in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Robots, approach efficiently to the second unlock switch in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, locate efficiently to the second release plate in the room after the left-most bay. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, navigate without delay until you reach the second activation pad in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Navigation bots, advance without hesitation toward the second trigger in the room after the left-most bay, near the divider gate."
+  },
+  {
+    "response": "Swarm members, travel smoothly to the second toggle in the mid-left room. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, make your way quickly toward the second unlock switch in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Units, reach without hesitation to the second switch located by the gate between rooms 1 and 2 in the mid-left room."
+  },
+  {
+    "response": "Recon agents, make your way directly to the second activation pad in the mid-left room. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, travel expeditiously until you reach the second release plate in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Support bots, move quickly straight to the second toggle in the room after the left-most bay, right next to the middle divider gate."
+  },
+  {
+    "response": "Sentinel units, proceed carefully to the second toggle in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, proceed expeditiously to the second switch in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Units, proceed promptly to the second trigger in the mid-left room near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, get to without hesitation to the second activation pad in the second room from the left. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, move to the second switch swiftly in the second room from the left; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, go promptly to the second control switch in the mid-left room. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, advance efficiently to the second control switch in room 1, past the first gate. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, proceed carefully to the second trigger in the mid-left room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Navigation bots, make your way without delay to the second control switch in the mid-left room. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, go smoothly to the second release plate in the mid-left room near the second barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, reach without hesitation to the second switch in room 1, past the first gate. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, find your way efficiently until you reach the second activation pad in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Exploration drones, proceed to the second control switch carefully in the second room from the left; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, make your way efficiently to the second trigger in the mid-left room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Autonomous nodes, get to efficiently until you reach the second control switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, reach expeditiously to the second control switch in the second room from the left. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, go steadily straight to the second unlock switch in room 1, past the first gate, right next to the second barrier."
+  },
+  {
+    "response": "Autonomous nodes, head to the second trigger carefully in the mid-left room; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, proceed carefully until you reach the second release plate in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, locate securely to the second switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Exploration drones, reach to the second unlock switch promptly in the mid-left room; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, navigate immediately to the second trigger in the room after the left-most bay. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, get to expeditiously to the second activation pad in the mid-left room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, find your way promptly to the second release plate in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Robots, advance expeditiously to the second trigger in the room after the left-most bay. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, travel to the second release plate swiftly in the room after the left-most bay; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, move smoothly to the second activation pad located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Task units, proceed efficiently toward the second switch in the room after the left-most bay, by the room divider."
+  },
+  {
+    "response": "Task units, make your way efficiently to the second trigger in the second room from the left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Swarm members, advance without hesitation to the second release plate located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Sentinel units, get to carefully to the second toggle in the second room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Autonomous nodes, navigate directly to the second control switch in the mid-left room near the second barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, advance promptly straight to the second unlock switch in the mid-left room, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Exploration drones, navigate swiftly until you reach the second release plate in the mid-left room beside the middle divider gate."
+  },
+  {
+    "response": "Control units, head swiftly until you reach the second unlock switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, proceed expeditiously to the second switch in the mid-left room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Swarm members, go immediately until you reach the second release plate in the mid-left room beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Autonomous nodes, reach carefully to the second control switch in the room after the left-most bay. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, find your way directly until you reach the second unlock switch in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Task units, get to directly to the second release plate in the mid-left room. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, get to steadily to the second activation pad located by the second barrier in the second room from the left."
+  },
+  {
+    "response": "Control units, navigate to the second release plate efficiently in room 1, past the first gate; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, approach promptly to the second switch located by the middle divider gate in the second room from the left."
+  },
+  {
+    "response": "Robots, locate smoothly to the second trigger in the mid-left room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Task units, proceed carefully to the second activation pad in room 1, past the first gate. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, proceed promptly to the second toggle in the room after the left-most bay. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, proceed swiftly until you reach the second trigger in the room after the left-most bay beside the second barrier."
+  },
+  {
+    "response": "Recon agents, make your way to the second trigger promptly in the mid-left room; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, navigate directly to the second unlock switch in room 1, past the first gate. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, get to immediately straight to the second trigger in the second room from the left, right next to the middle divider gate."
+  },
+  {
+    "response": "Navigation bots, move carefully toward the second control switch in the mid-left room, near the divider gate."
+  },
+  {
+    "response": "Control units, advance carefully to the second release plate in the second room from the left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Navigation bots, travel securely toward the second activation pad in the room after the left-most bay, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, approach promptly to the second activation pad located by the second barrier in room 1, past the first gate."
+  },
+  {
+    "response": "Control units, move to the second unlock switch carefully in room 1, past the first gate; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, navigate without delay to the second release plate in the room after the left-most bay. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, head without delay to the second switch in the mid-left room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Agents, get to without delay to the second toggle in room 1, past the first gate. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Agents, proceed promptly to the second trigger in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Units, get to directly to the second switch in the room after the left-most bay. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, proceed swiftly to the second control switch in room 1, past the first gate. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, travel without delay to the second trigger in the second room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, locate immediately toward the second switch in the second room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Task units, approach immediately to the second switch in the room after the left-most bay near the gate between rooms 1 and 2; mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, find your way efficiently to the second release plate in the room after the left-most bay. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, make your way quickly toward the second control switch in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Agents, move without hesitation to the second trigger in the room after the left-most bay near the second barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Units, reach promptly to the second trigger in the mid-left room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Units, travel immediately toward the second release plate in the second room from the left, near the divider gate."
+  },
+  {
+    "response": "Agents, head swiftly to the second toggle in room 1, past the first gate near the gate between rooms 1 and 2; stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, get to quickly to the second unlock switch in room 1, past the first gate. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, move directly to the second release plate in the mid-left room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, reach to the second release plate directly in room 1, past the first gate; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, move to the second unlock switch directly in the second room from the left; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, make your way swiftly straight to the second unlock switch in the mid-left room, right next to the second barrier."
+  },
+  {
+    "response": "Sentinel units, make your way to the second activation pad quickly in room 1, past the first gate; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, approach without delay to the second switch in the room after the left-most bay. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Control units, travel to the second switch immediately in room 1, past the first gate; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, make your way securely to the second trigger in the mid-left room near the middle divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, proceed immediately to the second switch in the mid-left room. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, proceed promptly to the second switch in the mid-left room. On approach, scan along the back wall."
+  },
+  {
+    "response": "Autonomous nodes, go steadily until you reach the second activation pad in the second room from the left beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Navigation bots, travel smoothly toward the second unlock switch in the second room from the left, by the room divider."
+  },
+  {
+    "response": "Task units, advance smoothly to the second switch in the room after the left-most bay. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, travel directly to the second release plate located by the middle divider gate in room 1, past the first gate."
+  },
+  {
+    "response": "Autonomous nodes, locate quickly to the second toggle in room 1, past the first gate. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, go smoothly to the second trigger in the second room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, travel carefully toward the second release plate in the room after the left-most bay, near the divider gate."
+  },
+  {
+    "response": "Sentinel units, locate steadily to the second toggle in the mid-left room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, find your way quickly to the second control switch located by the gate between rooms 1 and 2 in the second room from the left."
+  },
+  {
+    "response": "Control units, move immediately to the second trigger located by the gate between rooms 1 and 2 in the room after the left-most bay."
+  },
+  {
+    "response": "Support bots, navigate without hesitation straight to the second toggle in the second room from the left, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, proceed without hesitation to the second activation pad in the room after the left-most bay. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Robots, go carefully to the second activation pad in room 1, past the first gate. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, get to securely until you reach the second unlock switch in the room after the left-most bay beside the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Robots, locate quickly to the second unlock switch in the mid-left room. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, get to without delay toward the second trigger in room 1, past the first gate, by the room divider."
+  },
+  {
+    "response": "Task units, reach to the second release plate without delay in the mid-left room; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, head expeditiously straight to the second toggle in room 1, past the first gate, right next to the gate between rooms 1 and 2."
+  },
+  {
+    "response": "Support bots, get to carefully to the second trigger located by the middle divider gate in the room after the left-most bay."
+  },
+  {
+    "response": "Control units, go without delay to the second unlock switch in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, move immediately until you reach the second control switch in room 1, past the first gate beside the second barrier."
+  },
+  {
+    "response": "Sentinel units, approach smoothly to the second switch in the second room from the left near the second barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, proceed without delay to the second control switch in room 1, past the first gate. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, navigate securely to the second control switch in room 1, past the first gate. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Navigation bots, reach quickly to the second trigger located by the second barrier in the room after the left-most bay."
+  },
+  {
+    "response": "Sentinel units, reach carefully to the second control switch in the mid-left room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, approach expeditiously toward the second activation pad in the mid-left room, beside the gate post."
+  }
+]

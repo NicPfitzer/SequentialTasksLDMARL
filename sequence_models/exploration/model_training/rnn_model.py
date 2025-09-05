@@ -41,7 +41,7 @@ import itertools
 import wandb
 from pytorch_lightning.loggers import WandbLogger
 
-from sequence_models.model_training.mlp_decoder import Decoder
+from sequence_models.exploration.model_training.mlp_decoder import Decoder
 
 
 ###############################################################################
@@ -90,15 +90,15 @@ class EventSequenceDataset(Dataset):
         self.samples: List[Dict[str, Tensor]] = []
         for ix, s in enumerate(raw):
             e_key = "events" if "events" in s else "e"
-            if e_key not in s or not all(k in s for k in ("y", "h", "success", "label", "grids")):
+            if e_key not in s or not all(k in s for k in ("y", "h", "success", "label", "grid")):
                 raise KeyError(f"Sample {ix} missing required keys")
 
             e = torch.tensor(s[e_key], dtype=torch.float32)
             h = torch.tensor(s["h"], dtype=torch.float32)
             y = torch.tensor(s["y"], dtype=torch.float32)
-            grids = torch.tensor(s["grids"], dtype=torch.float32)
+            grid = torch.tensor(s["grid"], dtype=torch.float32)
             state_label = torch.tensor(s["label"], dtype=torch.float32)
-            self.samples.append({"e": e, "y": y, "h": h, "label": state_label, "grids": grids})
+            self.samples.append({"e": e, "y": y, "h": h, "label": state_label, "grid": grid})
 
     @classmethod
     def from_json(cls, path: str | pathlib.Path) -> "EventSequenceDataset":
@@ -404,7 +404,7 @@ class EventRNN(pl.LightningModule):
 
 def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "decoders/llm0_decoder_model_grid_scale.pth"):
     train_loader, val_loader = make_loaders(
-        "sequence_models/data/dataset_full_grid.json", batch_size=batch_size
+        "sequence_models/data/dataset.json", batch_size=batch_size
     )
     
     decoder = Decoder(

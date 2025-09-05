@@ -42,6 +42,14 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         
         self.language_unit.states.fill_(FIND_GOAL)
         super().reset_agents(env_index)
+    
+    def switch_hit_logic(self, agent: Agent):
+        
+        overlapping_switch = self.world.is_overlapping(agent, self.switch)
+        flag_on_switch = overlapping_switch.bool() & (agent.found_flags[torch.arange(self.world.batch_dim),self.switch.target_flag] == 1)
+        agent.hit_switch |= flag_on_switch
+        self.team_hit_switch |= agent.hit_switch
+        self.rew[overlapping_switch & (self.language_unit.states == self.switch.state)] += 0.05
         
         # for agent in self.world.agents:
             
@@ -156,20 +164,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         state_color = colors.get(state, Color.GRAY).value
 
         for i, agent1 in enumerate(self.world.agents):
-            
-            # Add rings for visited flags
-            for j, _ in enumerate(self.flags):
-                if agent1.found_flags[env_index, j]:
-                    ring = rendering.make_circle(
-                        radius=0.05 + j * 0.02,
-                        filled=False,
-                    )
-                    ring.set_linewidth(2)
-                    xform = rendering.Transform()
-                    xform.set_translation(*agent1.state.pos[env_index])
-                    ring.add_attr(xform)
-                    ring.set_color(*self.colors[j].value)
-                    geoms.append(ring)
+    
                     
             # Communication lines
             for j, agent2 in enumerate(self.world.agents):

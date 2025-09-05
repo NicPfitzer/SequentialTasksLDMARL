@@ -430,6 +430,10 @@ class FourFlagsScenario(BaseScenario):
                         self.switch_hit_logic(a)
                         overlapping_goal = self.world.is_overlapping(a, a.goal)
                         self.rew[overlapping_goal & (self.language_unit.states == FIND_GOAL)] += 0.05
+                        
+                        d = torch.linalg.vector_norm(a.state.pos - a.goal_coords, dim=1)
+                        on_goal = (d <= self.agent_spacing * 0.8)
+                        a.on_goal |= on_goal
         else:
             self.rew = torch.zeros(
                 self.world.batch_dim,

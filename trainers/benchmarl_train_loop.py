@@ -18,7 +18,7 @@ from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
 #    Feel free to add / remove entries or build this list programmatically.
 # ---------------------------------------------------------------------------
 TRAINING_VARIANTS = [
-    "+four_flags/training=four_flags_multitask",  # maps to conf/four_flags/training/four_flags_multitask.yaml
+    #"+four_flags/training=four_flags_multitask",  # maps to conf/four_flags/training/four_flags_multitask.yaml
     "+four_flags/training=four_flags_naive",
     "+four_flags/training=four_flags_rl",
 ]

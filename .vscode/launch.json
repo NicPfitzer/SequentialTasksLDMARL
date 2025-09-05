@@ -147,6 +147,66 @@
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
       }
+    },
+    {
+      "name": "Run evaluations/benchmarl_evaluate.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/evaluations/benchmarl_evaluate.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_rooms_scenario.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_rooms/four_rooms_scenario.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_rooms_rollout.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_rooms/four_rooms_rollout.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_rooms_naive_rl.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_rooms/four_rooms_naive_rl.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run four_rooms_rl.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scenarios/four_rooms/four_rooms_rl.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
     }
   ]
 }

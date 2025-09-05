@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - /four_rooms/experiment/experiment
+  - /four_rooms/model/shared_gnn
+  - /four_rooms/model/actor   # actor-network params
+  - /four_rooms/model/critic  # critic-network params
+  - /four_rooms/task/four_rooms_multitask
+  - /four_rooms/algorithm/mappo
+
+seed: 1

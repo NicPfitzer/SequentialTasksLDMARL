@@ -1,0 +1,3002 @@
+[
+  {
+    "response": "Sentinel units, advance smoothly to the first trigger in the starting bay on the left side. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, locate directly to the first trigger in the left-most room. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, approach quickly to the first trigger located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Swarm members, locate steadily toward the first activation pad in the left-most room, close to the vertical gate."
+  },
+  {
+    "response": "Agents, make your way steadily to the first unlock switch in room 0 on the far left. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, advance directly to the first toggle in the starting bay on the left side. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, head expeditiously to the first activation pad in room 0 on the far left near the first divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, proceed quickly to the first activation pad in the starting bay on the left side near the gate between rooms 0 and 1; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, travel immediately to the first control switch in the first room from the left near the gate between rooms 0 and 1; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, find your way smoothly to the first trigger located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Navigation bots, head securely until you reach the first control switch in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Navigation bots, move without delay to the first activation pad in the first room from the left. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, head efficiently to the first release plate in the first room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, travel quickly to the first control switch located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Navigation bots, make your way immediately to the first switch in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, advance swiftly toward the first trigger in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Robots, travel without hesitation straight to the first unlock switch in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Support bots, advance carefully straight to the first toggle in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, travel carefully to the first switch in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, move securely to the first control switch in the left-most room near the first divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, make your way directly to the first toggle in the starting bay on the left side. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, advance smoothly until you reach the first control switch in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, go without hesitation to the first toggle in the first room from the left. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, travel swiftly to the first release plate in room 0 on the far left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, navigate carefully to the first release plate in the first room from the left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Navigation bots, go swiftly to the first release plate in the left-most room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Control units, locate without delay to the first trigger in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, proceed steadily until you reach the first toggle in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Control units, proceed without delay to the first trigger in the left-most room near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, proceed smoothly toward the first toggle in the left-most room, near the divider gate."
+  },
+  {
+    "response": "Units, get to expeditiously to the first release plate located by the first divider gate in the starting bay on the left side."
+  },
+  {
+    "response": "Task units, find your way directly to the first unlock switch in the left-most room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, go securely to the first unlock switch in the first room from the left near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, travel carefully to the first unlock switch in the left-most room. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, find your way without delay straight to the first unlock switch in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Exploration drones, travel to the first trigger expeditiously in the left-most room; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, approach expeditiously to the first trigger in room 0 on the far left near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, find your way directly toward the first switch in the left-most room, near the divider gate."
+  },
+  {
+    "response": "Exploration drones, reach directly to the first control switch in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, move expeditiously to the first activation pad in room 0 on the far left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Robots, get to swiftly to the first trigger in the first room from the left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Task units, go promptly to the first unlock switch in the left-most room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Navigation bots, advance without delay to the first trigger in the left-most room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, travel promptly straight to the first trigger in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Control units, approach swiftly toward the first release plate in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Control units, approach swiftly straight to the first trigger in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, navigate expeditiously to the first control switch in the starting bay on the left side. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, approach quickly toward the first control switch in the first room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Task units, advance efficiently to the first control switch in the starting bay on the left side. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, locate smoothly until you reach the first release plate in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Sentinel units, find your way carefully to the first switch in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, head securely to the first toggle located by the first divider gate in the starting bay on the left side."
+  },
+  {
+    "response": "Agents, proceed efficiently to the first activation pad in the left-most room. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, make your way without hesitation until you reach the first control switch in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Autonomous nodes, make your way without delay to the first unlock switch in room 0 on the far left. Approach near the divider gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, head swiftly to the first control switch in the left-most room. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, find your way quickly to the first toggle in room 0 on the far left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, locate swiftly to the first trigger in the first room from the left near the first divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, head swiftly straight to the first unlock switch in the left-most room, right next to the first divider gate."
+  },
+  {
+    "response": "Control units, get to immediately to the first release plate in room 0 on the far left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Navigation bots, go quickly to the first control switch in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, get to steadily to the first control switch in the starting bay on the left side. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, go quickly to the first control switch located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Agents, find your way immediately to the first unlock switch in room 0 on the far left near the initial barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, approach promptly to the first control switch in room 0 on the far left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, head quickly straight to the first activation pad in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Robots, make your way to the first switch without delay in the left-most room; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, locate promptly until you reach the first toggle in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Sentinel units, move immediately to the first activation pad in room 0 on the far left. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, make your way without delay to the first toggle located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Sentinel units, approach promptly until you reach the first release plate in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Control units, advance securely to the first control switch in the first room from the left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Agents, advance carefully to the first release plate in the starting bay on the left side near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, reach to the first trigger promptly in room 0 on the far left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, locate without delay toward the first toggle in the first room from the left, beside the gate post."
+  },
+  {
+    "response": "Recon agents, find your way swiftly straight to the first switch in the left-most room, right next to the first divider gate."
+  },
+  {
+    "response": "Control units, go quickly until you reach the first trigger in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, locate immediately straight to the first activation pad in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Agents, make your way directly to the first activation pad in the left-most room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, proceed to the first release plate smoothly in the starting bay on the left side; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, head directly to the first release plate in the first room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, approach promptly to the first release plate in the first room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, find your way efficiently to the first toggle in the starting bay on the left side. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, make your way swiftly until you reach the first toggle in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Exploration drones, head carefully toward the first activation pad in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Support bots, proceed carefully straight to the first activation pad in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Autonomous nodes, get to swiftly until you reach the first unlock switch in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, reach immediately to the first toggle in the starting bay on the left side near the first divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, navigate without hesitation to the first trigger located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Navigation bots, find your way steadily to the first activation pad located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Exploration drones, move without hesitation until you reach the first activation pad in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Sentinel units, approach directly to the first trigger in room 0 on the far left near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, go expeditiously straight to the first switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Control units, advance swiftly straight to the first unlock switch in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, travel smoothly straight to the first control switch in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Swarm members, head without hesitation straight to the first activation pad in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Recon agents, navigate quickly to the first trigger in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, move immediately toward the first switch in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Task units, approach swiftly toward the first release plate in room 0 on the far left, near the divider gate."
+  },
+  {
+    "response": "Robots, locate to the first release plate without hesitation in the first room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, go promptly to the first trigger in the left-most room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Robots, reach without delay to the first release plate in the starting bay on the left side. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Swarm members, move efficiently to the first release plate in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, locate quickly straight to the first control switch in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Navigation bots, move steadily to the first toggle located by the gate between rooms 0 and 1 in room 0 on the far left."
+  },
+  {
+    "response": "Autonomous nodes, navigate carefully to the first release plate in the starting bay on the left side. On approach, scan along the back wall."
+  },
+  {
+    "response": "Swarm members, reach without delay until you reach the first activation pad in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Swarm members, make your way promptly straight to the first activation pad in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Task units, locate without delay to the first control switch in the starting bay on the left side. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, advance without delay to the first control switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Control units, advance promptly straight to the first activation pad in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, locate without hesitation to the first switch in room 0 on the far left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, locate expeditiously to the first activation pad in room 0 on the far left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Exploration drones, go without delay to the first activation pad located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Swarm members, navigate quickly to the first control switch in room 0 on the far left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, proceed directly until you reach the first trigger in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, travel securely to the first unlock switch in the first room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, reach quickly to the first toggle located by the first divider gate in the starting bay on the left side."
+  },
+  {
+    "response": "Swarm members, go without hesitation to the first activation pad in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, go to the first unlock switch promptly in room 0 on the far left; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, advance quickly until you reach the first unlock switch in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, navigate without hesitation to the first control switch in room 0 on the far left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, approach promptly toward the first switch in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Control units, proceed securely to the first switch in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, approach without hesitation to the first release plate in the first room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, proceed swiftly to the first release plate in the first room from the left. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, navigate directly straight to the first switch in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Robots, make your way without delay toward the first trigger in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Navigation bots, advance steadily to the first toggle in room 0 on the far left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, approach immediately to the first unlock switch in the first room from the left. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, move directly until you reach the first switch in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Swarm members, find your way quickly straight to the first control switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, locate smoothly straight to the first switch in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Swarm members, reach smoothly straight to the first unlock switch in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Control units, go efficiently to the first trigger in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, proceed securely until you reach the first trigger in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Support bots, make your way to the first switch quickly in room 0 on the far left; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, move carefully until you reach the first switch in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Support bots, head promptly until you reach the first switch in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, travel without hesitation to the first toggle in the left-most room. Approach near the divider gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, approach directly to the first unlock switch in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Units, find your way securely toward the first toggle in the starting bay on the left side, beside the gate post."
+  },
+  {
+    "response": "Swarm members, reach smoothly to the first trigger in the starting bay on the left side. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, go without delay to the first unlock switch in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Task units, head carefully straight to the first switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Task units, make your way securely to the first release plate in the starting bay on the left side near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, reach without hesitation to the first toggle in room 0 on the far left near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, get to promptly to the first toggle in the first room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, find your way directly to the first toggle in the left-most room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Sentinel units, find your way to the first toggle immediately in the first room from the left; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, locate directly to the first activation pad in room 0 on the far left. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, approach without delay toward the first unlock switch in the left-most room, beside the gate post."
+  },
+  {
+    "response": "Autonomous nodes, advance immediately to the first activation pad located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Robots, move securely to the first unlock switch in room 0 on the far left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Autonomous nodes, move smoothly until you reach the first unlock switch in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Support bots, make your way swiftly straight to the first toggle in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, go carefully until you reach the first unlock switch in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Agents, locate promptly to the first toggle in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, proceed expeditiously to the first toggle in the starting bay on the left side. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, make your way efficiently toward the first release plate in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Agents, approach steadily straight to the first release plate in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, travel promptly to the first unlock switch in the first room from the left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Sentinel units, locate expeditiously toward the first activation pad in the left-most room, by the room divider."
+  },
+  {
+    "response": "Autonomous nodes, get to to the first unlock switch smoothly in the first room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, approach directly straight to the first toggle in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Units, navigate without delay to the first toggle located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Sentinel units, proceed to the first control switch without delay in room 0 on the far left; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, get to securely to the first release plate in room 0 on the far left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Robots, head without hesitation to the first trigger in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, reach without delay to the first activation pad in the left-most room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, advance quickly toward the first trigger in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Support bots, travel promptly to the first unlock switch located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Agents, head quickly to the first control switch located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Exploration drones, get to directly until you reach the first activation pad in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Support bots, head promptly to the first switch in the starting bay on the left side. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, move immediately to the first control switch in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Autonomous nodes, travel expeditiously straight to the first switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, travel without hesitation until you reach the first release plate in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, proceed without delay until you reach the first release plate in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Recon agents, proceed quickly to the first release plate in the left-most room near the first divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, head expeditiously toward the first activation pad in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Navigation bots, head without delay straight to the first control switch in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Autonomous nodes, make your way without delay to the first switch in room 0 on the far left near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, make your way swiftly straight to the first trigger in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Robots, move carefully straight to the first unlock switch in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, head efficiently to the first release plate in the first room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, locate to the first release plate steadily in the first room from the left; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, approach to the first activation pad promptly in the left-most room; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, travel promptly straight to the first activation pad in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Sentinel units, locate to the first switch efficiently in the starting bay on the left side; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, advance to the first switch securely in the first room from the left; near the divider gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, get to smoothly to the first trigger located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Task units, advance to the first toggle securely in room 0 on the far left; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, proceed securely to the first switch in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, advance immediately to the first activation pad located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Swarm members, move quickly to the first release plate in the first room from the left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Units, find your way to the first activation pad quickly in the starting bay on the left side; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, make your way efficiently until you reach the first control switch in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Recon agents, make your way steadily to the first switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Support bots, get to securely to the first activation pad in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, locate immediately to the first switch in room 0 on the far left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Agents, travel without hesitation to the first activation pad located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Recon agents, go quickly straight to the first release plate in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Navigation bots, make your way swiftly to the first switch in the first room from the left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Control units, make your way efficiently to the first unlock switch located by the gate between rooms 0 and 1 in room 0 on the far left."
+  },
+  {
+    "response": "Agents, locate immediately to the first unlock switch in the left-most room near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, reach without hesitation until you reach the first control switch in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, locate expeditiously straight to the first toggle in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Agents, proceed steadily to the first release plate in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, advance expeditiously to the first trigger in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, get to swiftly to the first control switch in the starting bay on the left side. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, make your way quickly to the first release plate located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Recon agents, find your way quickly to the first control switch in room 0 on the far left. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, get to expeditiously to the first trigger in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Agents, proceed directly straight to the first trigger in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Support bots, get to securely to the first trigger in the first room from the left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, go quickly to the first switch in room 0 on the far left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, reach immediately to the first toggle in the starting bay on the left side. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, travel carefully to the first trigger located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Task units, advance directly straight to the first release plate in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Sentinel units, reach smoothly to the first activation pad in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, get to without hesitation to the first activation pad located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Navigation bots, navigate securely to the first switch in room 0 on the far left. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, move quickly straight to the first switch in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Agents, get to directly straight to the first activation pad in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Support bots, go smoothly to the first unlock switch in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, make your way to the first activation pad expeditiously in the left-most room; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, locate immediately to the first trigger in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, proceed securely to the first control switch in the starting bay on the left side. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, head without hesitation to the first activation pad located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Control units, make your way without delay until you reach the first unlock switch in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Sentinel units, find your way steadily toward the first unlock switch in the first room from the left, beside the gate post."
+  },
+  {
+    "response": "Swarm members, travel to the first unlock switch expeditiously in room 0 on the far left; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, get to efficiently to the first switch in the starting bay on the left side near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, locate efficiently to the first switch in the first room from the left. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, approach to the first switch quickly in the starting bay on the left side; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, head expeditiously to the first release plate in the left-most room. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, go without hesitation to the first toggle in the starting bay on the left side. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Navigation bots, advance immediately toward the first trigger in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Support bots, approach directly until you reach the first toggle in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Swarm members, head without hesitation straight to the first switch in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Agents, reach to the first activation pad carefully in the first room from the left; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, make your way to the first activation pad without delay in the left-most room; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, make your way immediately toward the first release plate in the left-most room, close to the vertical gate."
+  },
+  {
+    "response": "Exploration drones, get to immediately toward the first activation pad in the left-most room, by the room divider."
+  },
+  {
+    "response": "Swarm members, approach steadily to the first toggle in room 0 on the far left. Approach near the divider gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, reach steadily until you reach the first switch in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Task units, move directly to the first trigger in the starting bay on the left side. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, travel efficiently to the first unlock switch in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, navigate securely straight to the first switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Recon agents, proceed without hesitation straight to the first toggle in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, navigate directly toward the first unlock switch in room 0 on the far left, close to the vertical gate."
+  },
+  {
+    "response": "Task units, locate expeditiously to the first toggle in room 0 on the far left. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, advance to the first release plate carefully in room 0 on the far left; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, go to the first release plate immediately in the starting bay on the left side; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, move immediately straight to the first release plate in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, move immediately to the first release plate in the first room from the left near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, head expeditiously straight to the first toggle in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, advance quickly to the first control switch in the starting bay on the left side. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, move expeditiously to the first control switch located by the first divider gate in the starting bay on the left side."
+  },
+  {
+    "response": "Task units, go efficiently straight to the first trigger in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, proceed expeditiously to the first activation pad located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Navigation bots, proceed to the first toggle promptly in the first room from the left; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, approach swiftly to the first activation pad in the starting bay on the left side near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, locate immediately straight to the first release plate in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Support bots, head steadily until you reach the first unlock switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Support bots, travel steadily to the first switch in room 0 on the far left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, find your way efficiently to the first unlock switch in the first room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Robots, approach without delay until you reach the first activation pad in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, head steadily to the first release plate in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, go swiftly toward the first switch in the first room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Units, get to immediately to the first control switch in room 0 on the far left. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, travel promptly to the first activation pad in the left-most room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Recon agents, proceed securely straight to the first unlock switch in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, reach promptly straight to the first trigger in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Sentinel units, go immediately until you reach the first activation pad in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Control units, move efficiently to the first trigger located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Task units, approach steadily to the first activation pad in room 0 on the far left. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, move securely to the first control switch in the left-most room. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, move securely toward the first toggle in the left-most room, near the divider gate."
+  },
+  {
+    "response": "Swarm members, navigate immediately until you reach the first control switch in room 0 on the far left beside the first divider gate."
+  },
+  {
+    "response": "Autonomous nodes, get to securely straight to the first release plate in the left-most room, right next to the first divider gate."
+  },
+  {
+    "response": "Agents, locate efficiently to the first release plate in the starting bay on the left side. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, proceed without delay to the first toggle in the left-most room. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, reach steadily to the first release plate in the first room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, make your way securely to the first switch located by the gate between rooms 0 and 1 in room 0 on the far left."
+  },
+  {
+    "response": "Task units, find your way to the first trigger without hesitation in the starting bay on the left side; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, locate immediately until you reach the first trigger in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, make your way expeditiously to the first release plate in the left-most room. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, advance without delay to the first switch located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Support bots, approach promptly to the first unlock switch in the first room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, advance swiftly to the first toggle in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, go carefully until you reach the first switch in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Exploration drones, head carefully to the first switch in the first room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, go to the first toggle quickly in the left-most room; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, advance expeditiously toward the first activation pad in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Control units, find your way without hesitation to the first toggle in the left-most room near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, find your way promptly to the first release plate in room 0 on the far left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Task units, locate to the first control switch steadily in the left-most room; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, get to promptly to the first control switch in the first room from the left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Task units, reach swiftly toward the first control switch in room 0 on the far left, close to the vertical gate."
+  },
+  {
+    "response": "Navigation bots, navigate without delay to the first trigger in the left-most room. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, make your way to the first switch expeditiously in the first room from the left; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, travel expeditiously to the first unlock switch in room 0 on the far left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, get to promptly to the first trigger in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, travel without hesitation to the first activation pad in the left-most room. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, head to the first trigger without hesitation in the starting bay on the left side; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, move without hesitation toward the first activation pad in the left-most room, near the divider gate."
+  },
+  {
+    "response": "Exploration drones, approach to the first activation pad expeditiously in the left-most room; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, proceed swiftly toward the first switch in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Control units, locate immediately until you reach the first control switch in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, advance carefully to the first trigger located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Autonomous nodes, move promptly straight to the first unlock switch in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, go carefully toward the first control switch in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Recon agents, move without delay to the first switch located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Recon agents, reach steadily to the first switch in the left-most room near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, get to directly to the first unlock switch in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Sentinel units, reach without delay to the first trigger in the starting bay on the left side near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, move to the first trigger directly in the first room from the left; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Swarm members, approach carefully to the first activation pad in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, make your way expeditiously to the first toggle located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Agents, move immediately to the first activation pad in the starting bay on the left side. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Swarm members, proceed without hesitation to the first release plate in the left-most room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, find your way directly to the first unlock switch in the left-most room near the gate between rooms 0 and 1; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, go smoothly to the first toggle in room 0 on the far left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Support bots, go steadily to the first toggle in the starting bay on the left side. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, go expeditiously toward the first unlock switch in room 0 on the far left, by the room divider."
+  },
+  {
+    "response": "Control units, advance to the first control switch without hesitation in the first room from the left; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, proceed quickly to the first release plate located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Autonomous nodes, go promptly until you reach the first trigger in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Robots, find your way without hesitation to the first activation pad in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, find your way without delay toward the first switch in room 0 on the far left, by the room divider."
+  },
+  {
+    "response": "Exploration drones, head securely to the first toggle in room 0 on the far left near the first divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, approach without delay to the first release plate in the starting bay on the left side. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, approach steadily toward the first activation pad in the left-most room, by the room divider."
+  },
+  {
+    "response": "Units, get to without delay to the first toggle in the starting bay on the left side near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, find your way smoothly straight to the first toggle in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Control units, proceed immediately to the first control switch in the left-most room. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, reach swiftly until you reach the first trigger in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Units, reach immediately to the first unlock switch in room 0 on the far left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Units, reach efficiently to the first unlock switch located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Autonomous nodes, locate securely to the first unlock switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, navigate promptly to the first release plate in the left-most room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Exploration drones, travel quickly to the first unlock switch in the left-most room. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, travel without hesitation to the first control switch in the first room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, head smoothly until you reach the first trigger in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, get to smoothly to the first activation pad located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Autonomous nodes, travel directly to the first toggle in room 0 on the far left near the initial barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, make your way promptly to the first unlock switch in the starting bay on the left side near the initial barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, move smoothly to the first control switch in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Control units, approach directly straight to the first toggle in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Control units, navigate securely to the first activation pad in the left-most room. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, proceed promptly to the first release plate located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Sentinel units, go to the first unlock switch without hesitation in room 0 on the far left; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, find your way without delay straight to the first activation pad in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Navigation bots, head smoothly to the first trigger in the left-most room. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, navigate efficiently until you reach the first unlock switch in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, proceed steadily to the first activation pad in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, move to the first toggle promptly in the starting bay on the left side; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, proceed without hesitation straight to the first activation pad in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Task units, make your way quickly straight to the first unlock switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, locate securely to the first release plate in the left-most room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, head swiftly to the first unlock switch in the first room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, make your way promptly to the first control switch in room 0 on the far left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, navigate smoothly straight to the first activation pad in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, proceed carefully straight to the first toggle in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, travel quickly to the first release plate in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, travel securely to the first control switch in room 0 on the far left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, find your way smoothly to the first toggle located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Exploration drones, find your way without hesitation straight to the first control switch in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Navigation bots, find your way without delay to the first unlock switch in the first room from the left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, proceed without delay to the first control switch in the left-most room near the initial barrier; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, reach smoothly until you reach the first unlock switch in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Units, navigate without hesitation to the first unlock switch in the first room from the left near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, navigate quickly to the first control switch in room 0 on the far left. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, approach steadily to the first release plate in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, locate to the first release plate expeditiously in the starting bay on the left side; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, locate efficiently to the first activation pad located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Robots, get to expeditiously to the first switch in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, approach steadily to the first toggle in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Recon agents, navigate quickly to the first activation pad in the starting bay on the left side near the first divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Control units, navigate directly toward the first control switch in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Support bots, head without delay to the first control switch in the first room from the left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, find your way steadily to the first unlock switch in the left-most room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Task units, reach promptly to the first activation pad in room 0 on the far left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, make your way without delay straight to the first toggle in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Exploration drones, get to to the first toggle promptly in the first room from the left; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, head without delay to the first switch in room 0 on the far left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, reach efficiently toward the first toggle in the left-most room, close to the vertical gate."
+  },
+  {
+    "response": "Navigation bots, proceed immediately until you reach the first release plate in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Swarm members, navigate efficiently to the first release plate in the first room from the left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Agents, move to the first release plate smoothly in the first room from the left; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, go without hesitation until you reach the first toggle in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, approach securely until you reach the first activation pad in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Control units, get to expeditiously toward the first toggle in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Robots, head to the first trigger securely in the starting bay on the left side; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, locate efficiently toward the first trigger in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Task units, head swiftly to the first unlock switch in the first room from the left near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, move promptly to the first switch in the starting bay on the left side. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, move expeditiously to the first switch in room 0 on the far left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, go promptly toward the first activation pad in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Robots, get to carefully to the first toggle located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Robots, travel carefully to the first toggle in the first room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, move promptly to the first release plate in the left-most room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, go securely toward the first control switch in the left-most room, close to the vertical gate."
+  },
+  {
+    "response": "Robots, make your way without delay to the first control switch in the first room from the left. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Units, travel steadily to the first activation pad located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Swarm members, navigate directly until you reach the first control switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Support bots, navigate efficiently toward the first activation pad in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Recon agents, locate carefully toward the first unlock switch in the left-most room, near the divider gate."
+  },
+  {
+    "response": "Robots, move without hesitation to the first trigger in the first room from the left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, travel promptly to the first activation pad in room 0 on the far left. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, locate smoothly to the first release plate in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, head quickly to the first activation pad located by the first divider gate in the starting bay on the left side."
+  },
+  {
+    "response": "Recon agents, navigate securely until you reach the first trigger in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Navigation bots, go steadily to the first trigger in the starting bay on the left side. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, move promptly until you reach the first unlock switch in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, reach swiftly to the first unlock switch in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, proceed immediately to the first toggle in the starting bay on the left side. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, advance immediately toward the first trigger in room 0 on the far left, by the room divider."
+  },
+  {
+    "response": "Sentinel units, make your way smoothly toward the first switch in the first room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Exploration drones, go efficiently to the first release plate in the first room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Exploration drones, navigate steadily toward the first release plate in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Agents, travel steadily to the first trigger in the left-most room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, get to efficiently to the first control switch in the left-most room. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, travel to the first switch quickly in the first room from the left; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, get to immediately to the first activation pad located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Autonomous nodes, proceed expeditiously to the first control switch in the left-most room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, head without hesitation straight to the first trigger in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Support bots, travel swiftly to the first unlock switch located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Recon agents, go to the first switch swiftly in the first room from the left; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, move promptly to the first unlock switch in the starting bay on the left side. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, move carefully to the first unlock switch in the first room from the left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Exploration drones, get to directly until you reach the first trigger in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Sentinel units, approach smoothly until you reach the first switch in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Support bots, move to the first trigger without delay in the left-most room; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, make your way expeditiously straight to the first unlock switch in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Task units, proceed carefully to the first unlock switch in the first room from the left. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Task units, go to the first release plate promptly in the left-most room; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, find your way directly until you reach the first toggle in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, navigate to the first toggle securely in the starting bay on the left side; by the room divider, and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, proceed without delay until you reach the first unlock switch in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Swarm members, navigate to the first toggle swiftly in the first room from the left; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, go to the first activation pad securely in the first room from the left; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, go efficiently to the first control switch in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Units, head quickly toward the first trigger in the first room from the left, beside the gate post."
+  },
+  {
+    "response": "Autonomous nodes, reach steadily toward the first release plate in room 0 on the far left, close to the vertical gate."
+  },
+  {
+    "response": "Task units, navigate efficiently to the first switch in room 0 on the far left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, advance promptly straight to the first release plate in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Swarm members, approach securely to the first control switch in the starting bay on the left side near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, advance securely toward the first switch in the first room from the left, by the room divider."
+  },
+  {
+    "response": "Support bots, make your way to the first unlock switch efficiently in the first room from the left; by the room divider, and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, find your way steadily to the first switch in room 0 on the far left near the gate between rooms 0 and 1; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, locate promptly to the first control switch in room 0 on the far left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Task units, reach directly straight to the first release plate in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Recon agents, approach immediately until you reach the first activation pad in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Control units, find your way to the first unlock switch immediately in the left-most room; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, find your way expeditiously to the first switch in room 0 on the far left. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Autonomous nodes, navigate expeditiously to the first release plate in the starting bay on the left side. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Task units, move directly to the first activation pad in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, make your way quickly to the first activation pad in the left-most room. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, reach without hesitation until you reach the first release plate in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Agents, head promptly to the first unlock switch in the starting bay on the left side near the first divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Units, go promptly to the first unlock switch in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, advance quickly to the first switch in the first room from the left. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, make your way immediately straight to the first activation pad in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Control units, get to directly to the first trigger in room 0 on the far left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Task units, approach carefully toward the first unlock switch in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Robots, get to promptly to the first control switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Agents, move smoothly to the first release plate located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Units, locate quickly until you reach the first toggle in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Navigation bots, reach swiftly to the first activation pad located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Agents, travel immediately straight to the first trigger in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Units, get to carefully to the first unlock switch in the first room from the left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, head without delay to the first trigger in the left-most room near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, move without hesitation to the first control switch in the starting bay on the left side. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Support bots, find your way without delay to the first switch in the first room from the left near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Control units, proceed to the first switch immediately in the first room from the left; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, advance immediately to the first control switch in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, go expeditiously to the first toggle in the starting bay on the left side. On approach, scan along the back wall."
+  },
+  {
+    "response": "Recon agents, go smoothly to the first control switch located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Task units, move expeditiously to the first release plate in the left-most room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, locate swiftly toward the first release plate in the starting bay on the left side, beside the gate post."
+  },
+  {
+    "response": "Agents, move carefully to the first release plate located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Autonomous nodes, navigate without delay toward the first activation pad in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Swarm members, proceed securely to the first trigger located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Autonomous nodes, navigate expeditiously to the first control switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, get to smoothly to the first control switch in room 0 on the far left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Recon agents, find your way quickly to the first unlock switch in room 0 on the far left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, approach to the first unlock switch directly in the left-most room; beside the gate post, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, reach to the first unlock switch smoothly in the starting bay on the left side; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, get to steadily to the first unlock switch in the left-most room. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, travel steadily straight to the first toggle in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, locate without delay to the first release plate in room 0 on the far left. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, make your way directly to the first trigger in room 0 on the far left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, make your way smoothly until you reach the first release plate in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Control units, go without delay to the first toggle in the first room from the left. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, navigate to the first toggle efficiently in the starting bay on the left side; near the divider gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, head expeditiously toward the first trigger in the left-most room, by the room divider."
+  },
+  {
+    "response": "Agents, locate expeditiously toward the first activation pad in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Exploration drones, get to without delay to the first switch in the starting bay on the left side. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, approach steadily to the first trigger in the starting bay on the left side. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, get to without hesitation to the first release plate in the left-most room near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, advance immediately to the first switch in the left-most room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Task units, advance without delay until you reach the first trigger in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Sentinel units, navigate directly to the first toggle in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Exploration drones, move securely toward the first toggle in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Robots, reach efficiently to the first unlock switch in the left-most room. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, proceed to the first release plate efficiently in room 0 on the far left; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, head to the first trigger smoothly in the left-most room; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, travel steadily to the first release plate located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Recon agents, go quickly to the first control switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, move efficiently straight to the first switch in the left-most room, right next to the first divider gate."
+  },
+  {
+    "response": "Recon agents, locate swiftly to the first trigger located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Robots, locate without delay toward the first toggle in the left-most room, by the room divider."
+  },
+  {
+    "response": "Swarm members, find your way efficiently to the first toggle in the first room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, head promptly to the first release plate in room 0 on the far left. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, head steadily to the first trigger located by the gate between rooms 0 and 1 in room 0 on the far left."
+  },
+  {
+    "response": "Support bots, locate promptly to the first trigger in room 0 on the far left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, locate carefully to the first unlock switch in the first room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Agents, get to swiftly toward the first release plate in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Swarm members, locate efficiently toward the first switch in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Navigation bots, advance expeditiously straight to the first control switch in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Control units, find your way quickly until you reach the first unlock switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Recon agents, head quickly toward the first trigger in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Agents, locate without hesitation to the first release plate located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Sentinel units, approach carefully to the first release plate in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, travel promptly toward the first activation pad in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Sentinel units, approach expeditiously until you reach the first switch in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Task units, find your way promptly to the first trigger in the first room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Task units, advance immediately to the first activation pad located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Swarm members, go promptly to the first trigger in the starting bay on the left side. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Recon agents, go without hesitation to the first release plate in room 0 on the far left near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, get to to the first toggle steadily in room 0 on the far left; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, move promptly to the first unlock switch in the starting bay on the left side near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, find your way efficiently toward the first toggle in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Navigation bots, locate promptly to the first unlock switch in the left-most room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Control units, move to the first activation pad carefully in the starting bay on the left side; by the room divider, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, advance without hesitation to the first switch in room 0 on the far left near the first divider gate; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, reach immediately until you reach the first activation pad in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Navigation bots, find your way expeditiously until you reach the first control switch in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Support bots, make your way without delay to the first activation pad in the left-most room. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, advance carefully until you reach the first trigger in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Sentinel units, find your way without delay to the first activation pad in room 0 on the far left near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, make your way promptly toward the first control switch in the left-most room, beside the gate post."
+  },
+  {
+    "response": "Exploration drones, go immediately straight to the first unlock switch in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Autonomous nodes, go smoothly to the first toggle in room 0 on the far left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, make your way promptly to the first toggle located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Robots, make your way smoothly to the first switch in the starting bay on the left side. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, go without delay until you reach the first activation pad in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Task units, find your way expeditiously to the first unlock switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, make your way without hesitation to the first unlock switch in the first room from the left. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Autonomous nodes, travel carefully to the first trigger in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, travel expeditiously toward the first unlock switch in the first room from the left, by the room divider."
+  },
+  {
+    "response": "Swarm members, head swiftly to the first activation pad in the left-most room near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, get to swiftly to the first release plate in the first room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, get to to the first activation pad immediately in room 0 on the far left; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, make your way carefully to the first unlock switch in the left-most room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, locate without delay to the first control switch in room 0 on the far left. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, advance carefully straight to the first unlock switch in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, move directly to the first switch in the first room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, reach immediately to the first toggle located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Robots, navigate swiftly to the first activation pad in the left-most room. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, get to quickly to the first switch in the starting bay on the left side. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, locate directly until you reach the first release plate in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, navigate quickly to the first control switch in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, go quickly to the first toggle in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, navigate directly until you reach the first toggle in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Control units, proceed efficiently toward the first release plate in room 0 on the far left, close to the vertical gate."
+  },
+  {
+    "response": "Navigation bots, travel promptly to the first toggle in room 0 on the far left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Units, find your way without hesitation to the first unlock switch in the first room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Exploration drones, head steadily to the first switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Units, locate expeditiously straight to the first toggle in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, approach efficiently to the first toggle located by the first divider gate in the starting bay on the left side."
+  },
+  {
+    "response": "Control units, navigate directly to the first activation pad in room 0 on the far left near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, approach efficiently to the first unlock switch in the starting bay on the left side. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, get to without hesitation until you reach the first trigger in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Units, navigate without hesitation to the first trigger in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, travel steadily straight to the first unlock switch in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Recon agents, head without delay to the first activation pad located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Recon agents, reach without delay to the first release plate in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, go swiftly to the first release plate located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Task units, move quickly to the first trigger in the first room from the left. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, locate promptly straight to the first trigger in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Task units, locate smoothly until you reach the first switch in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Navigation bots, travel swiftly to the first unlock switch located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Navigation bots, head immediately to the first unlock switch in the starting bay on the left side. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, navigate efficiently to the first switch in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, travel expeditiously to the first release plate in the left-most room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Recon agents, navigate smoothly to the first switch located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Task units, locate directly to the first switch in the left-most room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Recon agents, travel smoothly to the first control switch in the starting bay on the left side near the initial barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, reach swiftly to the first control switch in the left-most room. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, locate quickly to the first activation pad located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Exploration drones, navigate swiftly until you reach the first activation pad in room 0 on the far left beside the first divider gate."
+  },
+  {
+    "response": "Navigation bots, proceed expeditiously to the first release plate in the starting bay on the left side. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, advance smoothly until you reach the first trigger in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Robots, go without delay to the first trigger located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Task units, go expeditiously until you reach the first control switch in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Task units, get to swiftly until you reach the first activation pad in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, head smoothly to the first release plate in the left-most room. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, get to without hesitation to the first trigger in the starting bay on the left side near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Units, get to securely to the first control switch in the starting bay on the left side. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Robots, get to immediately until you reach the first trigger in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, travel without hesitation until you reach the first unlock switch in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, move smoothly to the first toggle in the left-most room. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, approach promptly to the first activation pad in the left-most room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, head steadily to the first activation pad in the first room from the left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, move securely toward the first control switch in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Recon agents, get to promptly until you reach the first activation pad in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Navigation bots, make your way to the first toggle promptly in room 0 on the far left; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, approach carefully toward the first control switch in the left-most room, close to the vertical gate."
+  },
+  {
+    "response": "Sentinel units, make your way directly straight to the first control switch in the left-most room, right next to the first divider gate."
+  },
+  {
+    "response": "Agents, advance swiftly to the first toggle in the left-most room. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, proceed quickly to the first release plate in room 0 on the far left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, get to steadily to the first trigger in the starting bay on the left side. Approach near the divider gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, approach expeditiously until you reach the first activation pad in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Support bots, proceed carefully to the first toggle in the left-most room. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, locate swiftly toward the first release plate in the first room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Navigation bots, go without hesitation straight to the first release plate in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Sentinel units, travel swiftly straight to the first unlock switch in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Navigation bots, approach to the first activation pad smoothly in the left-most room; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, proceed swiftly until you reach the first switch in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Navigation bots, make your way carefully to the first control switch located by the gate between rooms 0 and 1 in room 0 on the far left."
+  },
+  {
+    "response": "Navigation bots, find your way directly to the first release plate in the first room from the left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, approach securely to the first unlock switch in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, proceed quickly until you reach the first trigger in room 0 on the far left beside the first divider gate."
+  },
+  {
+    "response": "Exploration drones, reach carefully to the first toggle in room 0 on the far left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Recon agents, proceed promptly to the first release plate in room 0 on the far left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Recon agents, locate steadily to the first switch in the starting bay on the left side near the first divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Support bots, proceed steadily straight to the first control switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Recon agents, move swiftly toward the first trigger in the first room from the left, close to the vertical gate."
+  },
+  {
+    "response": "Units, make your way steadily to the first switch in the first room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, go carefully to the first toggle in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, locate directly to the first control switch in the left-most room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Exploration drones, find your way without hesitation to the first trigger in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, head without delay to the first switch in room 0 on the far left near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, reach steadily to the first unlock switch in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, navigate smoothly to the first toggle in the starting bay on the left side near the first divider gate; stop once the actuator clicks."
+  },
+  {
+    "response": "Units, reach quickly to the first switch located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Recon agents, head quickly to the first switch in the left-most room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, approach swiftly to the first release plate in room 0 on the far left near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, advance expeditiously to the first toggle in the starting bay on the left side near the initial barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, move without hesitation until you reach the first toggle in the starting bay on the left side beside the initial barrier."
+  },
+  {
+    "response": "Task units, get to smoothly to the first unlock switch in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, reach directly straight to the first release plate in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Control units, head steadily straight to the first toggle in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Navigation bots, make your way directly to the first trigger in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, approach quickly to the first release plate in the first room from the left. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, travel quickly to the first unlock switch in room 0 on the far left. Approach close to the vertical gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, reach securely to the first activation pad in room 0 on the far left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, travel efficiently to the first switch located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Agents, proceed directly straight to the first switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Task units, advance immediately until you reach the first control switch in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, approach carefully to the first activation pad in the left-most room. On approach, scan along the back wall."
+  },
+  {
+    "response": "Support bots, go securely toward the first toggle in room 0 on the far left, near the divider gate."
+  },
+  {
+    "response": "Recon agents, make your way promptly to the first unlock switch in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, advance without delay to the first unlock switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, approach immediately to the first release plate in room 0 on the far left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Task units, advance swiftly to the first control switch in the starting bay on the left side near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, approach smoothly to the first release plate in the first room from the left. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, head immediately to the first unlock switch in the first room from the left near the initial barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Units, find your way smoothly to the first switch in the starting bay on the left side. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, proceed without delay to the first toggle in room 0 on the far left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Swarm members, make your way securely until you reach the first control switch in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Recon agents, reach quickly until you reach the first release plate in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Sentinel units, make your way to the first release plate promptly in the starting bay on the left side; near the divider gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Autonomous nodes, advance steadily until you reach the first switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Recon agents, locate to the first unlock switch securely in the left-most room; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, move swiftly straight to the first trigger in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Navigation bots, navigate steadily to the first release plate in the left-most room. Approach close to the vertical gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, travel promptly to the first unlock switch in the starting bay on the left side. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, go smoothly to the first toggle in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, locate to the first activation pad immediately in the starting bay on the left side; beside the gate post, and stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, find your way promptly to the first trigger in the left-most room. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, find your way to the first activation pad steadily in the left-most room; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, move smoothly straight to the first trigger in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Agents, head swiftly until you reach the first control switch in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Agents, get to efficiently to the first activation pad in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, travel promptly until you reach the first activation pad in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Sentinel units, go to the first activation pad quickly in the left-most room; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, locate without hesitation to the first activation pad in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, head swiftly to the first switch located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Robots, locate without delay to the first release plate in room 0 on the far left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, reach quickly to the first trigger in room 0 on the far left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, get to promptly to the first unlock switch in the starting bay on the left side. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, travel smoothly to the first activation pad in the first room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, locate carefully to the first release plate in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, go without hesitation straight to the first activation pad in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, go securely to the first activation pad in the starting bay on the left side. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, reach carefully to the first release plate located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Robots, travel efficiently straight to the first control switch in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Recon agents, move without delay toward the first switch in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Units, locate immediately to the first activation pad in the starting bay on the left side. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, reach swiftly to the first release plate in the left-most room. On approach, hug the left wall on entry."
+  },
+  {
+    "response": "Sentinel units, navigate smoothly to the first activation pad located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Navigation bots, locate smoothly to the first control switch in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, travel without delay to the first release plate in the first room from the left. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, proceed promptly until you reach the first unlock switch in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Support bots, locate smoothly straight to the first activation pad in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Agents, travel without hesitation to the first trigger located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Control units, travel quickly to the first toggle in the left-most room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Agents, proceed efficiently to the first toggle in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, get to without hesitation straight to the first control switch in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Autonomous nodes, advance immediately to the first toggle located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Sentinel units, get to without delay to the first control switch in room 0 on the far left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, head securely straight to the first release plate in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, approach securely to the first control switch in the starting bay on the left side. Approach by the room divider and signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, make your way carefully to the first release plate in room 0 on the far left. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, go swiftly to the first unlock switch in the first room from the left. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, advance smoothly to the first activation pad in the starting bay on the left side. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, travel swiftly straight to the first toggle in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Swarm members, make your way quickly until you reach the first unlock switch in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Recon agents, move quickly to the first activation pad in the starting bay on the left side. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Recon agents, travel efficiently toward the first activation pad in room 0 on the far left, near the divider gate."
+  },
+  {
+    "response": "Sentinel units, locate immediately to the first trigger in the starting bay on the left side. On approach, scan along the back wall."
+  },
+  {
+    "response": "Sentinel units, make your way without hesitation to the first unlock switch located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Sentinel units, reach quickly to the first trigger in the left-most room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, approach swiftly straight to the first control switch in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Robots, proceed to the first release plate expeditiously in the first room from the left; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, make your way promptly until you reach the first control switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Task units, advance to the first control switch quickly in the starting bay on the left side; close to the vertical gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, go directly to the first unlock switch in room 0 on the far left near the first divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, reach swiftly toward the first control switch in room 0 on the far left, close to the vertical gate."
+  },
+  {
+    "response": "Support bots, go immediately to the first control switch in the first room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, approach expeditiously straight to the first control switch in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Support bots, advance securely to the first trigger in the first room from the left near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, proceed expeditiously to the first control switch located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Robots, locate to the first trigger without delay in the starting bay on the left side; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, travel immediately straight to the first activation pad in the first room from the left, right next to the first divider gate."
+  },
+  {
+    "response": "Exploration drones, travel steadily to the first control switch in the first room from the left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Agents, advance to the first trigger carefully in the starting bay on the left side; near the divider gate, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, get to smoothly until you reach the first activation pad in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Units, move to the first activation pad carefully in the left-most room; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, advance without delay to the first release plate in the first room from the left. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Support bots, go to the first unlock switch efficiently in the first room from the left; near the divider gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, approach immediately to the first toggle in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, reach immediately until you reach the first trigger in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Sentinel units, head efficiently to the first toggle in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, travel steadily to the first toggle in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, move efficiently until you reach the first trigger in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Agents, approach efficiently to the first control switch in the starting bay on the left side. Approach close to the vertical gate and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, locate securely to the first trigger in the starting bay on the left side. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, advance without delay to the first release plate in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, go quickly to the first toggle located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Support bots, proceed quickly to the first release plate located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Navigation bots, approach carefully to the first trigger located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Recon agents, go smoothly toward the first control switch in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Agents, move securely to the first unlock switch in the first room from the left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, locate expeditiously to the first activation pad in the first room from the left near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, move without delay toward the first control switch in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Swarm members, move immediately to the first toggle in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, approach efficiently to the first switch in the left-most room. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, reach immediately to the first toggle in room 0 on the far left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, head securely to the first unlock switch in the starting bay on the left side. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, reach without hesitation until you reach the first activation pad in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Swarm members, find your way efficiently to the first activation pad in the first room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Recon agents, advance smoothly until you reach the first trigger in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Recon agents, go swiftly to the first activation pad in the starting bay on the left side. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Task units, proceed efficiently to the first switch in the starting bay on the left side near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, approach smoothly to the first control switch in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, travel efficiently to the first unlock switch in the left-most room. Approach near the divider gate and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, move securely to the first unlock switch in the first room from the left. Approach beside the gate post and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, travel without hesitation straight to the first activation pad in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Navigation bots, find your way carefully to the first toggle located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Sentinel units, navigate quickly to the first activation pad located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Robots, locate securely to the first unlock switch in the left-most room. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, get to without hesitation to the first switch in room 0 on the far left. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, head efficiently toward the first trigger in room 0 on the far left, by the room divider."
+  },
+  {
+    "response": "Task units, travel steadily to the first trigger in the first room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Units, get to without hesitation to the first trigger in the first room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, move immediately to the first trigger located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Support bots, locate quickly to the first toggle in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, get to to the first release plate without delay in the first room from the left; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, move securely to the first unlock switch in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, reach quickly to the first control switch in the starting bay on the left side. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Units, proceed immediately to the first activation pad in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Units, navigate to the first control switch immediately in the first room from the left; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, get to immediately to the first activation pad located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Sentinel units, go promptly toward the first control switch in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Recon agents, head quickly toward the first trigger in the left-most room, by the room divider."
+  },
+  {
+    "response": "Task units, get to directly to the first toggle in room 0 on the far left near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, find your way quickly straight to the first toggle in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, proceed promptly toward the first activation pad in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Agents, proceed expeditiously to the first trigger in the starting bay on the left side. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, advance immediately toward the first unlock switch in room 0 on the far left, by the room divider."
+  },
+  {
+    "response": "Units, head expeditiously until you reach the first control switch in the left-most room beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Control units, find your way without hesitation to the first trigger in the left-most room. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, travel quickly straight to the first unlock switch in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Control units, locate securely to the first release plate in the starting bay on the left side. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, advance carefully to the first toggle in the starting bay on the left side. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Sentinel units, approach expeditiously to the first control switch in the starting bay on the left side. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Task units, go without delay to the first activation pad in the left-most room. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, move without hesitation to the first control switch in room 0 on the far left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, locate without delay to the first trigger located by the gate between rooms 0 and 1 in the first room from the left."
+  },
+  {
+    "response": "Task units, reach quickly toward the first toggle in the left-most room, close to the vertical gate."
+  },
+  {
+    "response": "Swarm members, advance promptly to the first control switch in the left-most room. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Autonomous nodes, get to expeditiously to the first activation pad in the starting bay on the left side. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, advance directly to the first unlock switch in the first room from the left. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, advance quickly to the first release plate in the left-most room. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Task units, move immediately to the first activation pad in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, approach to the first trigger without delay in room 0 on the far left; near the divider gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, navigate efficiently to the first switch in the left-most room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, travel immediately to the first activation pad in the first room from the left near the gate between rooms 0 and 1; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Control units, reach promptly to the first control switch in room 0 on the far left near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, get to directly to the first activation pad in the starting bay on the left side. Approach beside the gate post and signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, proceed quickly to the first toggle in the left-most room. Then acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, get to smoothly to the first unlock switch in the starting bay on the left side near the gate between rooms 0 and 1; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, get to to the first unlock switch carefully in the left-most room; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, navigate efficiently to the first activation pad in room 0 on the far left. On approach, track the right wall briefly, then cut in."
+  },
+  {
+    "response": "Support bots, get to immediately to the first release plate in room 0 on the far left. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, navigate promptly to the first toggle in the left-most room. Approach close to the vertical gate and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, make your way to the first switch without hesitation in the first room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, get to securely to the first switch in the first room from the left. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Task units, make your way securely to the first trigger in room 0 on the far left near the initial barrier; confirm activation when the indicator lights."
+  },
+  {
+    "response": "Recon agents, make your way immediately straight to the first release plate in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Swarm members, proceed immediately to the first unlock switch located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Units, approach swiftly to the first control switch in the first room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, locate to the first release plate expeditiously in the first room from the left; beside the gate post, and signal ready when the ring glows."
+  },
+  {
+    "response": "Swarm members, locate quickly to the first toggle in room 0 on the far left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, locate promptly to the first trigger in the left-most room near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Exploration drones, locate steadily until you reach the first release plate in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Agents, find your way without hesitation to the first switch in the starting bay on the left side. Approach beside the gate post and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, reach immediately until you reach the first switch in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Units, advance smoothly straight to the first trigger in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, advance to the first control switch without delay in the first room from the left; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Task units, reach securely straight to the first unlock switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, advance without delay to the first toggle in the starting bay on the left side. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Recon agents, move directly until you reach the first trigger in room 0 on the far left beside the initial barrier."
+  },
+  {
+    "response": "Agents, proceed to the first activation pad without hesitation in the first room from the left; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, move steadily straight to the first unlock switch in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Sentinel units, move securely to the first unlock switch in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, navigate without hesitation to the first toggle in the starting bay on the left side. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, travel securely until you reach the first unlock switch in room 0 on the far left beside the first divider gate."
+  },
+  {
+    "response": "Exploration drones, find your way without hesitation to the first switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Autonomous nodes, go steadily to the first toggle in the left-most room. Stay aligned and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Autonomous nodes, proceed expeditiously to the first control switch in the starting bay on the left side near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, proceed smoothly toward the first switch in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Exploration drones, advance steadily to the first control switch in the first room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Navigation bots, travel directly to the first unlock switch in room 0 on the far left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Task units, advance without hesitation to the first control switch in the starting bay on the left side. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, make your way to the first control switch steadily in the starting bay on the left side; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, make your way swiftly to the first switch in the left-most room near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, head directly to the first activation pad in the starting bay on the left side. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, move swiftly to the first control switch in room 0 on the far left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, reach expeditiously to the first release plate in room 0 on the far left near the first divider gate; mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, head efficiently to the first unlock switch in the first room from the left. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Swarm members, find your way efficiently to the first toggle in the first room from the left near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, head smoothly until you reach the first toggle in the first room from the left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Support bots, move efficiently to the first switch in the starting bay on the left side. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, find your way securely until you reach the first trigger in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Autonomous nodes, move steadily to the first release plate in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, find your way immediately to the first toggle in room 0 on the far left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, advance securely toward the first control switch in room 0 on the far left, close to the vertical gate."
+  },
+  {
+    "response": "Robots, move to the first toggle without hesitation in room 0 on the far left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Units, find your way without delay straight to the first unlock switch in room 0 on the far left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Exploration drones, navigate quickly to the first release plate in the first room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, proceed to the first unlock switch immediately in the starting bay on the left side; by the room divider, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, make your way without delay to the first activation pad in the left-most room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Units, travel carefully toward the first release plate in room 0 on the far left, near the divider gate."
+  },
+  {
+    "response": "Agents, navigate smoothly to the first release plate in the starting bay on the left side. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Swarm members, travel steadily to the first release plate in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, head immediately to the first switch in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Exploration drones, get to without delay to the first unlock switch in the left-most room. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Recon agents, go carefully to the first switch in room 0 on the far left. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, go directly to the first activation pad located by the initial barrier in the first room from the left."
+  },
+  {
+    "response": "Recon agents, proceed efficiently to the first toggle in the left-most room. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, proceed expeditiously to the first switch in the left-most room. On approach, center yourself and proceed."
+  },
+  {
+    "response": "Agents, find your way smoothly to the first control switch located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Exploration drones, navigate securely to the first control switch in the first room from the left. Approach by the room divider and stop once the actuator clicks."
+  },
+  {
+    "response": "Navigation bots, move to the first release plate smoothly in the first room from the left; near the divider gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, make your way to the first release plate steadily in the left-most room; near the divider gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Control units, find your way promptly toward the first toggle in the first room from the left, by the room divider."
+  },
+  {
+    "response": "Control units, find your way swiftly until you reach the first unlock switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Recon agents, travel promptly to the first control switch in room 0 on the far left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Task units, make your way directly toward the first control switch in room 0 on the far left, near the divider gate."
+  },
+  {
+    "response": "Autonomous nodes, proceed carefully until you reach the first control switch in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Agents, approach promptly to the first switch in the starting bay on the left side. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Units, navigate without hesitation straight to the first trigger in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, make your way efficiently to the first release plate in the starting bay on the left side. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Navigation bots, reach without delay toward the first release plate in the starting bay on the left side, beside the gate post."
+  },
+  {
+    "response": "Units, find your way expeditiously straight to the first control switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Agents, make your way quickly to the first unlock switch in the starting bay on the left side. Approach near the divider gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, reach quickly to the first unlock switch in room 0 on the far left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Task units, approach swiftly straight to the first unlock switch in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Recon agents, reach without delay straight to the first unlock switch in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Swarm members, move smoothly to the first control switch in the left-most room. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, approach smoothly to the first release plate in the left-most room. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, make your way smoothly until you reach the first toggle in the starting bay on the left side beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Sentinel units, get to smoothly to the first control switch in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, approach without delay until you reach the first trigger in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Robots, travel to the first switch without hesitation in the left-most room; close to the vertical gate, and signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, locate without delay toward the first trigger in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Robots, make your way carefully straight to the first release plate in the left-most room, right next to the initial barrier."
+  },
+  {
+    "response": "Robots, approach without delay to the first activation pad in the starting bay on the left side. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Support bots, locate to the first switch securely in the left-most room; close to the vertical gate, and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, reach expeditiously to the first activation pad in the left-most room. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Autonomous nodes, head efficiently until you reach the first control switch in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Units, navigate promptly to the first unlock switch in the first room from the left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Robots, advance carefully until you reach the first trigger in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Units, find your way smoothly to the first switch in the first room from the left near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, travel smoothly straight to the first release plate in the left-most room, right next to the first divider gate."
+  },
+  {
+    "response": "Exploration drones, go carefully to the first trigger in the starting bay on the left side near the gate between rooms 0 and 1; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, approach efficiently to the first release plate in room 0 on the far left. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, approach expeditiously to the first activation pad in the first room from the left. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, approach carefully to the first switch in room 0 on the far left near the first divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, navigate expeditiously toward the first unlock switch in the first room from the left, near the divider gate."
+  },
+  {
+    "response": "Support bots, get to without delay to the first switch in the first room from the left. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Navigation bots, find your way quickly to the first unlock switch in the starting bay on the left side. On approach, scan along the back wall."
+  },
+  {
+    "response": "Swarm members, go securely until you reach the first unlock switch in the first room from the left beside the initial barrier."
+  },
+  {
+    "response": "Recon agents, move to the first release plate quickly in the starting bay on the left side; by the room divider, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Recon agents, travel quickly to the first activation pad in room 0 on the far left. Approach beside the gate post and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Autonomous nodes, approach securely to the first unlock switch located by the first divider gate in room 0 on the far left."
+  },
+  {
+    "response": "Navigation bots, reach expeditiously to the first trigger in the first room from the left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, go swiftly straight to the first toggle in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Sentinel units, go without hesitation toward the first control switch in the starting bay on the left side, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, move immediately to the first release plate in the left-most room. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Support bots, reach promptly straight to the first switch in the starting bay on the left side, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, advance without hesitation to the first switch in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Navigation bots, find your way securely to the first unlock switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Exploration drones, go promptly straight to the first activation pad in room 0 on the far left, right next to the initial barrier."
+  },
+  {
+    "response": "Exploration drones, proceed swiftly to the first activation pad in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Sentinel units, travel securely to the first trigger located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Support bots, reach immediately until you reach the first control switch in the left-most room beside the first divider gate."
+  },
+  {
+    "response": "Sentinel units, head efficiently until you reach the first control switch in the starting bay on the left side beside the first divider gate."
+  },
+  {
+    "response": "Robots, locate carefully straight to the first toggle in the left-most room, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Agents, head without delay straight to the first trigger in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Units, make your way promptly to the first toggle in the starting bay on the left side. Stay aligned and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, find your way promptly to the first toggle in the starting bay on the left side. Approach by the room divider and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Support bots, get to to the first trigger efficiently in the starting bay on the left side; beside the gate post, and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, advance without delay to the first trigger in the starting bay on the left side. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Robots, move expeditiously to the first activation pad in the first room from the left. On approach, scan along the back wall."
+  },
+  {
+    "response": "Sentinel units, proceed promptly to the first unlock switch in the starting bay on the left side. Approach near the divider gate and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, approach promptly toward the first control switch in the left-most room, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, make your way steadily to the first switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Exploration drones, get to smoothly toward the first release plate in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Sentinel units, proceed directly to the first activation pad in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, get to without hesitation until you reach the first switch in room 0 on the far left beside the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Sentinel units, reach without hesitation straight to the first switch in room 0 on the far left, right next to the first divider gate."
+  },
+  {
+    "response": "Navigation bots, reach promptly to the first control switch located by the initial barrier in the left-most room."
+  },
+  {
+    "response": "Autonomous nodes, reach without delay to the first switch in room 0 on the far left near the initial barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Sentinel units, get to expeditiously to the first trigger in the starting bay on the left side. Approach by the room divider and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Control units, navigate smoothly toward the first control switch in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Units, approach without hesitation to the first switch in the left-most room near the gate between rooms 0 and 1; stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, approach without delay to the first toggle in the first room from the left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, make your way quickly toward the first trigger in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Agents, locate smoothly to the first release plate in the first room from the left near the first divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Robots, reach quickly to the first release plate in the first room from the left. Then signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, reach smoothly toward the first toggle in the first room from the left, by the room divider."
+  },
+  {
+    "response": "Robots, approach without delay to the first toggle in the starting bay on the left side. Stay aligned and confirm activation when the indicator lights."
+  },
+  {
+    "response": "Swarm members, make your way without hesitation to the first toggle in room 0 on the far left. Then stop once the actuator clicks."
+  },
+  {
+    "response": "Robots, travel efficiently straight to the first release plate in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Robots, find your way without delay to the first control switch in room 0 on the far left near the initial barrier; mark success when the plate depresses."
+  },
+  {
+    "response": "Sentinel units, travel promptly to the first control switch in the left-most room. Approach beside the gate post and acknowledge once the panel turns on."
+  },
+  {
+    "response": "Agents, make your way promptly to the first release plate located by the gate between rooms 0 and 1 in the starting bay on the left side."
+  },
+  {
+    "response": "Autonomous nodes, locate efficiently toward the first control switch in the starting bay on the left side, close to the vertical gate."
+  },
+  {
+    "response": "Units, reach promptly to the first release plate in room 0 on the far left near the first divider gate; signal ready when the ring glows."
+  },
+  {
+    "response": "Task units, advance promptly to the first activation pad in room 0 on the far left. Stay aligned and signal ready when the ring glows."
+  },
+  {
+    "response": "Exploration drones, approach immediately toward the first switch in the first room from the left, by the room divider."
+  },
+  {
+    "response": "Navigation bots, travel without hesitation to the first toggle in room 0 on the far left near the first divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Units, get to carefully to the first activation pad in the first room from the left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Agents, make your way without delay to the first switch in room 0 on the far left near the gate between rooms 0 and 1; signal ready when the ring glows."
+  },
+  {
+    "response": "Autonomous nodes, get to directly to the first trigger in room 0 on the far left. Stay aligned and stop once the actuator clicks."
+  },
+  {
+    "response": "Exploration drones, head without hesitation straight to the first control switch in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Units, head without delay toward the first unlock switch in room 0 on the far left, by the room divider."
+  },
+  {
+    "response": "Navigation bots, locate carefully toward the first release plate in the starting bay on the left side, by the room divider."
+  },
+  {
+    "response": "Sentinel units, travel steadily straight to the first unlock switch in the starting bay on the left side, right next to the initial barrier."
+  },
+  {
+    "response": "Robots, get to to the first control switch directly in the first room from the left; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Autonomous nodes, head efficiently to the first toggle in the first room from the left. On approach, keep to the inner lane."
+  },
+  {
+    "response": "Navigation bots, locate directly straight to the first toggle in the first room from the left, right next to the gate between rooms 0 and 1."
+  },
+  {
+    "response": "Task units, proceed efficiently to the first switch in room 0 on the far left. On approach, follow the floor markers down the middle."
+  },
+  {
+    "response": "Robots, locate without delay to the first trigger located by the first divider gate in the first room from the left."
+  },
+  {
+    "response": "Swarm members, proceed to the first control switch expeditiously in room 0 on the far left; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Units, head directly to the first control switch located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Agents, find your way swiftly to the first activation pad located by the first divider gate in the left-most room."
+  },
+  {
+    "response": "Recon agents, find your way carefully toward the first activation pad in the left-most room, beside the gate post."
+  },
+  {
+    "response": "Navigation bots, make your way smoothly to the first unlock switch in the starting bay on the left side near the initial barrier; stop once the actuator clicks."
+  },
+  {
+    "response": "Agents, proceed without hesitation to the first activation pad in room 0 on the far left. Then confirm activation when the indicator lights."
+  },
+  {
+    "response": "Units, navigate to the first control switch immediately in the starting bay on the left side; close to the vertical gate, and mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, get to securely straight to the first activation pad in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Robots, proceed steadily to the first switch in the left-most room near the first divider gate; acknowledge once the panel turns on."
+  },
+  {
+    "response": "Navigation bots, move quickly to the first trigger located by the gate between rooms 0 and 1 in the left-most room."
+  },
+  {
+    "response": "Units, reach without hesitation until you reach the first trigger in the first room from the left beside the first divider gate."
+  },
+  {
+    "response": "Units, travel to the first trigger expeditiously in the first room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Recon agents, navigate carefully until you reach the first release plate in the left-most room beside the initial barrier."
+  },
+  {
+    "response": "Sentinel units, travel steadily to the first trigger located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Support bots, move directly toward the first switch in room 0 on the far left, beside the gate post."
+  },
+  {
+    "response": "Recon agents, reach to the first control switch securely in the left-most room; beside the gate post, and mark success when the plate depresses."
+  },
+  {
+    "response": "Agents, locate to the first unlock switch without delay in the first room from the left; close to the vertical gate, and stop once the actuator clicks."
+  },
+  {
+    "response": "Sentinel units, make your way without hesitation to the first trigger in the starting bay on the left side near the initial barrier; signal ready when the ring glows."
+  },
+  {
+    "response": "Support bots, head steadily to the first control switch located by the initial barrier in room 0 on the far left."
+  },
+  {
+    "response": "Swarm members, get to promptly toward the first switch in the starting bay on the left side, near the divider gate."
+  },
+  {
+    "response": "Autonomous nodes, approach promptly to the first activation pad in the left-most room. Approach by the room divider and mark success when the plate depresses."
+  },
+  {
+    "response": "Robots, go immediately toward the first trigger in the left-most room, near the divider gate."
+  },
+  {
+    "response": "Task units, proceed quickly straight to the first trigger in the starting bay on the left side, right next to the first divider gate."
+  },
+  {
+    "response": "Navigation bots, go swiftly to the first control switch located by the initial barrier in the starting bay on the left side."
+  },
+  {
+    "response": "Recon agents, make your way expeditiously straight to the first toggle in the first room from the left, right next to the initial barrier."
+  },
+  {
+    "response": "Navigation bots, approach promptly to the first toggle in the left-most room. Then mark success when the plate depresses."
+  },
+  {
+    "response": "Exploration drones, find your way securely to the first control switch in the left-most room. Approach close to the vertical gate and signal ready when the ring glows."
+  },
+  {
+    "response": "Agents, proceed expeditiously until you reach the first switch in the left-most room beside the initial barrier."
+  }
+]

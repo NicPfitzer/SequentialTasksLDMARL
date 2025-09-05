@@ -1,0 +1,23 @@
+# @package _global_
+defaults:
+  - /four_flags/experiment/experiment_team_gnn
+  - /four_flags/model/shared_gnn
+  - /four_flags/model/team_gnn_actor   # actor-network params
+  - /four_flags/model/team_gnn_critic  # critic-network params
+  - /four_flags/task/four_flags_deployment
+  - /four_flags/algorithm/mappo
+
+seed: 1
+device: cpu
+deployment:
+  a_range: 1.0
+  v_range: 1.0
+  id_list: [1,2,3]
+  max_steps: 200
+  action_dt: 0.1
+  obs_dt: 0.05
+  llm_model: "thenlper/gte-large"
+
+arena_config:
+  x_semidim: 3.7
+  y_semidim: 1.7
