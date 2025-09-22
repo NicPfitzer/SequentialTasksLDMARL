@@ -39,6 +39,7 @@ OUT_ROOT.mkdir(parents=True, exist_ok=True)
 SUMMARY_CSV = OUT_ROOT / "summary_seeds.csv"
 PLOT_GOAL = OUT_ROOT / "on_goal_mean_ci.png"
 PLOT_OFR  = OUT_ROOT / "opened_final_room_mean_ci.png"
+PLOT_SL   = OUT_ROOT / "success_level_mean_ci.png"
 # --------------------------------------------------------------------
 
 
@@ -107,7 +108,7 @@ def run_experiment_once(path_suffix: str, seed: int) -> list[dict]:
         print(f"[warn] Missing directory: {ckpt_dir}")
         return rows
 
-    restore_files = [f for f in os.listdir(ckpt_dir) if f.endswith(".pt")]
+    restore_files = [f for f in os.listdir(ckpt_dir) if (f.endswith(".pt") and f.startswith("checkpoint_"))]
     restore_files = sorted(restore_files, key=parse_frames)
 
     model_label = pretty_model_label(path_suffix)
@@ -251,7 +252,7 @@ def aggregate_and_plot(df: pd.DataFrame) -> None:
         plt.legend(title="Model", loc="lower right")
         plt.tight_layout()
         plt.savefig(PLOT_OFR, dpi=150)
-        plt.savefig(PLOT_GOAL.with_suffix(".pdf"))
+        plt.savefig(PLOT_OFR.with_suffix(".pdf"))
         plt.close()
         print(f"Saved plot → {PLOT_OFR}")
     else:
@@ -281,7 +282,7 @@ def aggregate_and_plot(df: pd.DataFrame) -> None:
         plt.tight_layout()
         plot_sl_path = OUT_ROOT / "success_level_mean_ci.png"
         plt.savefig(plot_sl_path, dpi=150)
-        plt.savefig(PLOT_GOAL.with_suffix(".pdf"))
+        plt.savefig(PLOT_SL.with_suffix(".pdf"))
         plt.close()
         print(f"Saved plot → {plot_sl_path}")
     else:

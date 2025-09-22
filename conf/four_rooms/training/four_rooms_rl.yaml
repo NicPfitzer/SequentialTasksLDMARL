@@ -7,4 +7,4 @@ defaults:
   - /four_rooms/task/four_rooms_rl
   - /four_rooms/algorithm/mappo
 
-seed: 1
+seed: 3

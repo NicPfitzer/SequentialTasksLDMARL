@@ -3,7 +3,9 @@
 #  All rights reserved.
 
 import torch
+import time
 from tensordict import TensorDict
+from collections import deque
 from vmas import render_interactively
 from vmas.simulator.core import Agent, Box, Landmark, Line, Sphere, World
 from vmas.simulator.scenario import BaseScenario
@@ -21,6 +23,13 @@ from trainers.benchmarl_setup_experiment import benchmarl_setup_experiment
 
 from scenarios.four_flags.four_flags_scenario import FourFlagsScenario as BaseFourFlagsScenario
 
+task_color_map = {
+    0: FIND_RED,
+    1: FIND_GREEN,
+    2: FIND_BLUE,
+    3: FIND_PURPLE,
+}
+
 class FourFlagsScenario(BaseFourFlagsScenario):
     def make_world(self, batch_dim: int, device: torch.device, **kwargs):
         load_scenario_config(kwargs, self)
@@ -37,8 +46,74 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         self._add_flags(world)
         self._init_language_unit(world)
         self._add_agents_and_goals(world)
+        
+        self._init_trails(world)
 
         return world
+    
+    def _init_trails(self, world: World):
+        # Tunables
+        self.trail_max_len = getattr(self, "trail_max_len", 500)   # number of stored points
+        self.trail_stride = getattr(self, "trail_stride", 1)       # sample every N rendered frames
+        self.trail_width = getattr(self, "trail_width", 10)         # line width
+        self._trail_tick = 0
+
+        # trails[agent_idx][env_idx] -> {"pos": deque[[2]], "state": deque[int]}
+        self.trails = [
+            [
+                {"pos": deque(maxlen=self.trail_max_len),
+                 "state": deque(maxlen=self.trail_max_len)}
+                for _ in range(world.batch_dim)
+            ]
+            for _ in range(self.n_agents)
+        ]
+
+    def _clear_trails(self, env_index: int | None = None):
+        if not hasattr(self, "trails"):
+            return
+        if env_index is None:
+            for i in range(self.n_agents):
+                for b in range(self.world.batch_dim):
+                    self.trails[i][b]["pos"].clear()
+                    self.trails[i][b]["state"].clear()
+        else:
+            for i in range(self.n_agents):
+                self.trails[i][env_index]["pos"].clear()
+                self.trails[i][env_index]["state"].clear()
+
+    def _record_trail(self, env_index: int):
+        # Called from extra_render so it records only when rendering
+        self._trail_tick += 1
+        if self._trail_tick % self.trail_stride != 0:
+            return
+        for i, a in enumerate(self.world.agents):
+            # store current position and the discrete state_ driving color
+            pos = a.state.pos[env_index].detach().clone()
+            st = int(a.state_[env_index].item())
+            self.trails[i][env_index]["pos"].append(pos)
+            self.trails[i][env_index]["state"].append(st)
+    
+    def _add_switch(self, world):
+        self.switch_radius = 1.1 * (self.agent_spacing * self.n_agents / 3 * 0.7 + self.agent_radius) / (3)**0.5 # slightly larger than inscribed circle of tetrahedron
+        self.switch = Landmark(
+            name=f"switch",
+            collide=False,
+            movable=False,
+            shape=Sphere(radius=self.switch_radius),
+            color=Color.YELLOW,
+            collision_filter=lambda e: not isinstance(e.shape, Box),
+        )
+        world.add_landmark(self.switch)
+        self.switch.target_flag = torch.zeros((world.batch_dim,), device=world.device, dtype=torch.int)
+        self.switch._target_set = torch.zeros(world.batch_dim, dtype=torch.bool, device=world.device)
+        
+        num_classes = max(task_color_map.keys()) + 1
+        lookup = torch.tensor(
+            [task_color_map[i] for i in range(num_classes)],
+            device=world.device,
+            dtype=torch.long,   # or match self.switch.target_flag.dtype
+        )
+        self.switch._color_lookup = lookup
             
     def _init_language_unit(self, world: World):
         #load_decoder(model_path=self.decoder_model_path, embedding_size=self.embedding_size, device=world.device)
@@ -47,6 +122,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         # Load Action Policy
         cfg, seed = generate_cfg(config_path=self.policy_config_path, config_name=self.policy_config_name, restore_path=self.policy_restore_path, device=world.device.type)
         self.policy = get_policy_from_cfg(cfg, seed)
+        self.policy.n_agents = self.n_agents
 
         self.language_unit = LanguageUnit(
             batch_size=world.batch_dim,
@@ -105,7 +181,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
             goal = Landmark(
                 name=f"goal {i}",
                 collide=False,
-                shape=Sphere(radius=self.agent_radius),
+                shape=Sphere(radius=self.agent_radius * 1.5),
                 color=Color.LIGHT_GREEN,
             )
             agent.goal = goal
@@ -244,6 +320,7 @@ class FourFlagsScenario(BaseFourFlagsScenario):
                 agent.state_[env_index].zero_()
             # Set the agent positions
             self.reset_agent_pos(agent,env_index)
+            self._clear_trails(env_index)
     
     def switch_hit_logic(self, agent: Agent):
         
@@ -261,19 +338,19 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         if not self.break_all_wall:
             passage_obs = []
             for pose in self.landmark_poses[: self.n_passages]:
-                passage_obs.append(pose - agent.state.pos)
+                passage_obs.append(pose - agent.state.pos) 
             passage_obs = torch.stack(passage_obs, dim=1).view(self.world.batch_dim, -1)
             obs_components.append(passage_obs)
  
-        obs_dict["pos"] = agent.state.pos
-        obs_dict["vel"] = agent.state.vel
+        obs_dict["pos"] = agent.state.pos 
+        obs_dict["vel"] = agent.state.vel 
         obs_dict["event"] = torch.cat([agent.found_flags, agent.hit_switch.unsqueeze(1)], dim=-1).float()
-        obs_components.append(agent.goal.state.pos - agent.state.pos)
-        obs_components.append(self.switch.state.pos - agent.state.pos)
-        
+        obs_components.append((agent.goal.state.pos - agent.state.pos))
+        obs_components.append((self.switch.state.pos - agent.state.pos))
+
         for flag in self.flags:
-            obs_components.append(flag.state.pos - agent.state.pos)
-        
+            obs_components.append((flag.state.pos - agent.state.pos))
+
         obs_components.append(torch.cat([agent.found_flags, agent.hit_switch.unsqueeze(1)], dim=-1).float())
 
         obs_dict["sentence_embedding"] = agent.h.clone()
@@ -289,7 +366,10 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         if is_first:
             # Replace agent action with the multitask policy action
             obs_all_agents = self._collect_observations()
+            t_start = time.time()
             actions = self.policy(obs_all_agents)
+            t_end = time.time()
+            print("policy time", t_end - t_start)
             for i, a in enumerate(self.world.agents):
                 # Clip e to 0, 1 integers
                 raw_event = a.action.u[:, :self.event_dim]
@@ -333,6 +413,8 @@ class FourFlagsScenario(BaseFourFlagsScenario):
         return TensorDict(obs_dict)
     
     def pre_step(self):
+        
+        t_start = time.time()
 
         for agent in self.world.agents:
             # agent.h: [E, H], agent.y: [E, Y] (batched per env)
@@ -350,6 +432,9 @@ class FourFlagsScenario(BaseFourFlagsScenario):
             agent.h = next_h
             agent.state_ = torch.argmax(torch.sigmoid(next_state[:,NUM_AUTOMATA:]), dim=-1)
             self.set_goal_coords(agent, self.world)
+        t_end = time.time()
+
+        print("RNN time", t_end - t_start)
 
     def done(self):
 
@@ -377,6 +462,8 @@ class FourFlagsScenario(BaseFourFlagsScenario):
             FIND_SWITCH: Color.YELLOW,
             FIND_GOAL: Color.LIGHT_GREEN,
         }
+        
+        self._record_trail(env_index)
         
         geoms = []
         # 0: right wall, 1: top wall, 2: left wall, 3: bottom wall
@@ -433,7 +520,6 @@ class FourFlagsScenario(BaseFourFlagsScenario):
             ring.set_color(*self.state_color_map[target_state].value)
             geoms.append(ring)
 
-
         for i, agent1 in enumerate(self.world.agents):
 
             # Agent state
@@ -445,44 +531,61 @@ class FourFlagsScenario(BaseFourFlagsScenario):
             circle.set_color(*agent_color)
             geoms.append(circle)
             
-            # Add rings for visited flags
-            for j, state in self.flag_state_map.items():
-                if agent1.found_flags[env_index, j]:
-                    ring = rendering.make_circle(
-                        radius=0.05 + j * 0.02,
-                        filled=False,
-                    )
-                    ring.set_linewidth(5)
-                    xform = rendering.Transform()
-                    xform.set_translation(*agent1.state.pos[env_index])
-                    ring.add_attr(xform)
-                    ring.set_color(*self.state_color_map[state].value)
-                    geoms.append(ring)
+            tr = self.trails[i][env_index]
             
-            # Add a ring for switch hit
-            if agent1.hit_switch[env_index]:
-                ring = rendering.make_circle(
-                    radius=0.05 + len(self.flags) * 0.02,
-                    filled=False,
-                )
-                ring.set_linewidth(3)
-                xform = rendering.Transform()
-                xform.set_translation(*agent1.state.pos[env_index])
-                ring.add_attr(xform)
-                ring.set_color(*Color.YELLOW.value)
-                geoms.append(ring)
+            for t in range(1, len(tr["pos"])):
+                p0 = tr["pos"][t - 1]
+                p1 = tr["pos"][t]
+                st = tr["state"][t]
+                color_rgb = self.state_color_map[st].value  # e.g., (r, g, b)
                 
-            # Communication lines
-            for j, agent2 in enumerate(self.world.agents):
-                if j <= i:
-                    continue
-                if self.world.get_distance(agent1, agent2)[env_index] <= self.comms_radius * (self.x_semidim + self.y_semidim)/2:
-                    line = rendering.Line(
-                        agent1.state.pos[env_index], agent2.state.pos[env_index], width=5
-                    )
-                    line.set_color(*state_color)
-                    line.set_linewidth(2)
-                    geoms.append(line)
+                # if i != 0:
+                #     scaled = tuple(int(c * 1.5) for c in Color.GRAY.value)
+                #     color_rgb = tuple(min(c, 256) for c in scaled)
+
+                seg = rendering.Line(p0, p1, width=self.trail_width)
+                seg.set_color(*color_rgb)
+                seg.set_linewidth(self.trail_width)
+                geoms.append(seg)
+            
+            # # Add rings for visited flags
+            # for j, state in self.flag_state_map.items():
+            #     if agent1.found_flags[env_index, j]:
+            #         ring = rendering.make_circle(
+            #             radius=0.05 + j * 0.02,
+            #             filled=False,
+            #         )
+            #         ring.set_linewidth(5)
+            #         xform = rendering.Transform()
+            #         xform.set_translation(*agent1.state.pos[env_index])
+            #         ring.add_attr(xform)
+            #         ring.set_color(*self.state_color_map[state].value)
+            #         geoms.append(ring)
+            
+            # # Add a ring for switch hit
+            # if agent1.hit_switch[env_index]:
+            #     ring = rendering.make_circle(
+            #         radius=0.05 + len(self.flags) * 0.02,
+            #         filled=False,
+            #     )
+            #     ring.set_linewidth(3)
+            #     xform = rendering.Transform()
+            #     xform.set_translation(*agent1.state.pos[env_index])
+            #     ring.add_attr(xform)
+            #     ring.set_color(*Color.YELLOW.value)
+            #     geoms.append(ring)
+                
+            # # Communication lines
+            # for j, agent2 in enumerate(self.world.agents):
+            #     if j <= i:
+            #         continue
+            #     if self.world.get_distance(agent1, agent2)[env_index] <= self.comms_radius * (self.x_semidim + self.y_semidim)/2:
+            #         line = rendering.Line(
+            #             agent1.state.pos[env_index], agent2.state.pos[env_index], width=5
+            #         )
+            #         line.set_color(*state_color)
+            #         line.set_linewidth(2)
+            #         geoms.append(line)
         
         try:
             sentence = self.language_unit.summary[env_index]

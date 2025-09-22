@@ -3,14 +3,15 @@ defaults:
   # - /hit_the_switch/training/hit_the_switch_gnn_train.yaml
   # - /hit_the_switch/training/hit_the_switch_multitask.yaml
  
-  # - /four_flags/training/four_flags_gnn_train.yaml
+  - /four_flags/training/four_flags_gnn_train.yaml
   # - /four_flags/training/four_flags_multitask.yaml
   # - /four_flags/training/four_flags_rl.yaml
   # - /four_flags/training/four_flags_naive.yaml
+  # - /four_flags/training/four_flags_rollout_two_color.yaml
 
   # - /four_rooms/training/four_rooms_rl.yaml
   # - /four_rooms/training/four_rooms_multitask.yaml
-  - /four_rooms/training/four_rooms_rollout.yaml
+  # - /four_rooms/training/four_rooms_rollout.yaml
   # - /four_rooms/training/four_rooms_naive.yaml
 
 

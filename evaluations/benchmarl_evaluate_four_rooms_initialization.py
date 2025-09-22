@@ -190,8 +190,8 @@ def aggregate_and_plot(df: pd.DataFrame) -> None:
         "vanilla_rl": "Vanilla RL",
         "naive_rl": "Vanilla RL",
         "rl": "Tuned Rewards RL",
-        "rollout_1": "DeCLaRE - No Language Init.",
-        "rollout_2": "DeCLaRE - Language Init.",
+        "rollout_2": "DeCLaRE - No Language Init.",
+        "rollout_3": "DeCLaRE - Language Init.",
     }
     df = df.copy()
     df["model"] = df["model"].map(lambda m: label_map.get(m, m))

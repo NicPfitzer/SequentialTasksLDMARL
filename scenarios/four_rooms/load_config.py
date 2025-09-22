@@ -7,14 +7,14 @@ from vmas.simulator.utils import ScenarioUtils  # kept in case you use it elsewh
 # --------------------------------------------------------------------------- #
 PARAMS = [
     # --- Arena --------------------------------------------------------------
-    ("x_semidim", 2.0), ("y_semidim", 1.0),
+    ("x_semidim", 1.0), ("y_semidim", 0.5),
 
     # --- Agents -------------------------------------------------------------
-    ("n_agents", 3), ("agent_radius", 0.05), ("agent_spacing", 0.25),
+    ("n_agents", 3), ("agent_radius", 0.025), ("agent_spacing", 0.2),
 
     # --- Rooms / Gates / Targets -------------------------------------------
-    ("gate_thickness", 0.15),
-    ("switch_radius", 0.15),
+    ("gate_thickness", 0.075),
+    ("switch_radius", 0.125),
     ("goal_radius", None),           # if None, scenario will default to agent_radius
     ("require_all_to_finish", True),
 

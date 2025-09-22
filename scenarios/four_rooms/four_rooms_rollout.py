@@ -368,7 +368,7 @@ class FourRoomsRolloutScenario(FourRoomsSwitchesScenario):
                 self._spawn_agents_for_env(b)
         else:
 
-            if (self.initial_room is not None or (self.initial_room is None and not self.even_distribution)):
+            if self.initialized_rnn and (self.initial_room is not None or (self.initial_room is None and not self.even_distribution)):
                 for a in self.world.agents:
                     a.switch_hits[env_index, :int(max_min_room.item())] = True
 

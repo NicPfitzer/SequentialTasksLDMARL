@@ -23,7 +23,7 @@ import math
 
 MIN_SEQ_STEPS: int = 3  # inclusive lower bound for sequence length L
 MAX_SEQ_STEPS: int = 12  # inclusive upper bound for L
-REPS: int = 1000      # number of runs per DFA
+REPS: int = 500     # number of runs per DFA
 RNG_SEED: int | None = 42  # None ➟ do not reset RNG
 
 EVENT_DIM = 5
@@ -50,8 +50,6 @@ STATES = {
     "FIND_PURPLE": FIND_PURPLE,
     "purple": FIND_PURPLE,
 }
-
-
 
 # --------------------------------------------------------------------------- #
 #  Generic DFA machinery
@@ -253,7 +251,7 @@ def make_color_then_goal_config(color: State, automaton_id: int) -> DFAConfig:
     """Generic two-step color sequence then goal."""
 
     transition: Dict[State, Callable[[Vector], State]] = {
-        color: advance_if(has(B),  "switch", color),
+        color: advance_if(has(idx_map[color]),  "switch", color),
         "switch": advance_case(
             (has(SW), "goal"),
             (not_has(idx_map[color]), color),
@@ -358,11 +356,11 @@ if __name__ == "__main__":
     #     switch_then_goal_config(),
     # ]
     
-    #AUTOMATA = []
-    #AUTOMATA += two_color_then_goal_configs(start_id=len(AUTOMATA))
-    
     AUTOMATA = []
-    AUTOMATA += color_then_goal_configs(start_id=len(AUTOMATA))
+    AUTOMATA += two_color_then_goal_configs(start_id=len(AUTOMATA))
+    
+    # AUTOMATA = []
+    # AUTOMATA += color_then_goal_configs(start_id=len(AUTOMATA))
     NUM_AUTOMATA: int = len(AUTOMATA)
     
     for cfg in AUTOMATA:

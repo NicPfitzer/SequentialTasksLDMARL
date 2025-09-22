@@ -24,8 +24,8 @@ class FourFlagsScenario(BaseScenario):
         self._prepare_state_map(device)
         
         self._add_passages(world)
-        self._add_switch(world)
         self._add_flags(world)
+        self._add_switch(world)
         self._init_language_unit(world)
         self._add_agents_and_goals(world)
 
@@ -64,7 +64,7 @@ class FourFlagsScenario(BaseScenario):
         
     def _add_flags(self, world):
         self.flags = []
-        self.state_color_map = {FIND_RED: Color.RED, FIND_GREEN: Color.GREEN, FIND_BLUE: Color.BLUE, FIND_PURPLE: Color.PURPLE}
+        self.state_color_map = {FIND_RED: Color.RED, FIND_GREEN: Color.GREEN, FIND_BLUE: Color.BLUE, FIND_PURPLE: Color.PURPLE, FIND_GOAL: Color.LIGHT_GREEN, FIND_SWITCH: Color.YELLOW}
         self.flag_state_map = {0: FIND_RED, 1: FIND_GREEN, 2: FIND_BLUE, 3: FIND_PURPLE}
         self.flag_radius = 1.1 * (self.agent_spacing + self.agent_radius) / (3)**0.5
         for i,c in self.flag_state_map.items():
@@ -89,7 +89,7 @@ class FourFlagsScenario(BaseScenario):
             use_embedding_ratio=self.use_embedding_ratio,
             device=world.device,
         )
-        if not self.load_dataset:
+        if self.load_dataset:
             self.language_unit.load_sequence_data(json_path=self.data_json_path, device=world.device)
         self.visualize_semidims = False
 
@@ -242,6 +242,8 @@ class FourFlagsScenario(BaseScenario):
                 )
 
     def reset_goals(self, env_index: int = None):
+        
+        half_span = (self.n_agents - 1) * self.agent_spacing / 2 + self.agent_radius
 
         # pick a random central point
         central_goal_pos = torch.cat(
@@ -259,8 +261,8 @@ class FourFlagsScenario(BaseScenario):
                     device=self.world.device,
                     dtype=torch.float32,
                 ).uniform_(
-                    -self.y_semidim + (3 * self.agent_radius + self.agent_spacing),
-                    self.y_semidim - (3 * self.agent_radius + self.agent_spacing),
+                    -self.y_semidim + half_span,
+                    self.y_semidim - half_span,
                 ),
             ],
             dim=1,

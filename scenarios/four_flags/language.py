@@ -39,7 +39,7 @@ def load_decoder(model_path, embedding_size, device):
 def load_sequence_model(model_path, embedding_size, event_size, state_size, device):
     
     global sequence_model
-    sequence_model = EventRNN(event_dim=event_size, y_dim=embedding_size, latent_dim=embedding_size, input_dim=64, state_dim=state_size, decoder=None).to(device)
+    sequence_model = EventRNN(event_dim=event_size, y_dim=embedding_size, latent_dim=embedding_size, input_dim=64, state_dim=state_size, decoder=None, use_encoder=False).to(device)
     sequence_model.load_state_dict(torch.load(model_path, map_location=device))
     sequence_model.eval()
 

@@ -11,11 +11,28 @@ from sequence_models.four_flags.model_training.rnn_model import EventRNN, NUM_AU
 from sequence_models.four_flags.model_training.mlp_decoder import Decoder
 from sequence_models.four_flags.random_automaton_walk import R, G, B, P, SW
 GL = 5
+# task_map = {
+#     0: "Locate the red flag, then the switch, and advance to the goal.",
+#     1: "Search for the green flag, then the switch, and navigate to the goal.",
+#     2: "Find the blue flag, spot the switch, and head for the target.",
+#     3: "Identify the purple flag, navigate to the switch and proceed to the goal."
+# }
 task_map = {
-    0: "Locate the red flag, then the switch, and advance to the goal.",
-    1: "Search for the green flag, then the switch, and navigate to the goal.",
-    2: "Find the blue flag, spot the switch, and head for the target.",
-    3: "Identify the purple flag, navigate to the switch and proceed to the goal."
+    0:   "Locate the red flag, then the green one, and advance to the goal.",
+    1:   "Find the red flag, spot the blue flag, and head for the target.",
+    2:   "Identify the red flag, then the purple flag, and proceed to the goal.",
+
+    3:   "Search for the green flag, then the red flag, and navigate to the goal.",
+    4:   "Locate the green flag, then the blue flag, and move toward the target.",
+    5:   "Find the green flag, identify the purple one, then reach the goal.",
+
+    6:   "Spot the blue flag, then the red flag, and continue to the goal.",
+    7:   "Head for the blue flag, then the green flag, and finish at the target.",
+    8:   "Identify the blue flag, then the purple flag, and advance to the goal.",
+
+    9:   "Locate the purple flag, then the red flag, and proceed to the goal.",
+    10:  "Find the purple flag, then the green one, and head toward the target.",
+    11:  "Search for the purple flag, then the blue flag, and reach the goal.",
 }
 
 subtask_map = {
@@ -35,7 +52,7 @@ DEVICE = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 def load_event_rnn_model(checkpoint_path: str = "event_rnn_best.pth", decoder: Decoder = None) -> EventRNN:
     if decoder is None:
         model = EventRNN(
-            event_dim=5, y_dim=1024, latent_dim=1024, state_dim=8, input_dim=64, num_layers=1
+            event_dim=5, y_dim=1024, latent_dim=1024, state_dim=10, input_dim=64, num_layers=1
         )
     else:
         print("Using provided decoder model.")
@@ -97,21 +114,21 @@ def predict_state_rollout(task: str, subtask: str, events: list[list[float]], mo
 
 # Run
 #decoder = load_decoder_model("sequence_models/four_flags/four_flags_decoder.pth")
-model = load_event_rnn_model("sequence_models/four_flags/one_color.pth")
+model = load_event_rnn_model("sequence_models/four_flags/two_colors_rnn.pth")
 
 # ]
 events = [
-    [0.,0.,0.,0.,0.],
-    [1.,1.,0.,0.,0.],
-    [0.,0.,0.,0.,0.],
-    [1.,0.,0.,0.,1.],
-    # [1.,1.,0.,0.,0.],
+    [0., 1., 1., 1., 1.],
+    [1., 1., 1., 1., 1.],
+    [0., 1., 1., 0., 0.],
+    [0., 0., 1., 0., 1.],
+    [0., 0., 1., 1., 1.],
     # [1.,1.,1.,0.,0.],
     # [1.,1.,1.,1.,0.],
     # [1.,1.,1.,1.,1.],
 ]
 
-task = "Search for the green flag, then the switch, and navigate to the goal."
+task = "Find the purple flag, then the green one, and head toward the target."
 subtask = None # Initialization subtask - We don't need to start at the beginning of the automaton.
 
 result = predict_state_rollout(

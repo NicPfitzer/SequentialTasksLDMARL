@@ -29,21 +29,21 @@ from sentence_transformers import SentenceTransformer
 
 # ─────────────── Project-local key import (keep as in your codebase) ───────── #
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from sequence_models.api_keys import GEMINI_API_KEY  # noqa: E402
-
+# from sequence_models.api_keys import GEMINI_API_KEY  # noqa: E402
+ 
 # ========================== Configuration ==========================
 
 # Input directory with all no-summary files to process
-INPUT_DIR = Path("sequence_models/data/one_color/no_summary")  # <- your no_summary dir
+INPUT_DIR = Path("sequence_models/data/two_color/no_summary")  # <- your no_summary dir
 INPUT_GLOB = "dataset_no_summary_*.json"  # tweak if needed
 
 # Output file (merged)
-OUTPUT_JSON = Path("sequence_models/data/dataset_one_color_ALL.json")
+OUTPUT_JSON = Path("sequence_models/data/dataset_two_color_ALL.json")
 
 # Gemini + embedding model
-MODEL_NAME = "gemini-2.0-flash-lite"
-TEMP = 0.2
-MAX_PROMPT_CHARS = 24000
+# MODEL_NAME = "gemini-2.0-flash-lite"
+# TEMP = 0.2
+# MAX_PROMPT_CHARS = 24000
 PRINT_EVERY = 200
 
 # LLM client + embedder
@@ -55,29 +55,29 @@ llm = SentenceTransformer("thenlper/gte-large")
 # 1) Global override for ALL items (string); set to None to disable.
 SENTENCE_OVERRIDE_GLOBAL: Optional[str] = None
 # 2) Per-file override (keyed by input filename stem -> sentence)
-# SENTENCE_OVERRIDE_BY_FILE: Dict[str, str] = {
-#     "dataset_no_summary_random_walk_two_step_red_green_goal":   "Locate the red flag, then the green one, and advance to the goal.",
-#     "dataset_no_summary_random_walk_two_step_red_blue_goal":    "Find the red flag, spot the blue flag, and head for the target.",
-#     "dataset_no_summary_random_walk_two_step_red_purple_goal":  "Identify the red flag, then the purple flag, and proceed to the goal.",
-
-#     "dataset_no_summary_random_walk_two_step_green_red_goal":   "Search for the green flag, then the red flag, and navigate to the goal.",
-#     "dataset_no_summary_random_walk_two_step_green_blue_goal":  "Locate the green flag, then the blue flag, and move toward the target.",
-#     "dataset_no_summary_random_walk_two_step_green_purple_goal":"Find the green flag, identify the purple one, then reach the goal.",
-
-#     "dataset_no_summary_random_walk_two_step_blue_red_goal":    "Spot the blue flag, then the red flag, and continue to the goal.",
-#     "dataset_no_summary_random_walk_two_step_blue_green_goal":  "Head for the blue flag, then the green flag, and finish at the target.",
-#     "dataset_no_summary_random_walk_two_step_blue_purple_goal": "Identify the blue flag, then the purple flag, and advance to the goal.",
-
-#     "dataset_no_summary_random_walk_two_step_purple_red_goal":  "Locate the purple flag, then the red flag, and proceed to the goal.",
-#     "dataset_no_summary_random_walk_two_step_purple_green_goal":"Find the purple flag, then the green one, and head toward the target.",
-#     "dataset_no_summary_random_walk_two_step_purple_blue_goal": "Search for the purple flag, then the blue flag, and reach the goal.",
-# }
 SENTENCE_OVERRIDE_BY_FILE: Dict[str, str] = {
-    "dataset_no_summary_random_walk_red_goal":   "Locate the red flag, then the switch, and advance to the goal.",
-    "dataset_no_summary_random_walk_blue_goal":    "Find the red flag, spot the switch, and head for the target.",
-    "dataset_no_summary_random_walk_purple_goal":  "Identify the purple flag, navigate to the switch and proceed to the goal.",
-    "dataset_no_summary_random_walk_green_goal":   "Search for the green flag, then the switch, and navigate to the goal.",
+    #"dataset_no_summary_random_walk_two_step_red_green_goal.json":   "Locate the red flag, then the green one, and advance to the goal.",
+    "dataset_no_summary_random_walk_two_step_red_blue_goal.json":    "Find the red flag, spot the blue flag, and head for the target.",
+    #"dataset_no_summary_random_walk_two_step_red_purple_goal.json":  "Identify the red flag, then the purple flag, and proceed to the goal.",
+
+    #"dataset_no_summary_random_walk_two_step_green_red_goal.json":   "Search for the green flag, then the red flag, and navigate to the goal.",
+    #"dataset_no_summary_random_walk_two_step_green_blue_goal.json":  "Locate the green flag, then the blue flag, and move toward the target.",
+    "dataset_no_summary_random_walk_two_step_green_purple_goal.json":"Find the green flag, identify the purple one, then reach the goal.",
+
+    #"dataset_no_summary_random_walk_two_step_blue_red_goal.json":    "Spot the blue flag, then the red flag, and continue to the goal.",
+    "dataset_no_summary_random_walk_two_step_blue_green_goal.json":  "Head for the blue flag, then the green flag, and finish at the target.",
+    #"dataset_no_summary_random_walk_two_step_blue_purple_goal.json": "Identify the blue flag, then the purple flag, and advance to the goal.",
+
+    "dataset_no_summary_random_walk_two_step_purple_red_goal.json":  "Locate the purple flag, then the red flag, and proceed to the goal.",
+    #"dataset_no_summary_random_walk_two_step_purple_green_goal.json":"Find the purple flag, then the green one, and head toward the target.",
+    #"dataset_no_summary_random_walk_two_step_purple_blue_goal.json": "Search for the purple flag, then the blue flag, and reach the goal.",
 }
+# SENTENCE_OVERRIDE_BY_FILE: Dict[str, str] = {
+#     "dataset_no_summary_random_walk_red_goal":   "Locate the red flag, then the switch, and advance to the goal.",
+#     "dataset_no_summary_random_walk_blue_goal":    "Find the red flag, spot the switch, and head for the target.",
+#     "dataset_no_summary_random_walk_purple_goal":  "Identify the purple flag, navigate to the switch and proceed to the goal.",
+#     "dataset_no_summary_random_walk_green_goal":   "Search for the green flag, then the switch, and navigate to the goal.",
+# }
 
 # ========================== Utilities ==========================
 
@@ -184,46 +184,16 @@ def stream_process():
         processed = processed_global
         start_ts = time.time()
 
-        for f_idx, input_path in enumerate(files):
+        for input_path, sentence in SENTENCE_OVERRIDE_BY_FILE.items():
             # Determine override (if any) for this file
-            file_override = SENTENCE_OVERRIDE_BY_FILE.get(input_path.stem)
-            if file_override:
-                print(f"[INFO] Using per-file override for {input_path.name}")
-            use_global_override = SENTENCE_OVERRIDE_GLOBAL is not None
-
-            # Determine colors
-            colors = infer_colors_from_filename(input_path)
-            if colors is None:
-                # Peek a few items to infer from states
-                with input_path.open("rb") as src:
-                    items = ijson.items(src, "item")
-                    peek = []
-                    try:
-                        for _ in range(10):  # small peek window
-                            peek.append(next(items))
-                    except StopIteration:
-                        pass
-                colors = infer_colors_from_states(peek)
-                if colors is None:
-                    raise ValueError(f"Could not infer two colors for {input_path.name}")
-            c1, c2 = colors
-
-            # Build prompt template
-            prompt_template = build_prompt_template(c1, c2)
 
             # Now stream the whole file
-            with input_path.open("rb") as src:
+            with Path.joinpath(INPUT_DIR, input_path).open("rb") as src:
                 items = ijson.items(src, "item")
                 for seq in items:
                     if skipped < processed_global:
                         skipped += 1
                         continue
-
-                    # Decide the sentence to use
-                    if use_global_override:
-                        sentence = SENTENCE_OVERRIDE_GLOBAL
-                    elif file_override:
-                        sentence = file_override
                     # else:
                     #     sentence = one_sentence_summary(seq["responses"], prompt_template)
 

@@ -1,6 +1,8 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
+
 
     {
       "name": "Run eval_rnn_model.py",
@@ -207,6 +209,18 @@
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
       }
-    }
+    },
+    {
+      "name": "Run multitask/eval_rnn_model.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/sequence_models/multitask/model_eval/eval_rnn_model.py",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
   ]
 }

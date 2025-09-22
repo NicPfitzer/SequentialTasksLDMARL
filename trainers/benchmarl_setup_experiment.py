@@ -32,7 +32,7 @@ def _patch_env_creator():
 
     VmasTask.get_env_fun = get_env_fun
 
-def benchmarl_setup_experiment(cfg: DictConfig, seed: int, main_experiment: bool) -> Experiment:
+def benchmarl_setup_experiment(cfg: DictConfig, seed: int, main_experiment: bool, use_critic: bool = True) -> Experiment:
 
     # ---------- TASK ----------
     task_enum = VmasTask[cfg.task.name]
@@ -65,13 +65,14 @@ def benchmarl_setup_experiment(cfg: DictConfig, seed: int, main_experiment: bool
         actor_model.gnn_class = None
 
     # ---------- CRITIC MODEL ----------
-    critic_model = instantiate(cfg.model.critic_model)
-    critic_model.activation_class = _load_class(critic_model.activation_class)
-    critic_model.layer_class = _load_class(critic_model.layer_class)
-    if getattr(critic_model, "use_gnn", False) or getattr(critic_model, "use_event_gnn", False):
-        critic_model.gnn_class = _load_class(critic_model.gnn_class)
-    else:
-        critic_model.gnn_class = None
+    if use_critic:
+        critic_model = instantiate(cfg.model.critic_model)
+        critic_model.activation_class = _load_class(critic_model.activation_class)
+        critic_model.layer_class = _load_class(critic_model.layer_class)
+        if getattr(critic_model, "use_gnn", False) or getattr(critic_model, "use_event_gnn", False):
+            critic_model.gnn_class = _load_class(critic_model.gnn_class)
+        else:
+            critic_model.gnn_class = None
 
     # ---------- EXPERIMENT CONFIG ----------
     exp_cfg = ExperimentConfig(**cfg.experiment)
@@ -84,7 +85,7 @@ def benchmarl_setup_experiment(cfg: DictConfig, seed: int, main_experiment: bool
         task=task,
         algorithm_config=algorithm_config,
         model_config=actor_model,
-        critic_model_config=critic_model,
+        critic_model_config=critic_model if use_critic else None,
         seed=seed,
         config=exp_cfg,
     )

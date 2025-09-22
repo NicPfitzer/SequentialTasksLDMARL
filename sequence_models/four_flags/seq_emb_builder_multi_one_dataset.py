@@ -24,7 +24,7 @@ SEQ_JSONS: Sequence[Path] = [
 ]
 
 # Option 2: directory with many *.json sequence files
-SEQ_DIR: Optional[Path] = Path("sequence_models/data/one_color/random_walks")  # or None
+SEQ_DIR: Optional[Path] = Path("sequence_models/data/two_color/random_walks")  # or None
 
 # Shared dataset for all sequences
 DATASET_JSON: Path = Path("sequence_models/data/four_flags_merged.json")
@@ -33,7 +33,7 @@ DATASET_JSON: Path = Path("sequence_models/data/four_flags_merged.json")
 OUTPUT_JSONS: Sequence[Optional[Path]] = []
 
 # Auto-naming for SEQ_JSONS (if OUTPUT_JSONS is empty)
-OUTPUT_DIR: Optional[Path] = Path("sequence_models/data/one_color/no_summary")  # or None
+OUTPUT_DIR: Optional[Path] = Path("sequence_models/data/two_color/no_summary")  # or None
 FILENAME_PREFIX: str = "dataset_no_summary_"
 FILENAME_SUFFIX: str = ""
 

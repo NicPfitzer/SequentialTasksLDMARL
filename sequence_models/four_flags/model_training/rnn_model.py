@@ -41,14 +41,12 @@ import itertools
 import wandb
 from pytorch_lightning.loggers import WandbLogger
 
-from sequence_models.four_flags.model_training.mlp_decoder import Decoder
-
 
 ###############################################################################
 # Constants – unchanged
 ###############################################################################
 
-MAX_SEQ_LEN = 12
+MAX_SEQ_LEN = 15
 EVENT_DIM = 5
 STATE_DIM = 8
 NUM_AUTOMATA = STATE_DIM - EVENT_DIM - 1
@@ -169,6 +167,7 @@ class EventRNN(pl.LightningModule):
         ground_truth_h_rate: float = 0.25,
         recon_loss: str = "cosine",
         decoder: Decoder = None,
+        use_encoder: bool = True,
     ) -> None:
         super().__init__()
         self.save_hyperparameters()
@@ -201,6 +200,17 @@ class EventRNN(pl.LightningModule):
         else:
             self.rnn = nn.GRU(2*I, D, num_layers=num_layers, batch_first=True)
             # we will still step manually to keep parity with TBPTT logic
+
+        # subtask embedding Encoder
+        self.use_encoder = use_encoder
+        if self.use_encoder:
+            self.subtask_encoder = nn.Sequential(
+                nn.Linear(D, hidden_dim),
+                nn.ReLU(),
+                nn.Linear(hidden_dim, hidden_dim),
+                nn.ReLU(),
+                nn.Linear(hidden_dim, D),
+            )
 
         # ─── Classification head ────────────────────────────────────
         hidden_dim = max(D // 2, 4)
@@ -262,8 +272,8 @@ class EventRNN(pl.LightningModule):
         preds = []
         for t in range(T):
             
-            if h_gt is not None and torch.rand(1).item() < self.ground_truth_h_rate:
-                h = h_gt[:, t]
+            if self.use_encoder and h_gt is not None and torch.rand(1).item() < self.ground_truth_h_rate:
+                h = self.subtask_encoder(h_gt[:, t])
                 
             h = self.rnn(fused[:, t], h)
             # Randomily sometimes replace the latest hidden state with the ground truth
@@ -310,6 +320,9 @@ class EventRNN(pl.LightningModule):
         state_decoder_out = self.state_head(torch.cat([h,fused],dim=-1))  # (B, T, state_dim)
 
         return h, state_decoder_out
+
+    def convert_to_latent(self, g: Tensor) -> Tensor:
+        return self.subtask_encoder(g)
 
     # ------------------------------------------------------------------
     def _step(self, batch):
@@ -395,23 +408,23 @@ class EventRNN(pl.LightningModule):
     def configure_optimizers(self):
         return torch.optim.AdamW(self.parameters(), lr=self.lr)
 
-def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "sequence_models/four_flags/four_flags_decoder.pth"):
+def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None, decoder_path: str = "sequence_models/four_rooms/four_rooms_decoder.pth"):
     train_loader, val_loader = make_loaders(
-        "sequence_models/data/dataset_one_color_ALL.json", batch_size=batch_size
+        "sequence_models/data/dataset_two_color_ALL.json", batch_size=batch_size
     )
     
-    decoder = Decoder(
-        emb_size=1024,
-        out_size=EVENT_DIM+1,
-    )
-    #Initialize the model
-    decoder.load_state_dict(torch.load(decoder_path, map_location="mps"))
-    decoder.eval() # Freeze the decoder
-    for param in decoder.parameters():
-        param.requires_grad = False
+    # decoder = Decoder(
+    #     emb_size=1024,
+    #     out_size=EVENT_DIM+1,
+    # )
+    # #Initialize the model
+    # decoder.load_state_dict(torch.load(decoder_path, map_location="mps"))
+    # decoder.eval() # Freeze the decoder
+    # for param in decoder.parameters():
+    #     param.requires_grad = False
 
     model = EventRNN(
-        lr=3e-5,
+        lr=5e-5,
         event_dim=EVENT_DIM,
         y_dim=1024,
         latent_dim=1024,
@@ -419,8 +432,8 @@ def run_training(batch_size: int, input_dim: int, resume_ckpt: str | None = None
         input_dim=input_dim,
         num_layers=1,
         cls_loss_weight=8.0,
-        ground_truth_h_rate=0.25,
-        decoder=decoder,
+        ground_truth_h_rate=0.0,
+        decoder=None,
     )
 
     run_name = f"gru-in{input_dim}-bs{batch_size}"

@@ -42,7 +42,7 @@ off_policy_use_prioritized_replay_buffer: False
 off_policy_prb_alpha: 0.6
 off_policy_prb_beta: 0.4
 
-evaluation_interval: 120000
+evaluation_interval: 30000
 evaluation_episodes: 10
 evaluation_deterministic_actions: True
 

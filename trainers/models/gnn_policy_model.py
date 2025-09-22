@@ -195,8 +195,10 @@ class MyModel(Model):
             ) and self.gnn_supports_edge_attrs:
                 forward_gnn_params.update({"edge_attr": graph.edge_attr})
             
+            n_agents = x.shape[-2]
+            self.mlp.n_agents = n_agents
             x = self.gnn(**forward_gnn_params).view(
-                *batch_size, self.n_agents, self.gnn_emb_dim
+                *batch_size, n_agents, self.gnn_emb_dim
             )
         
         # Stack all inputs

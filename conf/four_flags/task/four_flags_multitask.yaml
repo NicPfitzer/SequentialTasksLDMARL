@@ -3,23 +3,23 @@ scenario_class: scenarios.four_flags.four_flags_scenario.FourFlagsScenario
 
 params:
   # === Map & Layout ===
-  x_semidim: 4.0
-  y_semidim: 2.0
+  x_semidim: 1.0
+  y_semidim: 0.5
   n_passages: 4
   shared_reward: True
-  agent_radius: 0.17
+  agent_radius: 0.02
   n_agents: 3
-  passage_width: 0.1
-  passage_length: 0.2
-  agent_spacing: 0.8
-  switch_radius: 0.45
-  chamber_width: 2.5
+  passage_width: 0.025
+  passage_length: 0.05
+  agent_spacing: 0.2
+  switch_radius: 0.12
+  chamber_width: 0.625
   break_all_wall: True
   comms_radius: ${four_flags.model.actor_model.edge_radius}
 
   # === Rewards ===
   shaping_factor: 100
-  collision_penalty: 25.0
+  collision_penalty: 0.0
 
   # === Dynamics ===
   use_velocity_controller: True

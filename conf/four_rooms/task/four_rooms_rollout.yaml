@@ -45,7 +45,7 @@ params:
   policy_restore_path: "checkpoints/four_rooms/policy.pt"
 
   # Evaluation Configs
-  initial_room: null               # if None, scenario will randomize initial room
+  initial_room: 0               # if None, scenario will randomize initial room
   even_distribution: False         # if True, will spawn agents evenly across rooms
   initialized_rnn: False          # if True, will initialize RNN hidden state
 

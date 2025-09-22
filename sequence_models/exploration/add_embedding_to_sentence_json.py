@@ -8,14 +8,14 @@ IDLE = 3
 
 input_file_dict   = {
     EXPLORE: "sentences/exploration_sentences.json",
-    NAVIGATE: "sentences/navigation_sentences.json",
+    NAVIGATE: "sentences/navigate_to_base.json",
     DEFEND: "sentences/flag_defense_sentences.json",
     IDLE: "sentences/idle_sentences.json"
 }
 
 output_file_dict = {
     EXPLORE: "sequence_models/data/language_data_complete_exploration.json",
-    NAVIGATE: "sequence_models/data/language_data_complete_navigation.json",
+    NAVIGATE: "sequence_models/data/language_data_complete_navigate_base.json",
     DEFEND: "sequence_models/data/language_data_complete_flag_defense.json",
     IDLE: "sequence_models/data/language_data_complete_idle.json"
 }

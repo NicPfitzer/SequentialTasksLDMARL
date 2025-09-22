@@ -7,11 +7,11 @@ params:
   y_semidim: 2.0
   n_passages: 4
   shared_reward: True
-  agent_radius: 0.17
-  n_agents: 3
+  agent_radius: 0.07
+  n_agents: 6
   passage_width: 0.1
   passage_length: 0.2
-  agent_spacing: 0.8
+  agent_spacing: 0.25
   switch_radius: 0.05
   chamber_width: 2.5
   break_all_wall: True
