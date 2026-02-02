@@ -78,7 +78,7 @@ def main(cfg: DictConfig) -> None:
         # Tell the task where the freshly-written JSON lives
         cfg.task.params.data_json_path = json_path
         cfg.experiment.restore_file = restore_path
-        experiment = benchmarl_setup_experiment(cfg, seed)
+        experiment = benchmarl_setup_experiment(cfg, seed=seed, main_experiment=False)
         experiment.evaluate()
 
 if __name__ == "__main__":
